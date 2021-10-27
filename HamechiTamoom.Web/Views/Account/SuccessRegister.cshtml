@@ -1,0 +1,31 @@
+﻿@model HamechiTamoom.DataLayer.Entities.User.User
+@{
+    ViewData["Title"] = "ثبت نام موفق";
+}
+
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">خانه</a></li>
+                        <li>ثبت نام موفق</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert">
+    <h2 class="alert alert-success">
+        @Model.UserName عزیز خوش آمدید.
+    </h2>
+    <p class="alert alert-success">
+        ثبت نام شما با موفقیت انجام شد . ایمیلی حاوی لینک فعالسازی برای @Model.Email ارسال گردید
+    </p>
+    <p class="alert alert-info">
+        جهت ادامه ثبت نام وارد ایمیل خود شوید و روی لینک ارسال شده کلیک کنید.
+    </p>
+</div>
+

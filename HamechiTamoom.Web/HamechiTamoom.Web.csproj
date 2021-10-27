@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\IMadaenyPRJDscription.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\fonts\aviny-700.woff2" />
+    <None Include="wwwroot\fonts\dastnevis-400.woff2" />
+    <None Include="wwwroot\fonts\droid-naskh-400.woff2" />
+    <None Include="wwwroot\fonts\dubai-400.woff2" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\fonts\gandom-400.woff2" />
+    <None Include="wwwroot\fonts\helvetica-neue-700.woff2" />
+    <None Include="wwwroot\fonts\ionicons.svg" />
+    <None Include="wwwroot\fonts\iran-sans-300.woff2" />
+    <None Include="wwwroot\fonts\iran-sans-400.woff2" />
+    <None Include="wwwroot\fonts\iran-sans-500.woff2" />
+    <None Include="wwwroot\fonts\iran-sans-700.woff2" />
+    <None Include="wwwroot\fonts\iran-yekan-300.woff2" />
+    <None Include="wwwroot\fonts\iran-yekan-400.woff2" />
+    <None Include="wwwroot\fonts\iran-yekan-500.woff2" />
+    <None Include="wwwroot\fonts\iran-yekan-700.woff2" />
+    <None Include="wwwroot\fonts\lalezar-700.woff2" />
+    <None Include="wwwroot\fonts\Material-Design-Iconic-Font.woff2" />
+    <None Include="wwwroot\fonts\myriad-400.woff2" />
+    <None Include="wwwroot\fonts\myriad-700.woff2" />
+    <None Include="wwwroot\fonts\neirizi-400.woff2" />
+    <None Include="wwwroot\fonts\palatino-sans-400.woff2" />
+    <None Include="wwwroot\fonts\sahel-400.woff2" />
+    <None Include="wwwroot\fonts\shabnam-300.woff2" />
+    <None Include="wwwroot\fonts\shabnam-400.woff2" />
+    <None Include="wwwroot\fonts\shabnam-500.woff2" />
+    <None Include="wwwroot\fonts\shabnam-700.woff2" />
+    <None Include="wwwroot\fonts\vazir-300.woff2" />
+    <None Include="wwwroot\fonts\vazir-400.woff2" />
+    <None Include="wwwroot\fonts\vazir-500.woff2" />
+    <None Include="wwwroot\fonts\vazir-700.woff2" />
+    <None Include="wwwroot\fonts\yekan-400.woff2" />
+    <None Include="wwwroot\IMadaenyPRJDscription.txt" />
+    <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\js\map.js" />
+    <None Include="wwwroot\js\plugins.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HamechiTamoom.Core\HamechiTamoom.Core.csproj" />
+    <ProjectReference Include="..\HamechiTamoom.DataLayer\HamechiTamoom.DataLayer.csproj" />
+  </ItemGroup>
+
+</Project>

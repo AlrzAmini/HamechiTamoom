@@ -1,0 +1,68 @@
+﻿@model HamechiTamoom.Core.DTOs.LoginViewModel
+@{
+    ViewData["Title"] = "ورود";
+}
+
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">خانه</a></li>
+                        <li>ورود</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="customer_login mt-60">
+    <div class="container">
+        <div class="row">
+            <!--register area start-->
+            
+            <!--register area end-->
+            <!--login area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form">
+                    <h2>ورود</h2>
+                    <form asp-action="Login" method="post" class="shadow">
+                        <p>
+                            <label>ایمیل<span>*</span></label>
+                            <input asp-for="Email" type="text">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label>رمز عبور <span>*</span></label>
+                            <input asp-for="Password" type="password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </p>
+                        <div class="login_submit">
+                            <a href="/ForgotPassword">رمز عبور خود را فراموش کرده اید؟</a>
+                            <label for="remember">
+                                <input asp-for="RememberMe" id="remember" type="checkbox"> به خاطر سپاری
+                            </label>
+                            <button type="submit">ورود</button>
+                        </div>
+                        <p>
+                            <a class="text-primary" href="/Register">ثبت نام در سایت</a>
+                        </p>
+
+                    </form>
+                </div>
+            </div>
+            <!--login area start-->
+        </div>
+        @if (ViewBag.IsSuccess != null)
+        {
+            <p class="alert alert-success mt-3">خوش آمدید.</p>
+            <script>
+                // Your delay in milliseconds
+                var delay = 1000; 
+                setTimeout(function () { window.location = "https://localhost:44387/"; }, delay);
+            </script>
+        }
+    </div>
+</div>

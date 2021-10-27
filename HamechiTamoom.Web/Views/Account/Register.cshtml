@@ -1,0 +1,63 @@
+﻿@model HamechiTamoom.Core.DTOs.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">خانه</a></li>
+                        <li>ثبت نام</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="customer_login mt-60"> 
+    <div class="container">
+        <div class="row">
+            <!--register area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form register">
+                    <h2>ثبت نام</h2>
+                    <form asp-action="Register" method="post" class="shadow">
+                        <p>
+                            <label>نام کاربری <span>*</span></label>
+                            <input asp-for="UserName" type="text">
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label>آدرس ایمیل <span>*</span></label>
+                            <input asp-for="Email" type="text">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label>کلمه عبور <span>*</span></label>
+                            <input asp-for="Password" type="password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label>تکرار کلمه عبور<span>*</span></label>
+                            <input asp-for="RePassword" type="password">
+                            <span asp-validation-for="RePassword" class="text-danger"></span>
+                        </p>
+                        <a class="text-primary" href="/Login">قبلا ثبت نام کرده ام</a>
+                        <div class="login_submit">
+                            <button type="submit">ثبت نام</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--register area end-->
+            <!--login area start-->
+            
+            <!--login area start-->
+        </div>
+    </div>
+</div>
+
