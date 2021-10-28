@@ -77,5 +77,23 @@ namespace HamechiTamoom.Core.Services
             _context.Update(user);
             _context.SaveChanges();
         }
+
+        public InformationUserViewModel GetUserInformation(string userName)
+        {
+            User user = GetUserByUserName(userName);
+
+            InformationUserViewModel information = new InformationUserViewModel();
+            information.UserName = user.UserName;
+            information.Email = user.Email;
+            information.RegisterDate = user.RegisterDate;
+            information.Wallet = 0;
+
+            return information;
+        }
+
+        public User GetUserByUserName(string userName)
+        {
+            return _context.Users.SingleOrDefault(u => u.UserName == userName);
+        }
     }
 }

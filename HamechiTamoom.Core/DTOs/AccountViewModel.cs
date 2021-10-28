@@ -81,7 +81,7 @@ namespace HamechiTamoom.Core.DTOs
         [DisplayName("ایمیل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(400, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
-        [EmailAddress(ErrorMessage = "ایمیل دارد شده معتبر نیست . دقت کنید !")]
+        [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نیست . دقت کنید !")]
         public string Email { get; set; }
 
         #endregion 
