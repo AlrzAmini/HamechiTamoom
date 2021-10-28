@@ -180,5 +180,76 @@ namespace HamechiTamoom.Web.Controllers
 
         #endregion
 
+        #region Forgot Password
+
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel forgot)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(forgot);
+            }
+
+
+            string fixedEmail = FixText.FixEmail(forgot.Email);
+            DataLayer.Entities.User.User user = _userService.GetUserByEmail(fixedEmail);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("Email", "ایمیل مورد نظر یافت نشد");
+                return View(forgot);
+            }
+
+
+            string emailBody = _viewRenderService.RenderToStringAsync("_ForgotPassword", user);
+            SendEmail.Send(user.Email, "بازیابی کلمه عبور",emailBody);
+            ViewBag.IsSuccess = true;
+
+
+            return View();
+        }
+
+        #endregion
+
+        #region Reset Password
+
+        public IActionResult ResetPassword(string id) // id = activeCode
+        {
+            return View(new ResetPasswordViewModel()
+            {
+                ActiveCode = id
+            });
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordViewModel reset) 
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(reset);
+            }
+
+            DataLayer.Entities.User.User user = _userService.GetUserByActiveCode(reset.ActiveCode);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            string hashNewPassword = PasswordHelper.EncodePasswordMd5(reset.Password);
+            user.Password = hashNewPassword;
+            _userService.UpdateUser(user);
+
+            return Redirect("/Login");
+        }
+
+        #endregion
+
     }
 }

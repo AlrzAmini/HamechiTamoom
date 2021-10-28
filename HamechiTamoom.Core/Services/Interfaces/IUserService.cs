@@ -18,7 +18,13 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         User LoginUser(LoginViewModel login);
 
-        bool ActiveAccount(string activeCode); 
+        bool ActiveAccount(string activeCode);
+
+        User GetUserByEmail(string email);
+
+        User GetUserByActiveCode(string activeCode);
+
+        void UpdateUser(User user);
 
     }
 }
