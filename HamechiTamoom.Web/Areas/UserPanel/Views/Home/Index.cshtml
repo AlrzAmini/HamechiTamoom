@@ -20,14 +20,27 @@
 <!-- my account start  -->
 <section class="main_content_area">
     <div class="container">
-        <div>
-            <div class="col-lg-3 p-0">
-                <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
-                <img src="/img/UserAvatar/Avatar-min.jpg">
+        <div class="row">
+            <div class="border mb-2 shadow p-2 border-radius-5 col-md-3">
+                <div class="col-md-12">
+                    <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
+                    <img src="/img/UserAvatar/Avatar-min.jpg">
+                </div>
+                <div class="detail">
+                    <span> @Model.UserName </span>
+                </div>
             </div>
-            <div class="detail">
-                <span> علیرضا امینی </span>
-                <span> عضویت : 01/01/1400 </span>
+            <div class="tab-pane fade show active col-md-9" id="dashboard">
+                <h2>داشبورد </h2>
+                <div class="box-content border shadow p-3 border-radius-5 mb-2">
+                    <h3 class="text-primary"> اطلاعات کاربری </h3>
+                    <ul>
+                        <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری : @Model.UserName </li>
+                        <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
+                        <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.RegisterDate.ToShamsi() </li>
+                        <li> <i class="zmdi zmdi-money"></i> کیف پول : @Model.Wallet تومان </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="account_dashboard">
@@ -47,18 +60,7 @@
                 <div class="col-sm-12 col-md-9 col-lg-9">
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content">
-                        <div class="tab-pane fade show active" id="dashboard">
-                            <h2>داشبورد </h2>
-                            <div class="box-content border shadow p-3 border-radius-5">
-                                <h3 class="text-primary"> اطلاعات کاربری </h3>
-                                <ul>
-                                    <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری : @Model.UserName </li>
-                                    <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
-                                    <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.RegisterDate.ToShamsi() </li>
-                                    <li> <i class="zmdi zmdi-money"></i> کیف پول : @Model.Wallet تومان </li>
-                                </ul>
-                            </div>
-                        </div>
+
                         <div class="tab-pane fade" id="orders">
                             <h3>سفارشات</h3>
                             <div class="table-responsive">

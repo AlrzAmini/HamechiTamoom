@@ -13,6 +13,7 @@ using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Entities.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HamechiTamoom.Web.Controllers
 {
@@ -170,7 +171,7 @@ namespace HamechiTamoom.Web.Controllers
         #endregion
 
         #region Logout
-
+        
         [Route("Logout")]
         public IActionResult Logout()
         {
