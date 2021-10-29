@@ -40,9 +40,11 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         #endregion
 
-        #region UserPanel
+        #region User Panel
 
         InformationUserViewModel GetUserInformation(string userName);
+
+        SideBarUserPanelViewModel GetSideBarUserPanelData(string userName);
 
         #endregion
 

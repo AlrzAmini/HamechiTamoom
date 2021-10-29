@@ -17,4 +17,10 @@ namespace HamechiTamoom.Core.DTOs
 
         #endregion
     }
+
+    public class SideBarUserPanelViewModel
+    {
+        public string UserName { get; set; }
+        public string ImageName { get; set; } = "-";
+    }
 }

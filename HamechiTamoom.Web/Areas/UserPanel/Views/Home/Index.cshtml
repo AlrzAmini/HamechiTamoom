@@ -1,7 +1,7 @@
 ﻿@using HamechiTamoom.Core.Convertors
 @model HamechiTamoom.Core.DTOs.InformationUserViewModel
 @{
-    ViewData["Title"] = "پنل کاربری";
+    ViewData["Title"] = "پروفایل من";
 }
 <div class="breadcrumbs_area">
     <div class="container">
@@ -10,7 +10,7 @@
                 <div class="breadcrumb_content">
                     <ul>
                         <li><a href="/">خانه</a></li>
-                        <li>پنل کاربری</li>
+                        <li>پروفایل من</li>
                     </ul>
                 </div>
             </div>
@@ -21,46 +21,27 @@
 <section class="main_content_area">
     <div class="container">
         <div class="row">
-            <div class="border mb-2 shadow p-2 border-radius-5 col-md-3">
-                <div class="col-md-12">
-                    <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
-                    <img src="/img/UserAvatar/Avatar-min.jpg">
-                </div>
-                <div class="detail">
-                    <span> @Model.UserName </span>
-                </div>
-            </div>
+            <!--partial-->
+            <partial  name="_UserProfileImage"/>
             <div class="tab-pane fade show active col-md-9" id="dashboard">
-                <h2>داشبورد </h2>
                 <div class="box-content border shadow p-3 border-radius-5 mb-2">
                     <h3 class="text-primary"> اطلاعات کاربری </h3>
                     <ul>
-                        <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری : @Model.UserName </li>
+                        <li> <i class="zmdi zmdi-assignment-account color1"></i> نام کاربری : @Model.UserName </li>
                         <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
                         <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.RegisterDate.ToShamsi() </li>
-                        <li> <i class="zmdi zmdi-money"></i> کیف پول : @Model.Wallet تومان </li>
+                        <li> <i class="zmdi zmdi-money"></i> اعتبار فعلی : @Model.Wallet تومان </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="account_dashboard">
             <div class="row">
-                <div class="col-sm-12 col-md-3 col-lg-3">
-                    <!-- Nav tabs -->
-                    <div class="dashboard_tab_button">
-                        <ul role="tablist" class="nav flex-column dashboard-list">
-                            <li><a href="#dashboard" data-toggle="tab" class="nav-link active">داشبورد</a></li>
-                            <li> <a href="#orders" data-toggle="tab" class="nav-link">ویرایش حساب کاربری</a></li>
-                            <li><a href="#downloads" data-toggle="tab" class="nav-link">تغییر کلمه عبور</a></li>
-                            <li><a href="#address" data-toggle="tab" class="nav-link">تنظیمات حساب کاربری</a></li>
-                            <li><a href="login.html" class="nav-link">خروج</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <partial name="_UserNavTabs"/>
                 <div class="col-sm-12 col-md-9 col-lg-9">
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content">
-
+                        
                         <div class="tab-pane fade" id="orders">
                             <h3>سفارشات</h3>
                             <div class="table-responsive">
