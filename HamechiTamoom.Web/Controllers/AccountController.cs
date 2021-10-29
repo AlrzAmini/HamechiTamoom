@@ -97,10 +97,12 @@ namespace HamechiTamoom.Web.Controllers
         #region Login
 
         [Route("Login")]
-        public IActionResult Login()
+        public IActionResult Login(bool EditProfile = false)
         {
+            ViewBag.IsEdited = EditProfile;
             return View();
         }
+
         [HttpPost]
         [Route("Login")]
         public IActionResult Login(LoginViewModel login)
@@ -176,7 +178,7 @@ namespace HamechiTamoom.Web.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("/");
+            return Redirect("/Login");
         }
 
         #endregion

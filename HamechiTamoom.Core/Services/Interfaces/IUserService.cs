@@ -46,6 +46,10 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         SideBarUserPanelViewModel GetSideBarUserPanelData(string userName);
 
+        EditUserProfileViewModel GetUserDataForEditProfile(string userName);
+
+        void EditProfile(string username, EditUserProfileViewModel profile);
+
         #endregion
 
     }

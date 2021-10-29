@@ -69,3 +69,9 @@
     color: #7389a3;
     display: block;
 }
+.picture-maxwidth {
+    max-width: 150px;
+}
+.picture-maxwh {
+    max-width: 250px;
+}

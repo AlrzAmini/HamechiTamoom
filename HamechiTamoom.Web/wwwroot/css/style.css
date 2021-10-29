@@ -8286,7 +8286,7 @@ textarea:-ms-input-placeholder {
 .dashboard_tab_button ul li a {
 	font-size: 14px;
 	color: #ffffff;
-	font-weight: 500;
+    font-weight: 500;
 	background: #242424;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

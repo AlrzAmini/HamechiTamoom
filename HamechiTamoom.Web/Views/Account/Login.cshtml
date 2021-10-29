@@ -1,4 +1,5 @@
-﻿@model HamechiTamoom.Core.DTOs.LoginViewModel
+﻿@using Microsoft.AspNetCore.Http
+@model HamechiTamoom.Core.DTOs.LoginViewModel
 @{
     ViewData["Title"] = "ورود";
 }
@@ -27,6 +28,12 @@
             <!--login area start-->
             <div class="col-lg-6 col-md-6">
                 <div class="account_form">
+                    @if (ViewBag.IsEdited == true)
+                    {
+                        <div class="alert alert-info">
+                            <p>ویرایش پروفایل شما با موفقیت انجام شد.لطفا برای مشاهده تغییرات مجددا وارد شوید.</p>
+                        </div> 
+                    }
                     <h2>ورود</h2>
                     <form asp-action="Login" method="post" class="shadow">
                         <p>

@@ -1,0 +1,76 @@
+﻿@model HamechiTamoom.Core.DTOs.EditUserProfileViewModel
+@{
+    ViewData["Title"] = "ویرایش پروفایل";
+}
+
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">خانه</a></li>
+                        <li class="active"> ویرایش پروفایل </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="main_content_area">
+    <div class="container">
+        <div class="row">
+            <!--partial-->
+            <partial name="_SideBar" />
+            <div class="account_dashboard col-md-9 border border-radius-5 shadow p-2">
+                <div class="row">
+                    <div class="col-sm-12 col-md-9 col-lg-9">
+                        <!-- Tab panes -->
+                        <div class="tab-content dashboard_content">
+                            <div class="col-sm-12 col-md-9 col-lg-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content dashboard_content">
+                                    <div class="tab-pane fade active show" id="account-details">
+                                        <h3>ویرایش حساب </h3>
+                                        <div class="login">
+                                            <div class="login_form_container">
+                                                <div class="account_login_form">
+                                                    <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+
+                                                        @if (ViewBag.IsSuccess != null)
+                                                        {
+                                                            <div class="alert alert-success">
+                                                                <p>پروفایل شما با موفقیت بروزرسانی شد</p>
+                                                            </div>
+                                                        }
+
+                                                        <input type="hidden" asp-for="CurrentAvatar"/>
+                                                        <br>
+                                                        <label>نام کاربری</label>
+                                                        <input type="text" asp-for="UserName">
+                                                        <span asp-validation-for="UserName"></span>
+                                                        <br/>
+                                                        <label>تصویر پروفایل</label>
+                                                        <input type="file" asp-for="UserAvatar">
+                                                        <span>لطفا فقط تصویر انتخاب کنید</span>
+                                                        <img src="/img/UserAvatar/@Model.CurrentAvatar" class="picture-maxwidth img-thumbnail"/>
+                                                        <br>
+                                                        <div class="save_button primary_btn default_button">
+                                                            <button class="bg-success" type="submit">ذخیره</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

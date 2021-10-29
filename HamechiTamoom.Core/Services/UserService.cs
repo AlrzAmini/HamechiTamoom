@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,6 +104,49 @@ namespace HamechiTamoom.Core.Services
                 UserName = u.UserName,
                 ImageName = u.UserAvatar
             }).Single();
+        }
+
+        public EditUserProfileViewModel GetUserDataForEditProfile(string userName)
+        {
+            return _context.Users.Where(u => u.UserName == userName).Select(u => new EditUserProfileViewModel()
+            {
+                UserName = u.UserName,
+                CurrentAvatar = u.UserAvatar
+            }).Single();
+        }
+
+        public void EditProfile(string userName, EditUserProfileViewModel profile)
+        {
+            if (profile.UserAvatar != null)
+            {
+                string imgPath = "";
+                // if new image was exist
+                if (profile.CurrentAvatar != "Avatar-min.jpg")
+                {
+                    imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/UserAvatar",
+                        profile.CurrentAvatar);
+                    if (File.Exists(imgPath))
+                    {
+                        File.Delete(imgPath);
+                    }
+                }
+
+                profile.CurrentAvatar = CodeGenerator.GenerateUniqCode() + Path.GetExtension(profile.UserAvatar.FileName);
+
+                imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/UserAvatar",
+                    profile.CurrentAvatar);
+                using (var stream = new FileStream(imgPath, FileMode.Create))
+                {
+                    profile.UserAvatar.CopyTo(stream);
+                }
+            }
+
+            User user = GetUserByUserName(userName);
+            user.UserName = profile.UserName;
+            user.UserAvatar = profile.CurrentAvatar;
+
+            UpdateUser(user);
+
         }
     }
 }
