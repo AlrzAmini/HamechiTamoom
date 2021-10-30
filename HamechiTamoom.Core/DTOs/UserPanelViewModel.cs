@@ -47,4 +47,27 @@ namespace HamechiTamoom.Core.DTOs
         #endregion
 
     }
+
+    public class ChangePasswordViewModel
+    {
+        #region Password & Repeation Password & OldPassword
+
+        [DisplayName("کلمه عبور فعلی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        public string OldPassword { get; set; }
+
+        [DisplayName("کلمه عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        public string Password { get; set; }
+
+        [DisplayName("تکرار کلمه عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        [Compare("Password", ErrorMessage = "کلمه عبور و تکرار آن مغایرت دارند.")]
+        public string RePassword { get; set; }
+
+        #endregion
+    }
 }

@@ -148,5 +148,18 @@ namespace HamechiTamoom.Core.Services
             UpdateUser(user);
 
         }
+
+        public bool CompareOldPassword(string oldPassword, string username)
+        {
+            string hashOldPassword = PasswordHelper.EncodePasswordMd5(oldPassword);
+            return _context.Users.Any(u => u.UserName == username && u.Password == hashOldPassword);
+        }
+
+        public void ChangePassword(string userName, string newPassword)
+        {
+            User user = GetUserByUserName(userName);
+            user.Password = PasswordHelper.EncodePasswordMd5(newPassword);
+            UpdateUser(user);
+        }
     }
 }

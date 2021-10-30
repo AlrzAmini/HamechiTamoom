@@ -50,6 +50,10 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         void EditProfile(string username, EditUserProfileViewModel profile);
 
+        bool CompareOldPassword(string oldPassword, string username);
+
+        void ChangePassword(string userName, string newPassword);
+
         #endregion
 
     }
