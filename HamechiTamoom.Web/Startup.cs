@@ -112,6 +112,7 @@ namespace HamechiTamoom.Web
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
+                endpoints.MapRazorPages();
             });
 
             #endregion

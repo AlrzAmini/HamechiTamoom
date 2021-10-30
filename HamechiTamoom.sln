@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamechiTamoom.Web", "HamechiTamoom.Web\HamechiTamoom.Web.csproj", "{34EA341B-59D1-4190-AAC3-26BABE3E634D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamechiTamoom.Web", "HamechiTamoom.Web\HamechiTamoom.Web.csproj", "{34EA341B-59D1-4190-AAC3-26BABE3E634D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamechiTamoom.DataLayer", "HamechiTamoom.DataLayer\HamechiTamoom.DataLayer.csproj", "{8E350919-CE58-430E-9D8C-A8359079DACC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamechiTamoom.DataLayer", "HamechiTamoom.DataLayer\HamechiTamoom.DataLayer.csproj", "{8E350919-CE58-430E-9D8C-A8359079DACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamechiTamoom.Core", "HamechiTamoom.Core\HamechiTamoom.Core.csproj", "{797CDE01-CF13-4F6E-A6C8-B1E8F82046EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamechiTamoom.Core", "HamechiTamoom.Core\HamechiTamoom.Core.csproj", "{797CDE01-CF13-4F6E-A6C8-B1E8F82046EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

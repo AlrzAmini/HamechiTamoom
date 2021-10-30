@@ -6,10 +6,63 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\AdminPanel\fonts\iransans\iran-sans-300.woff2" />
+    <Content Remove="wwwroot\AdminPanel\fonts\iransans\iran-sans-400.woff2" />
+    <Content Remove="wwwroot\AdminPanel\fonts\iransans\iran-sans-500.woff2" />
+    <Content Remove="wwwroot\AdminPanel\fonts\iransans\iran-sans-700.woff2" />
     <Content Remove="wwwroot\IMadaenyPRJDscription.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\AdminPanel\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\bordered-pulled.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\core.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\fixed-width.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\font-awesome.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\icons.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\larger.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\list.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\mixins.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\path.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\rotated-flipped.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\spinning.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\stacked.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\less\variables.less" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\font-awesome.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_core.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_fixed-width.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_icons.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_larger.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_list.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_mixins.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_path.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_spinning.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_stacked.scss" />
+    <None Include="wwwroot\AdminPanel\font-awesome\scss\_variables.scss" />
+    <None Include="wwwroot\AdminPanel\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\AdminPanel\fonts\iransans\iran-sans-300.woff2" />
+    <None Include="wwwroot\AdminPanel\fonts\iransans\iran-sans-400.woff2" />
+    <None Include="wwwroot\AdminPanel\fonts\iransans\iran-sans-500.woff2" />
+    <None Include="wwwroot\AdminPanel\fonts\iransans\iran-sans-700.woff2" />
+    <None Include="wwwroot\AdminPanel\js\bootstrap.js" />
+    <None Include="wwwroot\AdminPanel\js\bootstrap.min.js" />
+    <None Include="wwwroot\AdminPanel\js\demo\dashboard-demo.js" />
+    <None Include="wwwroot\AdminPanel\js\demo\flot-demo.js" />
+    <None Include="wwwroot\AdminPanel\js\demo\morris-demo.js" />
+    <None Include="wwwroot\AdminPanel\js\jquery-1.10.2.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\dataTables\dataTables.bootstrap.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\dataTables\jquery.dataTables.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\flot\excanvas.min.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\flot\jquery.flot.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\flot\jquery.flot.pie.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\flot\jquery.flot.resize.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\flot\jquery.flot.tooltip.min.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\metisMenu\jquery.metisMenu.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\morris\morris.js" />
+    <None Include="wwwroot\AdminPanel\js\plugins\morris\raphael-2.1.0.min.js" />
+    <None Include="wwwroot\AdminPanel\js\sb-admin.js" />
     <None Include="wwwroot\fonts\aviny-700.woff2" />
     <None Include="wwwroot\fonts\dastnevis-400.woff2" />
     <None Include="wwwroot\fonts\droid-naskh-400.woff2" />
