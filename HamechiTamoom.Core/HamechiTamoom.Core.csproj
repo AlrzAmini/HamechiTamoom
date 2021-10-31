@@ -14,4 +14,8 @@
     <ProjectReference Include="..\HamechiTamoom.DataLayer\HamechiTamoom.DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Consts\" />
+  </ItemGroup>
+
 </Project>

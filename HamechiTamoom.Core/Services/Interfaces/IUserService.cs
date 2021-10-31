@@ -56,5 +56,13 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         #endregion
 
+        #region Admin Panel
+
+        UsersForAdminViewModel GetUsersByFilter(int pageId = 1, string filterUserName = "", string filterEmail = "");
+
+        int AddUserFromAdmin(CreateUserViewModel user);
+
+        #endregion
+
     }
 }

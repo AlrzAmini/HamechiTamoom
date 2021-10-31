@@ -54,9 +54,9 @@
                                                         <span asp-validation-for="UserName"></span>
                                                         <br/>
                                                         <label class="text-black-50"><i class="zmdi zmdi-image"></i> تصویر پروفایل</label>
-                                                        <input type="file" asp-for="UserAvatar" class="border-radius-5">
+                                                        <input id="UserAvatar" type="file" asp-for="UserAvatar">
                                                         <span>لطفا فقط تصویر انتخاب کنید</span>
-                                                        <img src="/img/UserAvatar/@Model.CurrentAvatar" class="picture-maxwidth img-thumbnail"/>
+                                                        <img id="imgAvatar" src="/img/UserAvatar/@Model.CurrentAvatar" class="picture-maxwidth img-thumbnail"/>
                                                         <br>
                                                         <div class="save_button primary_btn default_button">
                                                             <button class="bg-success" type="submit">ذخیره</button>
@@ -76,3 +76,24 @@
 
     </div>
 </section>
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#UserAvatar").change(function() {
+            readURL(this);
+        });
+    </script>
+}

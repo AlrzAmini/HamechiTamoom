@@ -161,5 +161,63 @@ namespace HamechiTamoom.Core.Services
             user.Password = PasswordHelper.EncodePasswordMd5(newPassword);
             UpdateUser(user);
         }
+
+        public UsersForAdminViewModel GetUsersByFilter(int pageId = 1, string filterUserName = "", string filterEmail = "")
+        {
+            IQueryable<User> result = _context.Users;
+            // filter by email
+            if (!string.IsNullOrEmpty(filterEmail))
+            {
+                result = result.Where(u => u.Email.Contains(filterEmail));
+            }
+            // filter by username
+            if (!string.IsNullOrEmpty(filterUserName))
+            {
+                result = result.Where(u => u.UserName.Contains(filterUserName));
+            }
+
+            // show item in page 
+
+            
+            int take = 10;
+            int skip = (pageId - 1) * take;
+
+            UsersForAdminViewModel lstPaging = new UsersForAdminViewModel();
+            lstPaging.CurrentPage = pageId;
+            lstPaging.TotalPage = (int)Math.Ceiling((decimal)result.Count() / take);  
+            lstPaging.Users = result.OrderBy(u => u.RegisterDate).Skip(skip).Take(take).ToList();
+
+            return lstPaging;
+        }
+
+        public int AddUserFromAdmin(CreateUserViewModel user)
+        {
+            User addUser = new User();
+            addUser.UserName = user.UserName;
+            addUser.Email = user.Email;
+            addUser.Password = PasswordHelper.EncodePasswordMd5(user.Password);
+            addUser.RegisterDate = DateTime.Now;
+            addUser.ActivationCode = CodeGenerator.GenerateUniqCode();
+            addUser.IsActive = true;
+            #region Save User Avatar
+
+            if (user.UserAvatar != null)
+            {
+                string imgPath = "";
+
+                addUser.UserAvatar = CodeGenerator.GenerateUniqCode() + Path.GetExtension(user.UserAvatar.FileName);
+
+                imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/UserAvatar",
+                    addUser.UserAvatar);
+                using (var stream = new FileStream(imgPath, FileMode.Create))
+                {
+                    user.UserAvatar.CopyTo(stream);
+                }
+            }
+
+            #endregion
+
+            return AddUser(addUser);
+        }
     }
 }
