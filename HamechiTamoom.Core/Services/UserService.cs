@@ -165,29 +165,30 @@ namespace HamechiTamoom.Core.Services
         public UsersForAdminViewModel GetUsersByFilter(int pageId = 1, string filterUserName = "", string filterEmail = "")
         {
             IQueryable<User> result = _context.Users;
-            // filter by email
+
+            // filter list by email
             if (!string.IsNullOrEmpty(filterEmail))
             {
                 result = result.Where(u => u.Email.Contains(filterEmail));
             }
-            // filter by username
+
+            // filter list by username
             if (!string.IsNullOrEmpty(filterUserName))
             {
                 result = result.Where(u => u.UserName.Contains(filterUserName));
             }
 
             // show item in page 
-
-            
             int take = 10;
             int skip = (pageId - 1) * take;
 
-            UsersForAdminViewModel lstPaging = new UsersForAdminViewModel();
-            lstPaging.CurrentPage = pageId;
-            lstPaging.TotalPage = (int)Math.Ceiling((decimal)result.Count() / take);  
-            lstPaging.Users = result.OrderBy(u => u.RegisterDate).Skip(skip).Take(take).ToList();
+            // Paging and Users
+            UsersForAdminViewModel lstUsers = new UsersForAdminViewModel();
+            lstUsers.CurrentPage = pageId;
+            lstUsers.TotalPage = (int)Math.Ceiling((decimal)result.Count() / take);
+            lstUsers.Users = result.OrderBy(u => u.RegisterDate).Skip(skip).Take(take).ToList();
 
-            return lstPaging;
+            return lstUsers;
         }
 
         public int AddUserFromAdmin(CreateUserViewModel user)
@@ -219,5 +220,67 @@ namespace HamechiTamoom.Core.Services
 
             return AddUser(addUser);
         }
+
+        public EditUserViewModel GetUserForShowInEditMode(int userId)
+        {
+            return _context.Users.Where(u => u.UserId == userId)
+                .Select(u => new EditUserViewModel()
+                {
+                    UserId = u.UserId,
+                    UserName = u.UserName,
+                    Email = u.Email,
+                    AvatarName = u.UserAvatar,
+                    UserRoles = u.UserRoles.Select(r => r.RoleId).ToList()
+
+                }).Single();
+        }
+
+        public User GetUserByUserId(int userId)
+        {
+            return _context.Users.SingleOrDefault(u => u.UserId == userId);
+        }
+
+        public void EditUserFromAdmin(EditUserViewModel editUser)
+        {
+            User user = GetUserByUserId(editUser.UserId);
+            //user.UserName = user name cant change ...
+            user.Email = editUser.Email;
+
+            if (!string.IsNullOrEmpty(editUser.Password))
+            {
+                user.Password = PasswordHelper.EncodePasswordMd5(editUser.Password);
+            }
+
+            
+            if (editUser.UserAvatar != null)
+            {
+
+                // Delete Old Image
+                if (editUser.AvatarName != "Avatar-min.jpg")
+                {
+                    string deletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/UserAvatar",
+                        editUser.AvatarName);
+                    if (File.Exists(deletePath))
+                    {
+                        File.Delete(deletePath);
+                    }
+                }
+
+                // Save New Image
+                user.UserAvatar = CodeGenerator.GenerateUniqCode() + Path.GetExtension(editUser.UserAvatar.FileName);
+
+                string imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/UserAvatar",
+                    user.UserAvatar);
+                using (var stream = new FileStream(imgPath, FileMode.Create))
+                {
+                    editUser.UserAvatar.CopyTo(stream);
+                }
+            }
+
+            
+
+            UpdateUser(user);
+        }
+
     }
 }

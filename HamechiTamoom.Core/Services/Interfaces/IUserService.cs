@@ -38,6 +38,8 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         User GetUserByActiveCode(string activeCode);
 
+        User GetUserByUserId(int userId);
+
         #endregion
 
         #region User Panel
@@ -61,6 +63,10 @@ namespace HamechiTamoom.Core.Services.Interfaces
         UsersForAdminViewModel GetUsersByFilter(int pageId = 1, string filterUserName = "", string filterEmail = "");
 
         int AddUserFromAdmin(CreateUserViewModel user);
+
+        EditUserViewModel GetUserForShowInEditMode(int userId);
+
+        void EditUserFromAdmin(EditUserViewModel editUser);
 
         #endregion
 

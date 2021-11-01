@@ -1,0 +1,120 @@
+﻿@page
+@using HamechiTamoom.DataLayer.Entities.User
+@model HamechiTamoom.Web.Pages.Admin.ManageUsers.EditUserModel
+@{
+    ViewData["Title"] = "ویرایش کاربر";
+    //List<Role> Roles = ViewData["Roles"] as List<Role>;
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">ویرایش کاربر</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+@if ((string)ViewData["IsUserNameUniq"] == "false")
+{
+    <div class="row">
+        <p class="alert alert-danger col-md-6">این نام کاربری قبلا استفاده شده</p>
+        <a asp-page="CreateUser" class="btn btn-primary btn-lg col-md-6">تازه سازی</a>
+    </div>
+    <br />
+}
+@if ((string)ViewData["IsEmailUniq"] == "false")
+{
+    <div class="row">
+        <p class="alert alert-danger col-md-6">این ایمیل قبلا استفاده شده</p>
+        <a asp-page="CreateUser" class="btn btn-primary btn-lg col-md-6">تازه سازی</a>
+    </div>
+    <br />
+}
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="EditUserViewModel.UserId"/>
+        <input type="hidden" asp-for="EditUserViewModel.AvatarName"/>
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات کاربر
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label> نام کاربری : </label>
+                        <h4 class="text-primary "> @Model.EditUserViewModel.UserName </h4>
+                        <p class="help-block"> شما قادر به تغییر نام کاربری نیستید. </p>
+                    </div>
+                    <div class="form-group">
+                        <label> ایمیل </label>
+                        <input type="email" asp-for="EditUserViewModel.Email" class="form-control">
+                        <span asp-validation-for="EditUserViewModel.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label> کلمه عبور </label>
+                        <input type="text" asp-for="EditUserViewModel.Password" class="form-control" placeholder="کلمه عبور جدیدی انتخاب کنید">
+                        <span asp-validation-for="EditUserViewModel.Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    نقش ها
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @foreach (var item in Model.Roles)
+                        {
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="SelectedRoles" value="@item.RoleId"
+                                           @((Model.EditUserViewModel.UserRoles.Any(r => r == item.RoleId) ? "checked" : ""))>@item.RoleTitle
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    پروفایل
+                </div>
+                <div class="panel-body">
+                    <img id="imgAvatar" class="img-fluid img-thumbnail" src="/img/UserAvatar/@Model.EditUserViewModel.AvatarName"/>
+                    <div class="form-group">
+                        <label>تصویر پروفایل</label>
+                        <input id="EditUserViewModel_UserAvatar" type="file" asp-for="EditUserViewModel.UserAvatar">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">ویرایش کاربر</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#EditUserViewModel_UserAvatar").change(function () {
+            readURL(this);
+        });
+    </script>
+}

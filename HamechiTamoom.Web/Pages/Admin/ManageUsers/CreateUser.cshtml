@@ -12,7 +12,22 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-
+@if ((string)ViewData["IsUserNameUniq"] == "false")
+{
+    <div class="row">
+        <p class="alert alert-danger col-md-6">این نام کاربری قبلا استفاده شده</p>
+        <a asp-page="CreateUser" class="btn btn-primary btn-lg col-md-6">تازه سازی</a>
+    </div>
+    <br />
+}
+@if ((string)ViewData["IsEmailUniq"] == "false")
+{
+<div class="row">
+    <p class="alert alert-danger col-md-6">این ایمیل قبلا استفاده شده</p>
+    <a asp-page="CreateUser" class="btn btn-primary btn-lg col-md-6">تازه سازی</a>
+</div>
+    <br />
+}
 <div class="row">
     <form method="post" enctype="multipart/form-data">
         <div class="col-md-7">
@@ -24,17 +39,17 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label>نام کاربری</label>
-                        <input type="text" asp-for="CreateUserViewModel.UserName" class="form-control" placeholder="نام کاربری را وارد کنید ...">
+                        <input type="text" asp-for="CreateUserViewModel.UserName" class="form-control" placeholder="نام کاربری را وارد کنید ">
                         <span asp-validation-for="CreateUserViewModel.UserName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>ایمیل</label>
-                        <input type="email" asp-for="CreateUserViewModel.Email" class="form-control" placeholder="ایمیل را وارد کنید ...">
+                        <input type="email" asp-for="CreateUserViewModel.Email" class="form-control" placeholder="ایمیل را وارد کنید ">
                         <span asp-validation-for="CreateUserViewModel.Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>کلمه عبور</label>
-                        <input type="text" asp-for="CreateUserViewModel.Password" class="form-control" placeholder="کلمه عبور را وارد کنید ...">
+                        <input type="text" asp-for="CreateUserViewModel.Password" class="form-control" placeholder="کلمه عبور را وارد کنید ">
                         <span asp-validation-for="CreateUserViewModel.Password" class="text-danger"></span>
                     </div>
                 </div>

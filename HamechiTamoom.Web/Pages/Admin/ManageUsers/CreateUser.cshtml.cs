@@ -23,8 +23,10 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageUsers
 
         [BindProperty]
         public CreateUserViewModel CreateUserViewModel { get; set; }
+
         [BindProperty]
         public List<Role> Roles { get; set; }
+        
 
         public void OnGet()
         {
@@ -34,6 +36,8 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageUsers
 
         public IActionResult OnPost(List<int> SelectedRoles)
         {
+            #region Validation
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -41,8 +45,25 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageUsers
 
             if (SelectedRoles == null)
             {
-                ModelState.AddModelError("Email","لطفا تمامی فبلد های قرار گرفته را پر کنید");
+                ModelState.AddModelError("", "لطفا تمامی فبلد های قرار گرفته را پر کنید");
             }
+
+            if (_userService.IsExistUserName(CreateUserViewModel.UserName))
+            {
+                ModelState.AddModelError("", "این نام کاربری قبلا استفاده شده است.");
+                ViewData["IsUserNameUniq"] = "false";
+                return Page();
+            }
+
+            if (_userService.IsExistEmail(CreateUserViewModel.Email))
+            {
+                ModelState.AddModelError("", "این ایمیل قبلا استفاده شده است.");
+                ViewData["IsEmailUniq"] = "false";
+                return Page();
+            }
+
+            #endregion
+
 
             int userId = _userService.AddUserFromAdmin(CreateUserViewModel);
 

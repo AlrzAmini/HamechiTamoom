@@ -37,5 +37,23 @@ namespace HamechiTamoom.Core.Services
 
             _context.SaveChanges();
         }
+
+        public void EditRolesUser(List<int> rolesId, int userId)
+        {
+
+            #region Delete User Roles
+
+            _context.UserRoles.Where(u => u.UserId == userId).ToList().ForEach(r => _context.UserRoles.Remove(r));
+
+            #endregion
+
+            #region Add New Roles
+
+            AddRolesToUser(rolesId,userId);
+
+            #endregion
+
+            _context.SaveChanges();
+        }
     }
 }

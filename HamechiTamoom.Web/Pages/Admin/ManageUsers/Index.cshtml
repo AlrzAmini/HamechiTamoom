@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <a asp-page="/Admin/ManageUsers/CreateUser" class="btn btn-outline btn-success">افزودن کاربر جدید</a>
+        <a asp-page="CreateUser" class="btn btn-outline btn-success">افزودن کاربر جدید</a>
     </div>
 </div>
 <br/>
@@ -69,8 +69,8 @@
                                     </td>
                                     <td>@item.RegisterDate.ToShamsi()</td>
                                     <td>
-                                        <a href="#" class="btn btn-outline btn-primary btn-sm">ویرایش</a>
-                                        <a href="#" class="btn btn-outline btn-danger btn-sm">حذف</a>
+                                        <a asp-page="EditUser" asp-route-userId="@item.UserId" class="btn btn-outline btn-primary btn-sm">ویرایش</a>
+                                        <a asp-page="DeleteUser" asp-route-userId="@item.UserId" class="btn btn-outline btn-danger btn-sm">حذف</a>
                                     </td>
                                 </tr>
                             }
