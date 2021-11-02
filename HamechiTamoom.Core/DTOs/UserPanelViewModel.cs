@@ -19,6 +19,12 @@ namespace HamechiTamoom.Core.DTOs
         public int Wallet { get; set; }
 
         #endregion
+
+        #region For Delete
+
+        public string UserAvatar { get; set; }
+
+        #endregion
     }
 
     public class SideBarUserPanelViewModel

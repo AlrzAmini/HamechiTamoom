@@ -1,0 +1,43 @@
+﻿@page
+@using HamechiTamoom.Core.Convertors
+@model HamechiTamoom.Web.Pages.Admin.ManageUsers.DeleteModel
+@{
+        ViewData["Title"] = "حذف کاربر";
+}
+
+    <h1 class="text-danger">حذف کاربر</h1>
+
+    <h4>آیا از حذف این کاربر مطمعن هستید ؟</h4>
+    <div>
+        <h4>@Model.Information.UserName</h4>
+        <hr />
+        <div class="col-md-12 row">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    اطلاعات کاربر
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label> نام کاربری </label>
+                        <h5 class="text-primary">@Model.Information.UserName</h5>
+                    </div>
+                    <div class="form-group">
+                        <label> ایمیل </label>
+                        <h5 class="text-primary">@Model.Information.Email</h5>
+                    </div>
+                    <div class="form-group">
+                        <label> تاریخ عضویت </label>
+                        <h5 class="text-primary">@Model.Information.RegisterDate.ToShamsi()</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <br/>
+        <form method="post">
+            <input type="hidden" name="UserId" value="@ViewData["UserId"].ToString()" />
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            <a asp-page="./Index">بازگشت به لیست</a>
+        </form>
+    </div>

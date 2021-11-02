@@ -4,14 +4,16 @@ using HamechiTamoom.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HamechiTamoom.DataLayer.Migrations
 {
     [DbContext(typeof(HamechiTamoomContext))]
-    partial class HamechiTamoomContextModelSnapshot : ModelSnapshot
+    [Migration("20211101175303_addIsDeleteToUser")]
+    partial class addIsDeleteToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

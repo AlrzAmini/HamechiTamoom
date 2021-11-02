@@ -81,6 +81,12 @@ namespace HamechiTamoom.DataLayer.Entities.User
 
         #endregion
 
+        #region Is delete ?
+
+        public bool IsDelete { get; set; }
+
+        #endregion
+
         #region Relations
 
         public List<UserRole> UserRoles { get; set; }

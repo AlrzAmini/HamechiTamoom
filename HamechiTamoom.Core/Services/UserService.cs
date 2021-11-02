@@ -23,6 +23,7 @@ namespace HamechiTamoom.Core.Services
             _context = context;
         }
 
+        #region Queries
 
         public bool IsExistUserName(string userName)
         {
@@ -82,6 +83,20 @@ namespace HamechiTamoom.Core.Services
         public InformationUserViewModel GetUserInformation(string userName)
         {
             User user = GetUserByUserName(userName);
+
+            InformationUserViewModel information = new InformationUserViewModel();
+            information.UserName = user.UserName;
+            information.Email = user.Email;
+            information.RegisterDate = user.RegisterDate;
+            information.Wallet = 0;
+            information.UserAvatar = user.UserAvatar;
+
+            return information;
+        }
+
+        public InformationUserViewModel GetUserInformation(int userId)
+        {
+            User user = GetUserByUserId(userId);
 
             InformationUserViewModel information = new InformationUserViewModel();
             information.UserName = user.UserName;
@@ -251,7 +266,7 @@ namespace HamechiTamoom.Core.Services
                 user.Password = PasswordHelper.EncodePasswordMd5(editUser.Password);
             }
 
-            
+
             if (editUser.UserAvatar != null)
             {
 
@@ -277,10 +292,19 @@ namespace HamechiTamoom.Core.Services
                 }
             }
 
-            
-
             UpdateUser(user);
         }
+
+        public void DeleteUserFromAdmin(int userId)
+        {
+            User user = GetUserByUserId(userId);
+
+            _context.Remove(user);
+            _context.SaveChanges();
+        }
+
+
+        #endregion
 
     }
 }

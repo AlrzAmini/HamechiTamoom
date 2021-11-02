@@ -46,6 +46,8 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         InformationUserViewModel GetUserInformation(string userName);
 
+        InformationUserViewModel GetUserInformation(int userId);
+
         SideBarUserPanelViewModel GetSideBarUserPanelData(string userName);
 
         EditUserProfileViewModel GetUserDataForEditProfile(string userName);
@@ -67,6 +69,8 @@ namespace HamechiTamoom.Core.Services.Interfaces
         EditUserViewModel GetUserForShowInEditMode(int userId);
 
         void EditUserFromAdmin(EditUserViewModel editUser);
+
+        void DeleteUserFromAdmin(int userId);
 
         #endregion
 
