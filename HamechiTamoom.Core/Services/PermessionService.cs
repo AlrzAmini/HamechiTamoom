@@ -55,5 +55,30 @@ namespace HamechiTamoom.Core.Services
 
             _context.SaveChanges();
         }
+
+        public int AddRole(Role role)
+        {
+            _context.Roles.Add(role);
+            _context.SaveChanges();
+
+            return role.RoleId;
+        }
+
+        public Role GetRoleByRoleId(int roleId)
+        {
+           return _context.Roles.Find(roleId);
+        }
+
+        public void UpdateRole(Role role)
+        {
+            _context.Roles.Update(role);
+            _context.SaveChanges();
+        }
+
+        public void DeleteRole(Role role)
+        {
+            _context.Roles.Remove(role);
+            _context.SaveChanges();
+        }
     }
 }

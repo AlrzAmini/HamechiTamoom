@@ -17,6 +17,14 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         void EditRolesUser(List<int> rolesId, int userId);
 
+        void DeleteRole(Role role);
+
+        int AddRole(Role role);
+
+        Role GetRoleByRoleId(int roleId);
+
+        void UpdateRole(Role role);
+
         #endregion
     }
 }

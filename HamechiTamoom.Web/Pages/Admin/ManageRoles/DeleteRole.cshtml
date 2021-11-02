@@ -1,0 +1,36 @@
+﻿@page
+@model HamechiTamoom.Web.Pages.Admin.ManageRoles.DeleteRoleModel
+@{
+    ViewData["Title"] = "حذف نقش";
+}
+
+<h1 class="text-danger">حذف نقش</h1>
+
+<h4>آیا از حذف این نقش مطمعن هستید ؟</h4>
+<div>
+    <h4 class="text-info">@Model.Role.RoleTitle</h4>
+    <hr />
+    <div class="col-md-12 row">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                اطلاعات نقش
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="form-group">
+                    <label> عنوان نقش </label>
+                    <h5 class="text-primary">@Model.Role.RoleTitle</h5>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <br/>
+    <form method="post">
+        <input type="hidden" asp-for="Role.RoleId"/>
+        <input type="hidden" asp-for="Role.RoleTitle"/>
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-page="./Index">بازگشت به لیست</a>
+    </form>
+</div>
+

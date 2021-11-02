@@ -24,8 +24,8 @@ namespace HamechiTamoom.DataLayer.Entities.User
 
         #region RoleTitle
 
+        [DisplayName("عنوان نقش")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        [DisplayName("")]
         [MaxLength(150,ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
         public string RoleTitle { get; set; }
 

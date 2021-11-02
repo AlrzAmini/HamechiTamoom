@@ -1,0 +1,48 @@
+﻿@page
+@model HamechiTamoom.Web.Pages.Admin.ManageRoles.CreateRoleModel
+@{
+    ViewData["Title"] = "افزودن نقش جدید";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-header">افزودن نقش جدید</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست نقش ها</a>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <form method="post">
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات نقش
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>عنوان نقش</label>
+                        <input type="text" asp-for="Role.RoleTitle" class="form-control" placeholder="عنوان نقش را وارد کنید ">
+                        <span asp-validation-for="Role.RoleTitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    دسترسی های نقش
+                </div>
+                <div class="panel-body">
+                    <!-- /.دسترسی ها -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">ثبت نقش</button>
+        </div>
+    </form>
+</div>
