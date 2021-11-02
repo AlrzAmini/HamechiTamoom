@@ -75,3 +75,6 @@
 .picture-maxwh {
     max-width: 250px;
 }
+.listnonetype {
+    list-style-type: none;
+}

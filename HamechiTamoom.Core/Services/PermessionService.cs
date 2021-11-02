@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Context;
+using HamechiTamoom.DataLayer.Entities.Permission;
 using HamechiTamoom.DataLayer.Entities.User;
 
 namespace HamechiTamoom.Core.Services
@@ -79,6 +80,40 @@ namespace HamechiTamoom.Core.Services
         {
             _context.Roles.Remove(role);
             _context.SaveChanges();
+        }
+
+        public List<Permission> GetAllPermissions()
+        {
+            return _context.Permission.ToList();
+        }
+
+        public void AddPermissionsToRole(int roleId, List<int> permission)
+        {
+            foreach (var item in permission)
+            {
+                _context.RolePermission.Add(new RolePermission()
+                {
+                    PermissionId = item,
+                    RoleId = roleId
+                });
+            }
+
+            _context.SaveChanges();
+        }
+
+        public List<int> PermissionsRole(int roleId)
+        {
+            return _context.RolePermission
+                .Where(r => r.RoleId == roleId)
+                .Select(r => r.PermissionId).ToList();
+        }
+
+        public void EditPermissionsRole(int roleId, List<int> permissions)
+        {
+            _context.RolePermission.Where(p => p.RoleId == roleId)
+                .ToList().ForEach(p=>_context.RolePermission.Remove(p));
+
+            AddPermissionsToRole(roleId,permissions);
         }
     }
 }

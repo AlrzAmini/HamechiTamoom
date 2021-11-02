@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HamechiTamoom.Core.Services;
 using HamechiTamoom.Core.Services.Interfaces;
+using HamechiTamoom.DataLayer.Entities.Permission;
 using HamechiTamoom.DataLayer.Entities.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -25,10 +26,10 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageRoles
 
         public void OnGet()
         {
-
+            ViewData["Permissions"] = _permissionService.GetAllPermissions();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(List<int> SelectedPermission)
         {
             if (!ModelState.IsValid)
             {
@@ -38,8 +39,8 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageRoles
             // add role and return role id
             int roleId = _permissionService.AddRole(Role);
 
-            // add permission of this role
-
+            // add permission to role
+            _permissionService.AddPermissionsToRole(roleId,SelectedPermission);
 
             return RedirectToPage("./Index");
         }

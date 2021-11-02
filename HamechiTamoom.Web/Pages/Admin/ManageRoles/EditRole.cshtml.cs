@@ -24,9 +24,11 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageRoles
         public void OnGet(int roleId)
         {
             Role = _permissionService.GetRoleByRoleId(roleId);
+            ViewData["Permissions"] = _permissionService.GetAllPermissions();
+            ViewData["SelectedPermissions"] = _permissionService.PermissionsRole(roleId);
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(List<int> SelectedPermission)
         {
             if (!ModelState.IsValid)
             {
@@ -34,6 +36,9 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageRoles
             }
 
             _permissionService.UpdateRole(Role);
+
+            _permissionService.EditPermissionsRole(Role.RoleId,SelectedPermission);
+
             return RedirectToPage("./Index");
         }
     }

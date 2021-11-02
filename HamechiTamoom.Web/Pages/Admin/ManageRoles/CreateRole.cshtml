@@ -1,7 +1,9 @@
 ﻿@page
+@using HamechiTamoom.DataLayer.Entities.Permission
 @model HamechiTamoom.Web.Pages.Admin.ManageRoles.CreateRoleModel
 @{
     ViewData["Title"] = "افزودن نقش جدید";
+    List<Permission> permissions = ViewData["Permissions"] as List<Permission>;
 }
 
 <div class="row">
@@ -37,7 +39,38 @@
                     دسترسی های نقش
                 </div>
                 <div class="panel-body">
-                    <!-- /.دسترسی ها -->
+                    <ul class="list-group">
+                        @foreach (var item in permissions.Where(p => p.ParrentId == null))
+                        {
+                            <li class="list-group-item list-group-item-success">
+                                <input type="checkbox" name="SelectedPermission" value="@item.PermissionId" /> @item.PermissionTitle
+
+                                @if (permissions.Any(p => p.ParrentId == item.PermissionId))
+                                {
+                                    <ul>
+                                        @foreach (var prm in permissions.Where(p => p.ParrentId == item.PermissionId))
+                                        {
+                                            <li class="list-group-item list-group-item-success">
+                                                <input type="checkbox" name="SelectedPermission" value="@prm.PermissionId" /> @prm.PermissionTitle
+
+                                                @if (permissions.Any(p => p.ParrentId == prm.PermissionId))
+                                                {
+                                                    <ul>
+                                                        @foreach (var prm2 in permissions.Where(p => p.ParrentId == prm.PermissionId))
+                                                        {
+                                                            <li class="list-group-item list-group-item-success">
+                                                                <input type="checkbox" name="SelectedPermission" value="@prm2.PermissionId" /> @prm2.PermissionTitle
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </div>

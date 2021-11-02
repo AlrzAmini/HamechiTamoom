@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HamechiTamoom.DataLayer.Entities.Permission;
 
 namespace HamechiTamoom.DataLayer.Entities.User
 {
@@ -34,6 +35,8 @@ namespace HamechiTamoom.DataLayer.Entities.User
         #region Relations
 
         public List<UserRole> UserRoles { get; set; }
+
+        public List<RolePermission> RolePermissions { get; set; }
 
         #endregion
     }
