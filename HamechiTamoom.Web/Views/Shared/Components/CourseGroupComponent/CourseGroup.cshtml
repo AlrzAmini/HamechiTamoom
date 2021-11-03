@@ -1,0 +1,67 @@
+﻿@model IEnumerable<HamechiTamoom.DataLayer.Entities.Course.CourseGroup>
+    
+    <div class="main_menu_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-12">
+                    <div class="categories_menu">
+                        <div class="categories_title">
+                            <h2 class="categori_toggle">دسته‌بندی ها</h2>
+                        </div>
+                        <div class="categories_menu_toggle">
+                            <ul>
+                                @foreach (var group in Model.Where(p => p.ParrentId == null))
+                                {
+                                <li class="menu_item_children">
+                                    <a href="#">@group.GroupTitle <i class="fa fa-angle-left"></i></a>
+                                    @if (Model.Any(g => g.ParrentId == group.GroupId))
+                                    {
+                                    <ul class="categories_mega_menu">
+                                        @foreach (var sub in Model.Where(g => g.ParrentId == group.GroupId))
+                                        {
+                                        <li class="menu_item_children">
+                                            <a href="#">@sub.GroupTitle</a>
+                                            @if (Model.Any(g => g.ParrentId == sub.GroupId))
+                                            {
+                                            <ul class="categorie_sub_menu">
+
+                                                @foreach (var sub2 in Model.Where(s => s.ParrentId == sub.GroupId))
+                                                {
+                                                <li class="menu_item_children">
+                                                    <a href="#">@sub2.GroupTitle</a>
+                                                </li>
+                                                }
+                                            </ul>
+                                            }
+                                        </li>
+                                        }
+                                    </ul>
+                                    }
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12">
+                    <div class="main_menu menu_position">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="blog.html">بلاگ<i class="fa fa-angle-down"></i></a>
+                                    <ul class="sub_menu pages">
+                                        <li><a href="blog-details.html">جزئیات مطلب بلاگ</a></li>
+                                        <li><a href="blog-fullwidth.html">بلاگ تمام عرض</a></li>
+                                        <li><a href="blog-sidebar.html">بلاگ نوار کناری راست</a></li>
+                                        <li><a href="blog-no-sidebar.html">بلاگ بدون نوار کناری</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about.html">درباره ما</a></li>
+                                <li><a href="contact.html"> تماس با ما</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

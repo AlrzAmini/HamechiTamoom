@@ -77,6 +77,8 @@ namespace HamechiTamoom.Web
 
             services.AddTransient<IPermissionService, PermissionService>();
 
+            services.AddTransient<ICourseService, CourseService>();
+
             #endregion
 
         }
