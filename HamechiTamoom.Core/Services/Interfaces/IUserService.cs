@@ -30,7 +30,7 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         #endregion
 
-        #region GetUserBy ...
+        #region Get User By ...
 
         User GetUserByEmail(string email);
 
@@ -73,6 +73,8 @@ namespace HamechiTamoom.Core.Services.Interfaces
         void DeleteUserFromAdmin(int userId);
 
         #endregion
+
+        int GetUserIdByUserName(string userName);
 
     }
 }

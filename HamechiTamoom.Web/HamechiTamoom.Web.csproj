@@ -11,6 +11,7 @@
     <Content Remove="wwwroot\AdminPanel\fonts\iransans\iran-sans-500.woff2" />
     <Content Remove="wwwroot\AdminPanel\fonts\iransans\iran-sans-700.woff2" />
     <Content Remove="wwwroot\IMadaenyPRJDscription.txt" />
+    <Content Remove="wwwroot\js\HelloAdmin\Hello.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -97,6 +98,7 @@
     <None Include="wwwroot\fonts\vazir-700.woff2" />
     <None Include="wwwroot\fonts\yekan-400.woff2" />
     <None Include="wwwroot\IMadaenyPRJDscription.txt" />
+    <None Include="wwwroot\js\HelloAdmin\Hello.js" />
     <None Include="wwwroot\js\main.js" />
     <None Include="wwwroot\js\map.js" />
     <None Include="wwwroot\js\plugins.js" />

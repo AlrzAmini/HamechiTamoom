@@ -38,6 +38,14 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         void EditPermissionsRole(int roleId, List<int> permissions);
 
+        bool CheckPermission(int permissionId, string userName);
+
+        #endregion
+
+        #region User
+
+        public int GetUserIdByUserName(string userName);
+
         #endregion
     }
 }

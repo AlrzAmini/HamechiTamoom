@@ -115,5 +115,36 @@ namespace HamechiTamoom.Core.Services
 
             AddPermissionsToRole(roleId,permissions);
         }
+
+        public int GetUserIdByUserName(string userName)
+        {
+            return _context.Users.Single(u => u.UserName == userName).UserId;
+        }
+
+        public bool CheckPermission(int permissionId, string userName)
+        {
+            int userId = GetUserIdByUserName(userName);
+
+            // this(username is in input) user roles
+            List<int> UserRoles = _context.UserRoles
+                .Where(r => r.UserId == userId)
+                .Select(r => r.RoleId)
+                .ToList();
+
+            if (!UserRoles.Any())
+            {
+                return false;
+            }
+
+            // this permissions role
+            List<int> RolesPermission = _context.RolePermission
+                .Where(p => p.PermissionId == permissionId)
+                .Select(p => p.RoleId)
+                .ToList();
+
+            return RolesPermission.Any(p => UserRoles.Contains(p));
+        }
+
+        
     }
 }

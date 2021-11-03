@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HamechiTamoom.Core.Consts;
+using HamechiTamoom.Core.Security;
 using HamechiTamoom.Core.Services;
 using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Entities.Permission;
@@ -11,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HamechiTamoom.Web.Pages.Admin.ManageRoles
 {
+    [PermissionChecker(PerIds.CreateRole)]
     public class CreateRoleModel : PageModel
     {
         private readonly IPermissionService _permissionService;

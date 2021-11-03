@@ -1,0 +1,41 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Khula:700);
+@font-face {
+    font-family: IranSans-Thin;
+    src: url("/AdminPanel/fonts/iransans/iran-sans-300.woff2") format("woff2"), url("/AdminPanel/fonts/iransans/iran-sans-300.woff") format("woff"), url("/AdminPanel/fonts/iransans/iran-sans-300.ttf") format("ttf");
+    font-style: normal;
+    font-weight: bold;
+}
+* {
+    font-family: 'IranSans-Thin';
+}
+body {
+    background: #111;
+    font-family: 'IranSans-Thin' !important;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.console-container {
+    font-family: Khula;
+    font-size: 4em;
+    text-align: center;
+    height: 200px;
+    width: 600px;
+    display: block;
+    position: absolute;
+    color: white;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.console-underscore {
+    display: inline-block;
+    position: relative;
+    top: -0.14em;
+    left: 10px;
+}

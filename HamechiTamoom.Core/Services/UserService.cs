@@ -303,6 +303,11 @@ namespace HamechiTamoom.Core.Services
             _context.SaveChanges();
         }
 
+        public int GetUserIdByUserName(string userName)
+        {
+            return _context.Users.Single(u => u.UserName == userName).UserId;
+        }
+
 
         #endregion
 
