@@ -12,10 +12,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HamechiTamoom.DataLayer.Context;
 using HamechiTamoom.DataLayer.Entities.User;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HamechiTamoom.Web.Pages.Admin.ManageUsers
 {
     [PermissionChecker(PerIds.DeleteUser)]
+    [Authorize]
     public class DeleteModel : PageModel
     {
         private readonly IUserService _userService;

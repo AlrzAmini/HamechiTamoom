@@ -6,12 +6,14 @@ using HamechiTamoom.Core.Consts;
 using HamechiTamoom.Core.DTOs;
 using HamechiTamoom.Core.Security;
 using HamechiTamoom.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HamechiTamoom.Web.Pages.Admin.ManageUsers
 {
     [PermissionChecker(PerIds.ManageUsers)]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IUserService _userService;

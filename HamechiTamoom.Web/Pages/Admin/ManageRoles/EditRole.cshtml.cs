@@ -6,12 +6,14 @@ using HamechiTamoom.Core.Consts;
 using HamechiTamoom.Core.Security;
 using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Entities.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HamechiTamoom.Web.Pages.Admin.ManageRoles
 {
     [PermissionChecker(PerIds.EditRole)]
+    [Authorize]
     public class EditRoleModel : PageModel
     {
         private readonly IPermissionService _permissionService;

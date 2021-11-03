@@ -7,12 +7,14 @@ using HamechiTamoom.Core.DTOs;
 using HamechiTamoom.Core.Security;
 using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Entities.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HamechiTamoom.Web.Pages.Admin.ManageUsers
 {
     [PermissionChecker(PerIds.DeleteUser)]
+    [Authorize]
     public class CreateUserModel : PageModel
     {
         private readonly IUserService _userService;

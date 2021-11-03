@@ -8,12 +8,14 @@ using HamechiTamoom.Core.Services;
 using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Entities.Permission;
 using HamechiTamoom.DataLayer.Entities.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HamechiTamoom.Web.Pages.Admin.ManageRoles
 {
     [PermissionChecker(PerIds.CreateRole)]
+    [Authorize]
     public class CreateRoleModel : PageModel
     {
         private readonly IPermissionService _permissionService;
