@@ -11,6 +11,7 @@ using HamechiTamoom.Core.Security;
 using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Context;
 using HamechiTamoom.DataLayer.Entities.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace HamechiTamoom.Core.Services
 {

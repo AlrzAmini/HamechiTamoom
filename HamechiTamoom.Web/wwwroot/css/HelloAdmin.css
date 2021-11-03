@@ -1,16 +1,16 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Khula:700);
 @font-face {
-    font-family: IranSans-Thin;
-    src: url("/AdminPanel/fonts/iransans/iran-sans-300.woff2") format("woff2"), url("/AdminPanel/fonts/iransans/iran-sans-300.woff") format("woff"), url("/AdminPanel/fonts/iransans/iran-sans-300.ttf") format("ttf");
+    font-family: IranSans;
+    src: url("/AdminPanel/fonts/iransans/iran-sans-500.woff2") format("woff2"), url("/AdminPanel/fonts/iransans/iran-sans-500.woff") format("woff"), url("/AdminPanel/fonts/iransans/iran-sans-500.ttf") format("ttf");
     font-style: normal;
     font-weight: bold;
 }
 * {
-    font-family: 'IranSans-Thin';
+    font-family: 'IranSans' !important;
 }
 body {
     background: #111;
-    font-family: 'IranSans-Thin' !important;
+    font-family: 'IranSans' !important;
 }
 
 .hidden {
