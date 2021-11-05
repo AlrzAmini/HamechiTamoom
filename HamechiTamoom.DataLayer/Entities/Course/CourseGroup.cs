@@ -14,20 +14,30 @@ namespace HamechiTamoom.DataLayer.Entities.Course
         [Key]
         public int GroupId { get; set; }
 
-        [DisplayName("عنوان گروه")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        [MaxLength(250, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
+        [Display(Name = "عنوان گروه")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string GroupTitle { get; set; }
 
-        [DisplayName("حذف شده ؟")]
+        [Display(Name = "حذف شده ؟")]
         public bool IsDelete { get; set; }
 
-        [DisplayName("گروه اصلی")]
+        [Display(Name = "گروه اصلی")]
         public int? ParrentId { get; set; }
 
 
+        #region Relations
+
         [ForeignKey("ParrentId")]
         public List<CourseGroup> CourseGroups { get; set; }
+
+        [InverseProperty("CourseGroup")]
+        public List<Course> Courses { get; set; }
+
+        [InverseProperty("Grooup")]
+        public List<Course> SubGroup { get; set; }
+
+        #endregion
 
     }
 }

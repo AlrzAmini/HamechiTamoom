@@ -120,4 +120,8 @@
     <ProjectReference Include="..\HamechiTamoom.DataLayer\HamechiTamoom.DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Course\Demos\" />
+  </ItemGroup>
+
 </Project>

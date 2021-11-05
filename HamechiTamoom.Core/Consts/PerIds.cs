@@ -17,6 +17,10 @@ namespace HamechiTamoom.Core.Consts
         public const int CreateRole = 7;
         public const int EditRole = 8;
         public const int DeleteRole = 9;
+        public const int ManageCourses = 10;
+        public const int CreateCourse = 11;
+        public const int EditCourse = 12;
+        public const int DeleteCourse = 13;
 
     }
 }

@@ -19,6 +19,110 @@ namespace HamechiTamoom.DataLayer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.Course", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CourseDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseImageName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("CourseLevelLevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoursePrice")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CourseStatusStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseTitle")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DemoFileName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubGroup")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tags")
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CourseId");
+
+                    b.HasIndex("CourseLevelLevelId");
+
+                    b.HasIndex("CourseStatusStatusId");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("SubGroup");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseEpisode", b =>
+                {
+                    b.Property<int>("EpisodeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EpisodeFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("EpisodeTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("EpisodeTitle")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<bool>("IsFree")
+                        .HasColumnType("bit");
+
+                    b.HasKey("EpisodeId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CourseEpisodes");
+                });
+
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseGroup", b =>
                 {
                     b.Property<int>("GroupId")
@@ -28,8 +132,8 @@ namespace HamechiTamoom.DataLayer.Migrations
 
                     b.Property<string>("GroupTitle")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
@@ -42,6 +146,40 @@ namespace HamechiTamoom.DataLayer.Migrations
                     b.HasIndex("ParrentId");
 
                     b.ToTable("CourseGroups");
+                });
+
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseLevel", b =>
+                {
+                    b.Property<int>("LevelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LevelTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("LevelId");
+
+                    b.ToTable("CourseLevels");
+                });
+
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseStatus", b =>
+                {
+                    b.Property<int>("StatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StatusTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("StatusId");
+
+                    b.ToTable("CourseStatus");
                 });
 
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Permission.Permission", b =>
@@ -171,6 +309,54 @@ namespace HamechiTamoom.DataLayer.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.Course", b =>
+                {
+                    b.HasOne("HamechiTamoom.DataLayer.Entities.Course.CourseLevel", "CourseLevel")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseLevelLevelId");
+
+                    b.HasOne("HamechiTamoom.DataLayer.Entities.Course.CourseStatus", "CourseStatus")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseStatusStatusId");
+
+                    b.HasOne("HamechiTamoom.DataLayer.Entities.Course.CourseGroup", "CourseGroup")
+                        .WithMany("Courses")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HamechiTamoom.DataLayer.Entities.Course.CourseGroup", "Grooup")
+                        .WithMany("SubGroup")
+                        .HasForeignKey("SubGroup");
+
+                    b.HasOne("HamechiTamoom.DataLayer.Entities.User.User", "User")
+                        .WithMany("Courses")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseGroup");
+
+                    b.Navigation("CourseLevel");
+
+                    b.Navigation("CourseStatus");
+
+                    b.Navigation("Grooup");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseEpisode", b =>
+                {
+                    b.HasOne("HamechiTamoom.DataLayer.Entities.Course.Course", "Course")
+                        .WithMany("CourseEpisodes")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseGroup", b =>
                 {
                     b.HasOne("HamechiTamoom.DataLayer.Entities.Course.CourseGroup", null)
@@ -223,9 +409,28 @@ namespace HamechiTamoom.DataLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.Course", b =>
+                {
+                    b.Navigation("CourseEpisodes");
+                });
+
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseGroup", b =>
                 {
                     b.Navigation("CourseGroups");
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("SubGroup");
+                });
+
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseLevel", b =>
+                {
+                    b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.CourseStatus", b =>
+                {
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Permission.Permission", b =>
@@ -244,6 +449,8 @@ namespace HamechiTamoom.DataLayer.Migrations
 
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.User.User", b =>
                 {
+                    b.Navigation("Courses");
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

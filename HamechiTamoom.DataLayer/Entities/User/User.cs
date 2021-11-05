@@ -91,6 +91,8 @@ namespace HamechiTamoom.DataLayer.Entities.User
 
         public List<UserRole> UserRoles { get; set; }
 
+        public List<Course.Course> Courses { get; set; }
+
         #endregion
 
     }

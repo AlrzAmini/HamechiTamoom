@@ -13,6 +13,7 @@ using HamechiTamoom.Core.Services;
 using HamechiTamoom.Core.Services.Interfaces;
 using HamechiTamoom.DataLayer.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 
 namespace HamechiTamoom.Web
@@ -40,6 +41,15 @@ namespace HamechiTamoom.Web
             #region Razor
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            #endregion
+
+            #region Max length
+
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 30000000;
+            });
 
             #endregion
 
@@ -71,13 +81,13 @@ namespace HamechiTamoom.Web
 
             #region IoC
 
-            services.AddTransient<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
 
-            services.AddTransient<IViewRenderService, RenderViewToString>();
+            services.AddScoped<IViewRenderService, RenderViewToString>();
 
-            services.AddTransient<IPermissionService, PermissionService>();
+            services.AddScoped<IPermissionService, PermissionService>();
 
-            services.AddTransient<ICourseService, CourseService>();
+            services.AddScoped<ICourseService, CourseService>();
 
             #endregion
 

@@ -5,12 +5,11 @@
     font-style: normal;
     font-weight: bold;
 }
-* {
-    font-family: 'IranSans' !important;
-}
 body {
-    background: #111;
-    font-family: 'IranSans' !important;
+    font-family: 'IranSans';
+}
+h1 {
+    font-family: 'IranSans';
 }
 
 .hidden {

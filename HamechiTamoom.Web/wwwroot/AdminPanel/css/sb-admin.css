@@ -121,6 +121,10 @@ h3, h4, h5, h6 {
 
 /* Sidebar Menu Styles */
 
+.littleimage {
+    max-width: 70px;
+}
+
 .navbar-static-side ul li {
     border-bottom: 1px solid #e7e7e7;
 }
