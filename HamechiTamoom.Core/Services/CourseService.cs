@@ -86,7 +86,7 @@ namespace HamechiTamoom.Core.Services
         {
             course.CreateDate = DateTime.Now;
             course.CourseImageName = "DefCourse.jpg"; // to halat defualt in ax hst Magar ...
-            //TODO: check image
+            
             if (imgCourse != null && imgCourse.IsImage())
             {
 
@@ -145,6 +145,80 @@ namespace HamechiTamoom.Core.Services
             list.EpisodeCount = epCount;
 
             return list;
+        }
+
+        public Course GetCourseById(int courseId)
+        {
+            return _context.Courses.Find(courseId);
+        }
+
+        public void UpdateCourse(Course course, IFormFile imgCourse, IFormFile demoCourse)
+        {
+            course.UpdateDate = DateTime.Now;
+
+            if (imgCourse != null && imgCourse.IsImage())
+            {
+                if (course.CourseImageName != "DefCourse.jpg")
+                {
+                    string imgDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/image",
+                        course.CourseImageName);
+                    if (File.Exists(imgDeletePath))
+                    {
+                        File.Delete(imgDeletePath);
+                    }
+
+                    string imgThumbDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/thumb",
+                        course.CourseImageName);
+                    if (File.Exists(imgThumbDeletePath))
+                    {
+                        File.Delete(imgThumbDeletePath);
+                    }
+                }
+
+                course.CourseImageName = CodeGenerator.GenerateUniqCode() + Path.GetExtension(imgCourse.FileName);
+
+                string imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/image",
+                    course.CourseImageName);
+                using (var stream = new FileStream(imgPath, FileMode.Create))
+                {
+                    imgCourse.CopyTo(stream);
+                }
+
+                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/thumb",
+                    course.CourseImageName);
+                ImageConvertor imgResizer = new ImageConvertor();
+                imgResizer.Image_resize(imgPath, thumbPath, 70);
+            }
+
+            if (demoCourse != null)
+            {
+                if (course.DemoFileName != null)
+                {
+                    string demoDeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Course/Demos",
+                        course.DemoFileName);
+                    if (File.Exists(demoDeletePath))
+                    {
+                        File.Delete(demoDeletePath);
+                    }
+                }
+
+                course.DemoFileName = CodeGenerator.GenerateUniqCode() + Path.GetExtension(demoCourse.FileName);
+                string demoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Course/Demos",
+                    course.DemoFileName);
+                using (var stream = new FileStream(demoPath, FileMode.Create))
+                {
+                    demoCourse.CopyTo(stream);
+                }
+            }
+
+            _context.Courses.Update(course);
+            _context.SaveChanges();
+        }
+
+        public void DeleteCourse(Course course)
+        {
+            _context.Courses.Remove(course);
+            _context.SaveChanges();
         }
 
     }

@@ -122,6 +122,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Course\Demos\" />
+    <Folder Include="wwwroot\MyImages\" />
   </ItemGroup>
 
 </Project>

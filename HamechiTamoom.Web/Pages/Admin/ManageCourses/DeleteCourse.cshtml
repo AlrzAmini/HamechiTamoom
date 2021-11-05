@@ -1,0 +1,39 @@
+﻿@page
+@model HamechiTamoom.Web.Pages.Admin.ManageCourses.DeleteCourseModel
+
+@{
+    ViewData["Title"] = "حذف دوره";
+}
+
+<h1 class="text-danger">حذف دوره</h1>
+
+<h4>آیا از حذف این دوره مطمعن هستید ؟</h4>
+<div>
+    <h4 class="text-info">@Model.Course.CourseTitle</h4>
+    <hr />
+    <div class="col-md-12 row">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                اطلاعات دوره
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="form-group">
+                    <label> عنوان دوره </label>
+                    <h5 class="text-primary">@Model.Course.CourseTitle</h5>
+                </div>
+                <div class="form-group">
+                    <label> قیمت دوره </label>
+                    <h5 class="text-primary">@Model.Course.CoursePrice</h5>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <br />
+    <form method="post">
+        <input type="hidden" asp-for="Course.CourseId" />
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a asp-page="./Index">بازگشت به لیست</a>
+    </form>
+</div>

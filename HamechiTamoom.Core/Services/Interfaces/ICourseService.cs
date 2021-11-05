@@ -34,6 +34,16 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         int AddCourse(Course course,IFormFile imgCourse,IFormFile demoCourse);
 
+        Course GetCourseById(int courseId);
+
+        void UpdateCourse(Course course, IFormFile imgCourse, IFormFile demoCourse);
+
+        void DeleteCourse(Course course);
+
+
+
+
+
         #endregion
 
     }

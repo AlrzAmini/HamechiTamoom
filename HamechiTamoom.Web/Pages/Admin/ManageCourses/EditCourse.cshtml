@@ -1,12 +1,13 @@
 ﻿@page
-@model HamechiTamoom.Web.Pages.Admin.ManageCourses.CreateCourseModel
+@model HamechiTamoom.Web.Pages.Admin.ManageCourses.EditCourseModel
 @{
-    ViewData["Title"] = "افزودن دوره جدید";
+    ViewData["Title"] = "ویرایش دوره ها";
 }
+
 
 <div class="row">
     <div class="col-lg-9">
-        <h1 class="page-header">افزودن دوره جدید</h1>
+        <h1 class="page-header">ویرایش دوره</h1>
     </div>
     <div class="col-md-3">
         <a asp-page="Index" class="btn btn-outline btn-primary">لیست دوره ها</a>
@@ -14,6 +15,10 @@
 </div>
 <div class="row">
     <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Course.CreateDate"/>
+        <input type="hidden" asp-for="Course.CourseId"/>
+        <input type="hidden" asp-for="Course.CourseImageName"/>
+        <input type="hidden" asp-for="Course.DemoFileName"/>
         <div class="col-md-7">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -43,7 +48,7 @@
                     </div>
                     <div class="form-group">
                         <label>@Html.DisplayNameFor(model => model.Course.CoursePrice)</label>
-                        <input type="number" asp-for="Course.CoursePrice" value="0" class="form-control">
+                        <input type="number" asp-for="Course.CoursePrice" class="form-control">
                         <span asp-validation-for="Course.CoursePrice" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -71,7 +76,7 @@
                     جزییات
                 </div>
                 <div class="panel-body">
-                    <img id="imgCourse" class="img-fluid img-thumbnail" src="/img/UserAvatar/Avatar-min.jpg" />
+                    <img id="imgCourse" class="img-fluid img-thumbnail" src="/img/Course/Image/@Model.Course.CourseImageName"/>
                     <div class="form-group">
                         <label>تصویر دوره</label>
                         <input type="file" id="imgCourseUp" name="imgCourseUp">
