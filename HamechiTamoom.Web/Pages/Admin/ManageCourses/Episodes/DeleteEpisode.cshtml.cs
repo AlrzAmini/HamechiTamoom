@@ -39,7 +39,6 @@ namespace HamechiTamoom.Web.Pages.Admin.ManageCourses.Episodes
 
         public IActionResult OnPost(int id)
         {
-            int crsId = CourseEpisode.CourseId;
             if (CourseEpisode != null)
             {
                 // delete episode file
