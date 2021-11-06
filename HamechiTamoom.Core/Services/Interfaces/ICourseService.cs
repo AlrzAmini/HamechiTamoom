@@ -40,8 +40,21 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         void DeleteCourse(Course course);
 
+        #endregion
 
+        #region Episode
 
+        List<CourseEpisode> GetListEpisodesCourse(int courseId);
+
+        int AddEpisode(CourseEpisode episode, IFormFile episodeFile);
+
+        bool CheckExistFile(string fileName);
+
+        CourseEpisode GetEpisodeByEpisodeId(int episodeId);
+
+        void UpdateEpisode(CourseEpisode episode, IFormFile episodeFile);
+
+        void DeleteEpisode(CourseEpisode episode);
 
 
         #endregion

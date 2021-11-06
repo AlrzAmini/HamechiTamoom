@@ -26,6 +26,7 @@ namespace HamechiTamoom.DataLayer.Entities.Course
         public TimeSpan EpisodeTime { get; set; }
 
         [DisplayName("فایل اپیزود")]
+        [MaxLength(300, ErrorMessage = "{0} نمیتواند بیش از {1} کاراکتر داشته باشد")]
         public string EpisodeFileName { get; set; }
 
         [DisplayName("رایگان است ؟")]

@@ -1,0 +1,62 @@
+﻿@page "{id}"
+@model HamechiTamoom.Web.Pages.Admin.ManageCourses.Episodes.EditEpisodeModel
+@{
+    ViewData["Title"] = "ویرایش اپیزود";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <h1 class="page-header">ویرایش اپیزود</h1>
+    </div>
+</div>
+
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="CourseEpisode.CourseId" />
+        <input type="hidden" asp-for="CourseEpisode.EpisodeId" />
+        <input type="hidden" asp-for="CourseEpisode.EpisodeFileName" />
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات اپیزود
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>عنوان اپیزود</label>
+                        <input type="text" asp-for="CourseEpisode.EpisodeTitle" class="form-control" placeholder="عنوان اپیزود را وارد کنید ">
+                        <span asp-validation-for="CourseEpisode.EpisodeTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>مدت زمان</label>
+                        <input type="text" asp-for="CourseEpisode.EpisodeTime" class="form-control">
+                        <p class="help-block"> مدت زمان اپیزود را وارد کنید </p>
+                        <span asp-validation-for="CourseEpisode.EpisodeTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>دسترسی</label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="CourseEpisode.IsFree"> رایگان
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>فایل اپیزود</label>
+                        <input type="file" name="episodeFileUp">
+                        <span asp-validation-for="CourseEpisode.EpisodeFileName" class="text-danger"></span>
+                    </div>
+                    @if (ViewData["IsFileNameExist"] != null)
+                    {
+                        <div class="alert alert-danger mt-3">
+                            نام فایل قرار داده شد معتبر نیست . لطفا آن را تغییر دهید.
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success btn-lg btn-block">ثبت اپیزود</button>
+            </div>
+        </div>
+    </form>
+</div>

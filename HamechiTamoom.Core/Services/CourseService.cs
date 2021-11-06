@@ -135,14 +135,14 @@ namespace HamechiTamoom.Core.Services
             int take = 10;
             int skip = (pageId - 1) * take;
 
-            var ep = result.Include(e => e.CourseEpisodes).First();
-            int epCount = ep.CourseEpisodes.Count();
+            //var ep = result.Include(e => e.CourseEpisodes).First();
+            //int epCount = ep.CourseEpisodes.Count();
 
             ShowCourseForAdminViewModel list = new ShowCourseForAdminViewModel();
             list.CurrentPage = pageId;
             list.TotalPage = (int)Math.Ceiling((decimal)result.Count() / take);
             list.Courses = result.OrderBy(c => c.CreateDate).Skip(skip).Take(take).ToList();
-            list.EpisodeCount = epCount;
+            //list.EpisodeCount = epCount;
 
             return list;
         }
@@ -221,5 +221,73 @@ namespace HamechiTamoom.Core.Services
             _context.SaveChanges();
         }
 
+        public int AddEpisode(CourseEpisode episode,IFormFile episodeFile)
+        {
+            if (episodeFile != null)
+            {
+                episode.EpisodeFileName = episodeFile.FileName;
+
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Course/EpisodeFiles",
+                    episode.EpisodeFileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    episodeFile.CopyTo(stream);
+                }
+            }
+
+            _context.CourseEpisodes.Add(episode);
+            _context.SaveChanges();
+
+            return episode.EpisodeId;
+        }
+
+        public bool CheckExistFile(string fileName)
+        {
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Course/EpisodeFiles",
+                fileName);
+
+            return File.Exists(filePath);
+        }
+
+        public List<CourseEpisode> GetListEpisodesCourse(int courseId)
+        {
+            return _context.CourseEpisodes.Where(e => e.CourseId == courseId).ToList();
+        }
+
+        public CourseEpisode GetEpisodeByEpisodeId(int episodeId)
+        {
+            return _context.CourseEpisodes.Find(episodeId);
+        }
+
+        public void UpdateEpisode(CourseEpisode episode, IFormFile episodeFile)
+        {
+            if (episodeFile != null)
+            {
+                // delete old file
+                string deleteFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Course/EpisodeFiles",
+                    episode.EpisodeFileName);
+                File.Delete(deleteFilePath);
+
+                // set name of new file
+                episode.EpisodeFileName = episodeFile.FileName;
+
+                // find path and create new file
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Course/EpisodeFiles",
+                    episode.EpisodeFileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    episodeFile.CopyTo(stream);
+                }
+            }
+
+            _context.CourseEpisodes.Update(episode);
+            _context.SaveChanges();
+        }
+
+        public void DeleteEpisode(CourseEpisode episode)
+        {
+            _context.CourseEpisodes.Remove(episode);
+            _context.SaveChanges();
+        }
     }
 }

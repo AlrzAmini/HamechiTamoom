@@ -41,7 +41,6 @@
                         <thead>
                             <tr>
                                 <th>عنوان دوره</th>
-                                <th>تعداد اپیزودها</th>
                                 <th>تاریخ شروع</th>
                                 <th>قیمت دوره</th>
                                 <th>تصویر</th>
@@ -53,15 +52,15 @@
                             {
                                 <tr>
                                     <td>@item.CourseTitle</td>
-                                    <td>@Model.ShowCourseForAdminViewModel.EpisodeCount</td>
                                     <td>@item.CreateDate.ToShamsi()</td>
                                     <td>@item.CoursePrice</td>
                                     <td>
                                         <img src="/img/Course/thumb/@item.CourseImageName" class="img-thumbnail littleimage" />
                                     </td>
                                     <td>
-                                        <a asp-page="EditCourse" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-primary btn-sm">ویرایش</a>
-                                        <a asp-page="DeleteCourse" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-danger btn-sm">حذف</a>
+                                        <a asp-page="EditCourse" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-primary">ویرایش</a>
+                                        <a asp-page="Episodes/IndexEpisode" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-info">اپیزود ها</a>
+                                        <a asp-page="DeleteCourse" asp-route-courseId="@item.CourseId" class="btn btn-outline btn-danger">حذف</a>
                                     </td>
                                 </tr>
                             }

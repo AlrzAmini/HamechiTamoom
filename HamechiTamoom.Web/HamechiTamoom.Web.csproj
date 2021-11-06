@@ -123,6 +123,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Course\Demos\" />
     <Folder Include="wwwroot\MyImages\" />
+    <Folder Include="wwwroot\Course\EpisodeFiles\" />
   </ItemGroup>
 
 </Project>

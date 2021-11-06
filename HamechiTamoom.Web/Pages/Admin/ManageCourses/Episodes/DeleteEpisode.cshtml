@@ -1,0 +1,57 @@
+﻿@page
+@model HamechiTamoom.Web.Pages.Admin.ManageCourses.Episodes.DeleteEpisodeModel
+
+@{
+    ViewData["Title"] = "حذف اپیزود";
+}
+
+<h1 class="text-danger">حذف اپیزود</h1>
+
+<h4>آیا از حذف این اپیزود مطمعن هستید ؟</h4>
+<div>
+    <h4 class="text-info">@Model.CourseEpisode.EpisodeTitle</h4>
+    <hr />
+    <div class="col-md-12 row">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                اطلاعات اپیزود
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="form-group">
+                    <label> عنوان اپیزود </label>
+                    <h5 class="text-primary">@Model.CourseEpisode.EpisodeTitle</h5>
+                </div>
+                <div class="form-group">
+                    <label> مدت زمان اپیزود </label>
+                    <h5 class="text-primary">@Model.CourseEpisode.EpisodeTime</h5>
+                </div>
+                <div class="form-group">
+                    <label> رایگان </label>
+
+                    @if (Model.CourseEpisode.IsFree)
+                    {
+                        <h5 class="text-success">
+                            بله
+                        </h5>
+                    }
+                    else
+                    {
+                        <h5 class="text-danger">
+                            خیر
+                        </h5>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <br />
+    <form method="post">
+        <input type="hidden" asp-for="CourseEpisode.EpisodeId" />
+        <input type="hidden" asp-for="CourseEpisode.EpisodeFileName" />
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a href="/Admin/ManageCourses">بازگشت به لیست</a>
+    </form>
+</div>
