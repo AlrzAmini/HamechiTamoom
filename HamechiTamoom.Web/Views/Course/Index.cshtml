@@ -1,0 +1,128 @@
+﻿@using HamechiTamoom.DataLayer.Entities.Course
+@model List<HamechiTamoom.Core.DTOs.ShowCourseListViewModel>
+@{
+    ViewData["Title"] = "آرشیو دوره ها";
+}
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">خانه</a></li>
+                        <li>لیست دوره ها</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shop_area shop_reverse mt-60 mb-60">
+    <div class="container">
+        <form action="/Course" method="get" id="formfilter">
+            <input type="hidden" name="pageId" value="@ViewBag.pageId.ToString()" />
+            <div class="row">
+                <div class="col-lg-3 col-md-12">
+                    <!--sidebar widget start-->
+                    <aside class="sidebar_widget">
+                        <div class="widget_inner">
+                            <div class="widget_list widget_categories">
+                                @{
+                                    List<CourseGroup> groups = ViewBag.Groups as List<CourseGroup>;
+                                    List<int> selected = ViewBag.selectedGroups as List<int>;
+                                }
+                                <h2>دسته بندی دوره ها</h2>
+                                <ul>
+                                    @foreach (CourseGroup item in groups.Where(g => g.ParrentId == null))
+                                    {
+                                        <li>
+                                            <input onchange="changGroup()" type="checkbox" @((selected.Any(g => g == item.GroupId) ? "checked" : "")) name="selectedGroups" value="@item.GroupId" id="cat-1" />
+                                            <label for="cat-1"> @item.GroupTitle </label>
+                                            @if (groups.Any(g => g.ParrentId == item.GroupId))
+                                            {
+                                                <ul>
+                                                    @foreach (CourseGroup sub in groups.Where(g => g.ParrentId == item.GroupId))
+                                                    {
+                                                        <li>
+                                                            <input onchange="changGroup()" type="checkbox" @((selected.Any(g => g == sub.GroupId) ? "checked" : "")) name="selectedGroups" value="@sub.GroupId" id="sub-1" />
+                                                            <label for="sub-1"> @sub.GroupTitle </label>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </aside>
+                    <!--sidebar widget end-->
+                </div>
+                <div class="col-lg-9 col-md-12">
+                    <!--shop wrapper start-->
+                    <!--shop toolbar start-->
+                    <div class="shop_toolbar_wrapper shadow border-radius-5">
+                        <div class="shop_toolbar_btn">
+                            <button data-role="grid_3" type="button" class="btn-grid-3 active" data-toggle="tooltip" title="" data-original-title="3"></button>
+                            <button data-role="grid_4" type="button" class="btn-grid-4" data-toggle="tooltip" title="" data-original-title="4"></button>
+                        </div>
+                        <div class="niceselect_container">
+                            <label>ترتیب:</label>
+                            <select class="select_option" name="orderByType" id="short" style="display: none;">
+                                <option value="date">مرتب سازی بر اساس تاریخ انتشار </option>
+                                <option value="updatedate">مرتب سازی بر اساس تاریخ بروزرسانی </option>
+                                <option value="price">مرتب سازی بر اساس قیمت </option>
+                            </select>
+                        </div>
+                        <div class="page_amount m-3">
+                            <div class="wrapper">
+                                <input id="option-1" name="getType" value="all" checked type="radio">
+                                <input id="option-2" name="getType" value="buy" type="radio">
+                                <input id="option-3" name="getType" value="free" type="radio">
+                                <label for="option-1" class="option option-1">
+                                    <div class="dot"></div>
+                                    <span>همه</span>
+                                </label>
+                                <label for="option-2" class="option option-2">
+                                    <div class="dot"></div>
+                                    <span>خریدنی</span>
+                                </label>
+                                <label for="option-3" class="option option-3">
+                                    <div class="dot"></div>
+                                    <span>رایگان</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-success">اعمال فیلتر</button>
+                            <a href="/Course" class="btn btn-warning">لغو  </a>
+                        </div>
+                    </div>
+                    <!--shop toolbar end-->
+
+                    <div class="row shop_wrapper">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-4">
+                                <partial name="_BoxCourse" model="@item" />
+                            </div>
+                        }
+                    </div>
+
+                    <!--shop toolbar end-->
+                    <!--shop wrapper end-->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+
+        function changGroup() {
+            $("#formfilter").submit();
+        }
+
+    </script>
+}

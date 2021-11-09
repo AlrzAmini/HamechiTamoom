@@ -13,9 +13,15 @@ namespace HamechiTamoom.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICourseService _courseService;
+
+        public HomeController(ICourseService courseService)
+        {
+            _courseService = courseService;
+        }
         public IActionResult Index()
         {
-            return View();
+            return View(_courseService.GetCourse());
         }
 
         [HttpPost]

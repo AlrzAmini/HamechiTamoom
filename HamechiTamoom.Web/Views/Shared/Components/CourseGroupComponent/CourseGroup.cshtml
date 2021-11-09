@@ -13,14 +13,14 @@
                                 @foreach (var group in Model.Where(p => p.ParrentId == null))
                                 {
                                 <li class="menu_item_children">
-                                    <a href="#">@group.GroupTitle <i class="fa fa-angle-left"></i></a>
+                                    <a href="/Course?SelectedGroups=@group.GroupId">@group.GroupTitle <i class="fa fa-angle-left"></i></a>
                                     @if (Model.Any(g => g.ParrentId == group.GroupId))
                                     {
                                     <ul class="categories_mega_menu">
                                         @foreach (var sub in Model.Where(g => g.ParrentId == group.GroupId))
                                         {
                                         <li class="menu_item_children">
-                                            <a href="#">@sub.GroupTitle</a>
+                                            <a href="/Course?SelectedGroups=@sub.GroupId">@sub.GroupTitle</a>
                                             @if (Model.Any(g => g.ParrentId == sub.GroupId))
                                             {
                                             <ul class="categorie_sub_menu">
@@ -28,7 +28,7 @@
                                                 @foreach (var sub2 in Model.Where(s => s.ParrentId == sub.GroupId))
                                                 {
                                                 <li class="menu_item_children">
-                                                    <a href="#">@sub2.GroupTitle</a>
+                                                    <a href="/Course?SelectedGroups=@sub2.GroupId">@sub2.GroupTitle</a>
                                                 </li>
                                                 }
                                             </ul>

@@ -40,6 +40,11 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         void DeleteCourse(Course course);
 
+        List<ShowCourseListViewModel> GetCourse(int pageId = 1, string filter = "", string getType = "all",
+            string orderByType = "date", int startPrice = 0, int endPrice = 0, List<int> selectedGroups = null, int take = 0);
+
+        Course GetCourseForShow(int courseId);
+
         #endregion
 
         #region Episode

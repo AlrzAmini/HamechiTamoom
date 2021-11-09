@@ -21,7 +21,7 @@ namespace HamechiTamoom.Web.Pages.Admin.Controllers
         {
             List<SelectListItem> list = new List<SelectListItem>()
             {
-                new SelectListItem(){Text = "انتخاب کنید",Value = "0"}
+                new SelectListItem(){Text = "انتخاب کنید",Value = ""}
             };
             list.AddRange(_courseService.GetSubGroupForManageCourse(id));
             return Json(new SelectList(list, "Value", "Text"));

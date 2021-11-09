@@ -86,7 +86,7 @@ namespace HamechiTamoom.Core.Services
         {
             course.CreateDate = DateTime.Now;
             course.CourseImageName = "DefCourse.jpg"; // to halat defualt in ax hst Magar ...
-            
+
             if (imgCourse != null && imgCourse.IsImage())
             {
 
@@ -102,7 +102,7 @@ namespace HamechiTamoom.Core.Services
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/thumb",
                     course.CourseImageName);
                 ImageConvertor imgResizer = new ImageConvertor();
-                imgResizer.Image_resize(imgPath,thumbPath,70);
+                imgResizer.Image_resize(imgPath, thumbPath, 150);
             }
 
             if (demoCourse != null)
@@ -221,7 +221,7 @@ namespace HamechiTamoom.Core.Services
             _context.SaveChanges();
         }
 
-        public int AddEpisode(CourseEpisode episode,IFormFile episodeFile)
+        public int AddEpisode(CourseEpisode episode, IFormFile episodeFile)
         {
             if (episodeFile != null)
             {
@@ -288,6 +288,100 @@ namespace HamechiTamoom.Core.Services
         {
             _context.CourseEpisodes.Remove(episode);
             _context.SaveChanges();
+        }
+
+        public List<ShowCourseListViewModel> GetCourse(int pageId = 1, string filter = ""
+            , string getType = "all", string orderByType = "date",
+            int startPrice = 0, int endPrice = 0, List<int> selectedGroups = null, int take = 0)
+        {
+            if (take == 0)
+                take = 8;
+
+            IQueryable<Course> result = _context.Courses;
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                result = result.Where(c => c.CourseTitle.Contains(filter));
+            }
+
+            // filter by free or nonFree
+            switch (getType)
+            {
+                case "all":
+                    break;
+                case "buy":
+                    {
+                        result = result.Where(c => c.CoursePrice > 0);
+                        break;
+                    }
+                case "free":
+                    {
+                        result = result.Where(c => c.CoursePrice == 0);
+                        break;
+                    }
+
+            }
+
+            // orderBy date
+            switch (orderByType)
+            {
+                case "date":
+                    {
+                        result = result.OrderByDescending(c => c.CreateDate);
+                        break;
+                    }
+                case "updatedate":
+                    {
+                        result = result.OrderByDescending(c => c.UpdateDate);
+                        break;
+                    }
+                case "price":
+                {
+                    result = result.OrderByDescending(c => c.CoursePrice);
+                    break;
+                }
+            }
+
+            // filter by price range
+            if (startPrice > 0)
+            {
+                result = result.Where(c => c.CoursePrice > startPrice);
+            }
+
+            if (endPrice > 0)
+            {
+                result = result.Where(c => c.CoursePrice < endPrice);
+            }
+
+
+            if (selectedGroups != null && selectedGroups.Any())
+            {
+                foreach (int groupId in selectedGroups)
+                {
+                    result = result.Where(c => c.GroupId == groupId || c.SubGroup == groupId);
+                }
+            }
+
+            int skip = (pageId - 1) * take;
+
+            return result.Include(c => c.CourseEpisodes).Select(c => new ShowCourseListViewModel()
+            {
+                CourseId = c.CourseId,
+                ImageName = c.CourseImageName,
+                Price = c.CoursePrice,
+                Title = c.CourseTitle
+            }).Skip(skip).Take(take).ToList();
+
+
+        }
+
+        public Course GetCourseForShow(int courseId)
+        {
+            return _context.Courses.Include(c => c.CourseEpisodes)
+                .Include(c => c.CourseStatus)
+                .Include(c => c.CourseLevel)
+                .Include(c => c.User)
+                .FirstOrDefault(c => c.CourseId == courseId);
         }
     }
 }

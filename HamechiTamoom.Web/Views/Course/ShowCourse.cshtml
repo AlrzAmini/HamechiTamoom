@@ -1,0 +1,158 @@
+﻿@using HamechiTamoom.Core.Convertors
+@model HamechiTamoom.DataLayer.Entities.Course.Course
+@{
+    ViewData["Title"] = Model.CourseTitle;
+}
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">خانه</a></li>
+                        <li>دوره ها</li>
+                        <li> @Model.CourseTitle</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product_details mt-60 mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product-details-tab">
+                    <div id="img-1" class="zoomWrapper single-zoom border-radius-5 thumbnail">
+                        <a href="#">
+                            <img id="zoom1" src="/img/Course/image/@Model.CourseImageName" alt="@Model.CourseTitle">
+                        </a>
+                    </div>
+                    <div class="single-zoom-thumb">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product_d_right">
+                    <form action="#">
+
+                        <div class="title border border-radius-5 p-3 shadow border-primary text-center">
+                            <h2>@Model.CourseTitle</h2>
+                        </div>
+
+                        <div class=" product_ratting">
+
+                        </div>
+                        <div class="price_box border border-radius-5 p-3 shadow text-center">
+                            @if (Model.CoursePrice == 0)
+                            {
+                            <span class="current_price"> رایگان </span> 
+                            }
+                            else
+                            {
+                                <span class="current_price"><i class="fa fa-dollar"></i> قیمت دوره :  @Model.CoursePrice.ToString("#,0") تومان</span>
+                            }
+                        </div>
+                        <div class="product_desc">
+                            @Html.Raw(Model.CourseDescription)
+                        </div>
+                        <div class="product_d_action card border border-radius-5 p-3">
+                            <ul>
+                                <li><a class="text-black-50" href="#" title="مدت دوره"><i class="fa fa-user"></i> مدرس دوره : @Model.User.UserName</a></li>
+                                <li>
+                                    <a class="text-black-50" href="#" title="مدت دوره">
+                                        <i class="fa fa-clock-o"></i>
+                                        مدت زمان دوره :
+                                        @{
+                                            TimeSpan time = new TimeSpan(Model.CourseEpisodes.Sum(e => e.EpisodeTime.Ticks));
+                                        }
+                                        @time
+                                    </a>
+                                </li>
+                                <li><a class="text-black-50" href="#" title="تعداد ویدیو"><i class="fa fa-video-camera"></i> تعداد ویدیو : @Model.CourseEpisodes.Count</a></li>
+                                @{
+                                    string level = "متوسط";
+                                    string status = "در حال برگزاری";
+                                    if (Model.CourseLevel != null)
+                                    {
+                                        level = new string(Model.CourseLevel.LevelTitle);
+                                    }
+                                    if (Model.CourseStatus != null)
+                                    {
+                                        status = new string(Model.CourseStatus.StatusTitle);
+                                    }
+
+
+                                }
+                                <li><a class="text-black-50" href="#" title="سطح دوره"><i class="fa fa-level-up"></i> سطح دوره : @level</a></li>
+                                <li><a class="text-black-50" href="#" title="وضعیت دوره"><i class="fa fa-warning"></i> وضعیت دوره : @status</a></li>
+                                <li><a class="text-black-50" href="#" title="آخرین بروزرسانی دوره"><i class="fa fa-calendar"></i> تاریخ شروع : @Model.CreateDate.ToShamsi() </a></li>
+                                <li><a class="text-black-50" href="#" title="آخرین بروزرسانی دوره"><i class="fa fa-upload"></i> آخرین بروزرسانی : @Model.UpdateDate?.ToShamsi() </a></li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary btn-lg col-md-12" type="submit">شرکت در دوره</button>
+                        </div>
+                    </form>
+                    <div class="priduct_social text-center">
+                        <ul>
+                            <li><a class="facebook" href="#" title="فیسبوک"><i class="fa fa-facebook"></i> لایک</a></li>
+                            <li><a class="twitter" href="#" title="توییتر"><i class="fa fa-twitter"></i> توییت</a></li>
+                            <li><a class="pinterest" href="#" title="پینترست"><i class="fa fa-pinterest"></i> ذخیره</a></li>
+                            <li><a class="google-plus" href="#" title="گوگل پلاس"><i class="fa fa-google-plus"></i> اشتراک گذاری</a></li>
+                            <li><a class="telegram" href="#" title="تلگرام"><i class="fa fa-telegram"></i> تلگرام</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product_d_info mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="product_d_inner">
+                    <div class="product_info_button">
+                        <ul class="nav" role="tablist">
+                            <li>
+                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">سر فصل های این دوره</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="info" role="tabpanel">
+                            <div class="product_info_content term-description">
+                                <ul>
+                                    @foreach (var item in Model.CourseEpisodes)
+                                    {
+                                        <li class="row m-1 border p-3 border-radius-5">
+                                            <h4 class="col-md-6"> @item.EpisodeTitle </h4>
+                                            <div class="col-md-3">
+                                                @if (item.IsFree)
+                                                {
+                                                    <p class="text-primary">
+                                                        رایگان
+                                                    </p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="text-success">
+                                                        نقدی
+                                                    </p>
+                                                }
+                                            </div>
+                                            <p class="col-md-3 text-right">@item.EpisodeTime</p>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
