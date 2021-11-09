@@ -28,22 +28,22 @@
                     <form asp-action="Register" method="post" class="shadow">
                         <p>
                             <label>نام کاربری <span>*</span></label>
-                            <input asp-for="UserName" type="text">
+                            <input asp-for="UserName" type="text" class="rounded">
                             <span asp-validation-for="UserName" class="text-danger"></span>
                         </p>
                         <p>
                             <label>آدرس ایمیل <span>*</span></label>
-                            <input asp-for="Email" type="text">
+                            <input asp-for="Email" type="text" class="rounded">
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </p>
                         <p>
                             <label>کلمه عبور <span>*</span></label>
-                            <input asp-for="Password" type="password">
+                            <input asp-for="Password" type="password" class="rounded">
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </p>
                         <p>
                             <label>تکرار کلمه عبور<span>*</span></label>
-                            <input asp-for="RePassword" type="password">
+                            <input asp-for="RePassword" type="password" class="rounded">
                             <span asp-validation-for="RePassword" class="text-danger"></span>
                         </p>
                         <a class="text-primary" href="/Login">قبلا ثبت نام کرده ام</a>

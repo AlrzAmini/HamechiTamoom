@@ -38,12 +38,12 @@
                     <form asp-action="Login" method="post" class="shadow">
                         <p>
                             <label>ایمیل<span>*</span></label>
-                            <input asp-for="Email" type="text">
+                            <input asp-for="Email" type="text" class="rounded">
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </p>
                         <p>
                             <label>رمز عبور <span>*</span></label>
-                            <input asp-for="Password" type="password">
+                            <input asp-for="Password" type="password" class="rounded">
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </p>
                         <div class="login_submit">
