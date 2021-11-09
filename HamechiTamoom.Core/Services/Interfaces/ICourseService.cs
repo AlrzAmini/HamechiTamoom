@@ -64,5 +64,13 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         #endregion
 
+        #region Comments
+
+        void AddComment(AllCmnt comment);
+
+        Tuple<List<AllCmnt>,int> GetCourseComment(int courseId , int pageId=1);
+
+        #endregion
+
     }
 }

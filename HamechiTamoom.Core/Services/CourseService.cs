@@ -102,7 +102,7 @@ namespace HamechiTamoom.Core.Services
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/thumb",
                     course.CourseImageName);
                 ImageConvertor imgResizer = new ImageConvertor();
-                imgResizer.Image_resize(imgPath, thumbPath, 150);
+                imgResizer.Image_resize(imgPath, thumbPath, 200); 
             }
 
             if (demoCourse != null)
@@ -187,7 +187,7 @@ namespace HamechiTamoom.Core.Services
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/thumb",
                     course.CourseImageName);
                 ImageConvertor imgResizer = new ImageConvertor();
-                imgResizer.Image_resize(imgPath, thumbPath, 70);
+                imgResizer.Image_resize(imgPath, thumbPath, 200);
             }
 
             if (demoCourse != null)
@@ -382,6 +382,28 @@ namespace HamechiTamoom.Core.Services
                 .Include(c => c.CourseLevel)
                 .Include(c => c.User)
                 .FirstOrDefault(c => c.CourseId == courseId);
+        }
+
+        public void AddComment(AllCmnt comment)
+        {
+            _context.AllCmnts.Add(comment);
+            _context.SaveChanges();
+        }
+
+        public Tuple<List<AllCmnt>, int> GetCourseComment(int courseId , int pageId = 1)
+        {
+            int take = 7;
+            int skip = (pageId - 1) * take;
+            int pageCount = _context.AllCmnts.Where(c => c.CourseId == courseId).Count() / take;
+
+            if ((pageCount%2!=0))
+            {
+                pageCount+=1;
+            }
+
+            return Tuple.Create(_context.AllCmnts.Include(c=>c.User).Where(c => c.CourseId == courseId)
+                    .Skip(skip).Take(take).OrderByDescending(c=>c.CreateDate).ToList(),
+                pageCount);
         }
     }
 }

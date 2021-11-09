@@ -293,7 +293,8 @@ figure {
 }
 
 .indxcoursepic {
-    height: 200px;
+    height: auto;
+    max-width: 100%;
 }
 /*-- 
     - Common Classes
@@ -314,6 +315,7 @@ figure {
     .container {
         width: 450px;
     }
+
 }
 
 @media only screen and (max-width: 479px) {

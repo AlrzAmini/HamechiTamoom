@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HamechiTamoom.DataLayer.Entities.Course;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HamechiTamoom.DataLayer.Entities.User
@@ -92,6 +93,8 @@ namespace HamechiTamoom.DataLayer.Entities.User
         public List<UserRole> UserRoles { get; set; }
 
         public List<Course.Course> Courses { get; set; }
+
+        public List<AllCmnt> AllCmnts { get; set; }
 
         #endregion
 

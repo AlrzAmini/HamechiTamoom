@@ -2,6 +2,9 @@
 @model HamechiTamoom.DataLayer.Entities.Course.Course
 @{
     ViewData["Title"] = Model.CourseTitle;
+
+    bool isUserAuthenticated = User.Identity.IsAuthenticated;
+
 }
 <div class="breadcrumbs_area">
     <div class="container">
@@ -46,11 +49,13 @@
                         <div class="price_box border border-radius-5 p-3 shadow text-center">
                             @if (Model.CoursePrice == 0)
                             {
-                            <span class="current_price"> رایگان </span> 
+                                <span class="current_price"> رایگان </span>
                             }
                             else
                             {
-                                <span class="current_price"><i class="fa fa-dollar"></i> قیمت دوره :  @Model.CoursePrice.ToString("#,0") تومان</span>
+                                <span class="current_price">
+                                    <i class="fa fa-dollar"></i> قیمت : @Model.CoursePrice.ToString("#,0") تومان
+                                </span>
                             }
                         </div>
                         <div class="product_desc">
@@ -91,7 +96,21 @@
                             </ul>
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-primary btn-lg col-md-12" type="submit">شرکت در دوره</button>
+                            @if (isUserAuthenticated)
+                            {
+                                @if (Model.CoursePrice != 0)
+                                {
+                                    <button class="btn btn-primary btn-lg col-md-12" type="submit">شرکت در دوره : @Model.CoursePrice.ToString("#,0") تومان</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-primary btn-lg col-md-12" type="submit">شرکت در دوره </button>
+                                }
+                            }
+                            else
+                            {
+                                <a href="/Register" class="btn btn-outline-primary col-md-12">برای شرکت در دوره ابتدا در سایت ثبت نام کنید </a>
+                            }
                         </div>
                     </form>
                     <div class="priduct_social text-center">
@@ -112,6 +131,12 @@
 <div class="product_d_info mb-60">
     <div class="container">
         <div class="row">
+            @if (!isUserAuthenticated)
+            {
+                <div class="col-lg-11 col-sm-12 col-md-12 alert alert-info m-3">
+                    <p> بعد از ثبت نام در سایت لینک های دانلود برای شما فعال می شوند. </p>
+                </div>
+            }
             <div class="col-12">
                 <div class="product_d_inner">
                     <div class="product_info_button">
@@ -128,7 +153,20 @@
                                     @foreach (var item in Model.CourseEpisodes)
                                     {
                                         <li class="row m-1 border p-3 border-radius-5">
-                                            <h4 class="col-md-6"> @item.EpisodeTitle </h4>
+                                            @if (isUserAuthenticated)
+                                            {
+                                                <h4 class="col-md-6">
+                                                    <a href="/DownloadFile/@item.EpisodeId">
+                                                        @item.EpisodeTitle
+                                                    </a>
+                                                </h4>
+                                            }
+                                            else
+                                            {
+                                                <h4 class="col-md-6">
+                                                    @item.EpisodeTitle
+                                                </h4>
+                                            }
                                             <div class="col-md-3">
                                                 @if (item.IsFree)
                                                 {
@@ -153,6 +191,59 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-9 col-md-12">
+
+            <div class="comments_form">
+                
+                @if (isUserAuthenticated)
+                {
+                    <h3 class="mt-5">نظر شما درباره این دوره </h3>
+                    <form asp-controller="Course" asp-action="CreateComment" data-ajax="true" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="#listComment"
+                          data-ajax-succes="Success">
+                        <input type="hidden" name="courseComment.CourseId" value="@Model.CourseId"/>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="review_comment">نظر </label>
+                                <textarea class="border-radius-5" name="courseComment.Comment" id="courseComment_Comment"></textarea>
+                            </div>
+                        </div>
+                        <button class="button" type="submit">ارسال نظر</button>
+                    </form>
+                }
+                else
+                { 
+                    <div class="alert alert-warning">برای ثبت نظر باید ابتدا وارد شوید</div>
+                }
+            </div>
+            <div class="comments_box mt-5"> 
+                <h3> نظرات کاربران </h3>
+
+                <div class="comment_list" id="listComment">
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function Success() {
+            $("#courseComment_Comment").val("");
+
+        }
+
+        $(function() {
+            $("#listComment").load("/Course/ShowComment/" + @Model.CourseId);
+        });
+
+        function pageComment(pageId) {
+            $("#listComment").load("/Course/ShowComment/" + @Model.CourseId+"?pageId="+pageId);
+        }
+    </script>
+}
+
+
 

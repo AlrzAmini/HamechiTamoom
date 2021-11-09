@@ -40,8 +40,20 @@ namespace HamechiTamoom.DataLayer.Context
         public DbSet<CourseEpisode> CourseEpisodes { get; set; }
         public DbSet<CourseLevel> CourseLevels { get; set; }
         public DbSet<CourseStatus> CourseStatus { get; set; }
+        public DbSet<nmn> Nmns { get; set; }
+        public DbSet<AllCmnt> AllCmnts { get; set; }
 
         #endregion
+
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+
+        //    modelBuilder.Entity<AllCmnt>()
+        //        .HasOne(e=>e.UserId)
+        //        .WithMany(a=>a.)
+        //    base.OnModelCreating(modelBuilder);
+        //}
 
     }
 }

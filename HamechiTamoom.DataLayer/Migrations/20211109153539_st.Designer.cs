@@ -4,52 +4,22 @@ using HamechiTamoom.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HamechiTamoom.DataLayer.Migrations
 {
     [DbContext(typeof(HamechiTamoomContext))]
-    partial class HamechiTamoomContextModelSnapshot : ModelSnapshot
+    [Migration("20211109153539_st")]
+    partial class st
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.AllCmnt", b =>
-                {
-                    b.Property<int>("CommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment")
-                        .HasMaxLength(700)
-                        .HasColumnType("nvarchar(700)");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsAdminRead")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CommentId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AllCmnts");
-                });
 
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.Course", b =>
                 {
@@ -357,23 +327,6 @@ namespace HamechiTamoom.DataLayer.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.AllCmnt", b =>
-                {
-                    b.HasOne("HamechiTamoom.DataLayer.Entities.Course.Course", "Course")
-                        .WithMany("AllCmnts")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HamechiTamoom.DataLayer.Entities.User.User", "User")
-                        .WithMany("AllCmnts")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.Course", b =>
                 {
                     b.HasOne("HamechiTamoom.DataLayer.Entities.Course.CourseLevel", "CourseLevel")
@@ -476,8 +429,6 @@ namespace HamechiTamoom.DataLayer.Migrations
 
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.Course.Course", b =>
                 {
-                    b.Navigation("AllCmnts");
-
                     b.Navigation("CourseEpisodes");
                 });
 
@@ -516,8 +467,6 @@ namespace HamechiTamoom.DataLayer.Migrations
 
             modelBuilder.Entity("HamechiTamoom.DataLayer.Entities.User.User", b =>
                 {
-                    b.Navigation("AllCmnts");
-
                     b.Navigation("Courses");
 
                     b.Navigation("UserRoles");

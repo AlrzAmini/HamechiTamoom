@@ -3,14 +3,9 @@
 <article class="single_product">
     <figure>
         <div class="product_thumb">
-            <a class="" href="/ShowCourse/@Model.CourseId"><img class="indxcoursepic card-img" src="/img/Course/thumb/@Model.ImageName" alt="@Model.Title"></a>
+            <a href="/ShowCourse/@Model.CourseId"><img class="img-fluid card-img rounded indxcoursepic" src="/img/Course/thumb/@Model.ImageName" alt="@Model.Title"></a>
             @*<a class="secondary_img" href="product-countdown.html"><img src="/img/product/product2.jpg" alt=""></a>*@
-            <div class="label_product">
-                @*<span class="label_sale">فروش</span>*@
-            </div>
-            <div class="action_links">
-
-            </div>
+            
             @*<div class="add_to_cart">
                 <a href="cart.html" title="افزودن به سبد">افزودن به سبد</a>
             </div>*@
@@ -21,6 +16,7 @@
         <figcaption class="product_content">
             <h3 class="product_name"><a href="/ShowCourse/@Model.CourseId">@Model.Title</a></h3>
             <div class="price_box">
+
                 <span class="text-success">@*@Model.TotalTime*@</span>
                 @if (Model.Price == 0)
                 {

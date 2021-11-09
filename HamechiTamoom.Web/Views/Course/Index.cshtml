@@ -62,16 +62,12 @@
                     <!--shop wrapper start-->
                     <!--shop toolbar start-->
                     <div class="shop_toolbar_wrapper shadow border-radius-5">
-                        <div class="shop_toolbar_btn">
-                            <button data-role="grid_3" type="button" class="btn-grid-3 active" data-toggle="tooltip" title="" data-original-title="3"></button>
-                            <button data-role="grid_4" type="button" class="btn-grid-4" data-toggle="tooltip" title="" data-original-title="4"></button>
-                        </div>
                         <div class="niceselect_container">
-                            <label>ترتیب:</label>
+                            <label>مرتب سازی بر اساس:</label>
                             <select class="select_option" name="orderByType" id="short" style="display: none;">
-                                <option value="date">مرتب سازی بر اساس تاریخ انتشار </option>
-                                <option value="updatedate">مرتب سازی بر اساس تاریخ بروزرسانی </option>
-                                <option value="price">مرتب سازی بر اساس قیمت </option>
+                                <option value="date"> تاریخ انتشار </option>
+                                <option value="updatedate"> تاریخ بروزرسانی </option>
+                                <option value="price"> قیمت </option>
                             </select>
                         </div>
                         <div class="page_amount m-3">
@@ -103,7 +99,7 @@
                     <div class="row shop_wrapper">
                         @foreach (var item in Model)
                         {
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <partial name="_BoxCourse" model="@item" />
                             </div>
                         }

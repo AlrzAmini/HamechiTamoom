@@ -75,6 +75,8 @@ namespace HamechiTamoom.DataLayer.Entities.Course
 
         public List<CourseEpisode> CourseEpisodes { get; set; }
 
+        public List<AllCmnt> AllCmnts { get; set; }
+
         #endregion
     }
 }
