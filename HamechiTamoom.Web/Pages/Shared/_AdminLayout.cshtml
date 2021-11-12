@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using HamechiTamoom.Core.Consts
+@using HamechiTamoom.Core.Services.Interfaces
+
+@inject IPermissionService _permissionService
+
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -59,15 +65,31 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> مدیریت <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/Admin/ManageRoles">دسترسی ها</a>
-                                </li>
-                                <li>
-                                    <a href="/Admin/ManageUsers">کاربران</a>
-                                </li>
-                                <li>
-                                    <a href="/Admin/ManageCourses">دوره ها</a>
-                                </li>
+                                @if (_permissionService.CheckPermission(PerIds.ManageRoles, User.Identity.Name))
+                                {
+                                    <li>
+                                        <a href="/Admin/ManageRoles">دسترسی ها</a>
+                                    </li>
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.ManageUsers, User.Identity.Name))
+                                {
+                                    <li>
+                                        <a href="/Admin/ManageUsers">کاربران</a>
+                                    </li>
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.ManageCourses, User.Identity.Name))
+                                {
+                                    <li>
+                                        <a href="/Admin/ManageCourses">دوره ها</a>
+                                    </li>
+                                }
+                                @if (_permissionService.CheckPermission(PerIds.ManageGroups, User.Identity.Name))
+                                {
+                                    <li>
+                                        <a href="/Admin/ManageGroups">گروه ها</a>
+                                    </li>
+                                }
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

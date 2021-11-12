@@ -22,10 +22,6 @@
 <div class="customer_login mt-60">
     <div class="container">
         <div class="row">
-            <!--register area start-->
-            
-            <!--register area end-->
-            <!--login area start-->
             <div class="col-lg-6 col-md-6">
                 <div class="account_form">
                     @if (ViewBag.IsEdited == true)
@@ -60,15 +56,13 @@
                     </form>
                 </div>
             </div>
-            <!--login area start-->
         </div>
         @if (ViewBag.IsSuccess != null)
         {
             <p class="alert alert-success mt-3">خوش آمدید.</p>
             <script>
-                // Your delay in milliseconds
-                var delay = 300; 
-                setTimeout(function () { window.location = "https://localhost:44387/"; }, delay);
+                var delay = 100; 
+                setTimeout(function () { window.location = "http://haamechitamoom.ir/"; }, delay);
             </script>
         }
     </div>

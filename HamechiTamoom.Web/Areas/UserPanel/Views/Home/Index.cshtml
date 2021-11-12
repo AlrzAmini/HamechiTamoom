@@ -24,7 +24,7 @@
             <!--partial-->
             <partial  name="_SideBar"/>
             <div class="tab-pane fade show active col-md-9" id="dashboard">
-                <div class="box-content border shadow p-3 border-radius-5 mb-2">
+                <div class="box-content border shadow p-3 rounded mb-2">
                     <h3 class="text-primary"> اطلاعات کاربری </h3>
                     <ul>
                         <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری : @Model.UserName </li>
@@ -35,19 +35,10 @@
                 </div>
             </div>
         </div>
-        <div class="account_dashboard">
+        <div>
             <div class="row">
                 <div class="col-sm-12 col-md-3 col-lg-3">
-                    <!-- Nav tabs -->
-                    @*<div class="dashboard_tab_button">
-                        <ul role="tablist" class="nav flex-column dashboard-list">
-                            <li><a href="/UserPanel" data-toggle="tab" class="nav-link active">مشاهده اطلاعات حساب کاربری</a></li>
-                            <li><a href="/UserPanel/EditProfile" data-toggle="tab" class="nav-link">ویرایش اطلاعات کاربری</a></li>
-                            <li><a href="#downloads" data-toggle="tab" class="nav-link">تغییر کلمه عبور</a></li>
-                            <li><a href="#address" data-toggle="tab" class="nav-link">تنظیمات حساب کاربری</a></li>
-                            <li><a href="/Logout" class="nav-link">خروج</a></li>
-                        </ul>
-                    </div>*@
+                    
                 </div>
                 <div class="col-sm-12 col-md-9 col-lg-9">
                     <!-- Tab panes -->
@@ -59,4 +50,3 @@
     </div>
 </section>
 
-<!-- my account end   -->

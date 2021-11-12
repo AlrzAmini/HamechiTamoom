@@ -1,42 +1,22 @@
 ﻿<!DOCTYPE html>
 <html class="no-js" lang="fa" dir="rtl">
-
 <head>
     <meta charset="utf-8">
     <title> همه چی تموم | @ViewData["Title"]</title>
     <partial name="_MetaTags" />
     <partial name="_Styles" />
 </head>
-
 <body>
-
-    <!--header area start-->
-    <!--Offcanvas menu area start-->
     <partial name="_MainMenu" />
-    <!--Offcanvas menu area end-->
     <partial name="_Header" />
-    <!--header area end-->
-    <!--sticky header area start-->
     <partial name="_StickyHeader" />
-    <!--sticky header area end-->
     @RenderBody()
-    <!--blog area start-->
-    @*<partial name="_Blogs" />*@
-    <!--blog area end-->
-    <!--footer area start-->
     <partial name="_Footer" />
-    <!--footer area end-->
-    <!-- JS
-        ============================================ -->
-    <!-- Plugins JS -->
     <script src="/js/plugins.js"></script>
-
-    <!-- Main JS -->
     <script src="/js/main.js"></script>
-
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/jquery.validate.unobtrusive.js"></script>
-@RenderSection("Scripts",false)
+    @RenderSection("Scripts", false)
 </body>
 </html>
 

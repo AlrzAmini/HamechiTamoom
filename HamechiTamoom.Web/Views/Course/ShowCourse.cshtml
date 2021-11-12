@@ -21,12 +21,12 @@
         </div>
     </div>
 </div>
-<div class="product_details mt-60 mb-60">
+<div class="mt-60 mb-60">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="product-details-tab">
-                    <div id="img-1" class="zoomWrapper single-zoom border-radius-5 thumbnail">
+                    <div id="img-1" class="rounded thumbnail">
                         <a href="#">
                             <img id="zoom1" src="/img/Course/image/@Model.CourseImageName" alt="@Model.CourseTitle">
                         </a>
@@ -38,15 +38,10 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
                     <form action="#">
-
-                        <div class="title border border-radius-5 p-3 shadow border-primary text-center">
+                        <div class="title border rounded p-3 shadow border-primary text-center">
                             <h2>@Model.CourseTitle</h2>
                         </div>
-
-                        <div class=" product_ratting">
-
-                        </div>
-                        <div class="price_box border border-radius-5 p-3 shadow text-center">
+                        <div class="price_box border rounded p-3 shadow text-center">
                             @if (Model.CoursePrice == 0)
                             {
                                 <span class="current_price"> رایگان </span>
@@ -61,7 +56,7 @@
                         <div class="product_desc">
                             @Html.Raw(Model.CourseDescription)
                         </div>
-                        <div class="product_d_action card border border-radius-5 p-3">
+                        <div class="product_d_action card border rounded p-3">
                             <ul>
                                 <li><a class="text-black-50" href="#" title="مدت دوره"><i class="fa fa-user"></i> مدرس دوره : @Model.User.UserName</a></li>
                                 <li>
@@ -115,11 +110,11 @@
                     </form>
                     <div class="priduct_social text-center">
                         <ul>
-                            <li><a class="facebook" href="#" title="فیسبوک"><i class="fa fa-facebook"></i> لایک</a></li>
-                            <li><a class="twitter" href="#" title="توییتر"><i class="fa fa-twitter"></i> توییت</a></li>
-                            <li><a class="pinterest" href="#" title="پینترست"><i class="fa fa-pinterest"></i> ذخیره</a></li>
-                            <li><a class="google-plus" href="#" title="گوگل پلاس"><i class="fa fa-google-plus"></i> اشتراک گذاری</a></li>
-                            <li><a class="telegram" href="#" title="تلگرام"><i class="fa fa-telegram"></i> تلگرام</a></li>
+                            <li><a class="facebook" href="https://www.instagram.com/alirez.amni/" title="فیسبوک"><i class="fa fa-facebook"></i> لایک</a></li>
+                            <li><a class="twitter" href="https://www.instagram.com/alirez.amni/" title="توییتر"><i class="fa fa-twitter"></i> توییت</a></li>
+                            <li><a class="pinterest" href="https://www.instagram.com/alirez.amni/" title="پینترست"><i class="fa fa-pinterest"></i> ذخیره</a></li>
+                            <li><a class="google-plus" href="https://www.instagram.com/alirez.amni/" title="گوگل پلاس"><i class="fa fa-google-plus"></i> اشتراک گذاری</a></li>
+                            <li><a class="telegram" href="https://www.instagram.com/alirez.amni/" title="تلگرام"><i class="fa fa-telegram"></i> تلگرام</a></li>
                         </ul>
                     </div>
 
@@ -128,7 +123,7 @@
         </div>
     </div>
 </div>
-<div class="product_d_info mb-60">
+<div class="mb-60">
     <div class="container">
         <div class="row">
             @if (!isUserAuthenticated)
@@ -148,11 +143,11 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="info" role="tabpanel">
-                            <div class="product_info_content term-description">
+                            <div class="term-description">
                                 <ul>
                                     @foreach (var item in Model.CourseEpisodes)
                                     {
-                                        <li class="row m-1 border p-3 border-radius-5">
+                                        <li class="row m-1 border p-3 rounded">
                                             @if (isUserAuthenticated)
                                             {
                                                 <h4 class="col-md-6">
@@ -204,7 +199,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label for="review_comment">نظر </label>
-                                <textarea class="border-radius-5" name="courseComment.Comment" id="courseComment_Comment"></textarea>
+                                <textarea class="rounded" name="courseComment.Comment" id="courseComment_Comment"></textarea>
                             </div>
                         </div>
                         <button class="button" type="submit">ارسال نظر</button>

@@ -19,6 +19,7 @@ namespace HamechiTamoom.Web.Controllers
         {
             _courseService = courseService;
         }
+
         public IActionResult Index()
         {
             return View(_courseService.GetCourse());
@@ -50,6 +51,18 @@ namespace HamechiTamoom.Web.Controllers
 
 
             return Json(new { uploaded = true, url });
+        }
+
+        [Route("AboutUs")]
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
+        [Route("ContactUs")]
+        public IActionResult ContactUs()
+        {
+            return View();
         }
 
     }

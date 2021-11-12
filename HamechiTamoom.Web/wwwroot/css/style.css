@@ -21,6 +21,10 @@
     padding: 25px 25px 10px
 }
 
+.disnone {
+    display: none
+}
+
 .term-description {
     width: 100%;
     margin-bottom: 20px;
@@ -740,6 +744,10 @@ textarea:-ms-input-placeholder {
 
 .Offcanvas_menu {
     display: none;
+}
+
+.picture-maxwh {
+    max-width: 250px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

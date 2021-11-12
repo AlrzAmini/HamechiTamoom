@@ -78,7 +78,6 @@ namespace HamechiTamoom.Web.Controllers
             // Add new User to Table Users
             _userService.AddUser(user);
 
-            //TODO: Send Activation Email
 
             #region Send Active Email
 
@@ -88,6 +87,7 @@ namespace HamechiTamoom.Web.Controllers
             #endregion
 
             return View("SuccessRegister", user);
+
             #endregion
 
         }
@@ -123,8 +123,6 @@ namespace HamechiTamoom.Web.Controllers
             {
                 if (user.IsActive)
                 {
-                    //TODO: Login user
-
                     // Chiz haye ke mikhaym az user negahdari knim
                     var claims = new List<Claim>()
                     {

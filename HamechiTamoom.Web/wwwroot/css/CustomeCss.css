@@ -1,6 +1,4 @@
-.border-radius-5 {
-    border-radius: 5px;
-}
+
 .user-account aside > section,
 .user-account .avatar-layer{
   border:1px solid #ecf1f8; 
@@ -68,12 +66,6 @@
     line-height: 25px;
     color: #7389a3;
     display: block;
-}
-.picture-maxwidth {
-    max-width: 150px;
-}
-.picture-maxwh {
-    max-width: 250px;
 }
 .listnonetype {
     list-style-type: none;

@@ -22,21 +22,18 @@
 <section class="main_content_area">
     <div class="container">
         <div class="row">
-            <!--partial-->
             <partial name="_SideBar" />
-            <div class="account_dashboard col-md-9 border border-radius-5 shadow p-2">
+            <div class="col-md-9 border rounded shadow p-2">
                 <div class="row">
                     <div class="col-sm-12 col-md-9 col-lg-9">
-                        <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
                             <div class="col-sm-12 col-md-9 col-lg-9">
-                                <!-- Tab panes -->
                                 <div class="tab-content dashboard_content">
                                     <div class="tab-pane fade active show" id="account-details">
                                         <h3 class="text-primary">ویرایش حساب </h3>
                                         <hr/>
-                                        <div class="login">
-                                            <div class="login_form_container">
+                                        <div>
+                                            <div>
                                                 <div class="account_login_form">
                                                     <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
 
@@ -50,15 +47,15 @@
                                                         <input type="hidden" asp-for="CurrentAvatar"/>
                                                         <br>
                                                         <label class="text-black-50"><i class="zmdi zmdi-account"></i> نام کاربری</label>
-                                                        <input type="text" asp-for="UserName" class="border-radius-5">
+                                                        <input type="text" asp-for="UserName" class="rounded">
                                                         <span asp-validation-for="UserName"></span>
                                                         <br/>
                                                         <label class="text-black-50"><i class="zmdi zmdi-image"></i> تصویر پروفایل</label>
                                                         <input id="UserAvatar" type="file" asp-for="UserAvatar">
                                                         <span>لطفا فقط تصویر انتخاب کنید</span>
-                                                        <img id="imgAvatar" src="/img/UserAvatar/@Model.CurrentAvatar" class="picture-maxwidth img-thumbnail"/>
+                                                        <img id="imgAvatar" src="/img/UserAvatar/@Model.CurrentAvatar" class="img-thumbnail"/>
                                                         <br>
-                                                        <div class="save_button primary_btn default_button">
+                                                        <div>
                                                             <button class="bg-success" type="submit">ذخیره</button>
                                                         </div>
                                                     </form>

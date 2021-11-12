@@ -83,7 +83,7 @@ namespace HamechiTamoom.Web
 
             services.AddScoped<IUserService, UserService>();
 
-            services.AddScoped<IViewRenderService, RenderViewToString>();
+            services.AddTransient<IViewRenderService, RenderViewToString>();
 
             services.AddScoped<IPermissionService, PermissionService>();
 

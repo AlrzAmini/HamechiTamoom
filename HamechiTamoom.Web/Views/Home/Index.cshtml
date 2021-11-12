@@ -3,7 +3,6 @@
     ViewData["Title"] = "خانه";
 }
 <partial name="_Slider" />
-<!--product area start-->
 <section class="product_area mb-46">
     <div class="container">
         <div class="row">
@@ -17,45 +16,31 @@
             </div>
         </div>
         <div class="product_carousel product_column5 owl-carousel">
-
-            @foreach (var item in Model)
-            {
-                <partial name="_BoxCourse" model="@item" />
-            }
+            <cache expires-after="@TimeSpan.FromMinutes(5)">
+                @await Component.InvokeAsync("LatesCourse")
+            </cache>
         </div>
     </div>
 </section>
-<!--product area end-->
-<!--product area start-->
 <section class="product_area mb-46">
     <div class="shop_area shop_fullwidth mt-60 mb-60">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!--shop wrapper start-->
-                    <!--shop toolbar start-->
                     <div class="">
                         <div class="section_title">
                             <h2 class="col-md-8"><i class="fa fa-reply-all text-primary"></i> همه دوره ها</h2>
                                 <a class="btn btn-outline-primary col-md-3" href="/Course"><i class="fa fa-filter"></i> فیلتر ها </a>
                         </div>
                     </div>
-                    <!--shop toolbar end-->
-
                     <div class="row shop_wrapper">
                         @foreach (var item in Model)
                         {
                             <partial name="_BoxCourse" model="@item" />
                         }
                     </div>
-
-                    <!--shop toolbar end-->
-                    <!--shop wrapper end-->
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--product area end-->
-<!--product area start-->
-<!--product area end-->

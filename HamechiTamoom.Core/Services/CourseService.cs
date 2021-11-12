@@ -102,7 +102,7 @@ namespace HamechiTamoom.Core.Services
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Course/thumb",
                     course.CourseImageName);
                 ImageConvertor imgResizer = new ImageConvertor();
-                imgResizer.Image_resize(imgPath, thumbPath, 200); 
+                imgResizer.Image_resize(imgPath, thumbPath, 200);
             }
 
             if (demoCourse != null)
@@ -336,10 +336,10 @@ namespace HamechiTamoom.Core.Services
                         break;
                     }
                 case "price":
-                {
-                    result = result.OrderByDescending(c => c.CoursePrice);
-                    break;
-                }
+                    {
+                        result = result.OrderByDescending(c => c.CoursePrice);
+                        break;
+                    }
             }
 
             // filter by price range
@@ -390,20 +390,48 @@ namespace HamechiTamoom.Core.Services
             _context.SaveChanges();
         }
 
-        public Tuple<List<AllCmnt>, int> GetCourseComment(int courseId , int pageId = 1)
+        public Tuple<List<AllCmnt>, int> GetCourseComment(int courseId, int pageId = 1)
         {
             int take = 7;
             int skip = (pageId - 1) * take;
             int pageCount = _context.AllCmnts.Where(c => c.CourseId == courseId).Count() / take;
 
-            if ((pageCount%2!=0))
+            if ((pageCount % 2 != 0))
             {
-                pageCount+=1;
+                pageCount += 1;
             }
 
-            return Tuple.Create(_context.AllCmnts.Include(c=>c.User).Where(c => c.CourseId == courseId)
-                    .Skip(skip).Take(take).OrderByDescending(c=>c.CreateDate).ToList(),
+            return Tuple.Create(_context.AllCmnts.Include(c => c.User).Where(c => c.CourseId == courseId)
+                    .Skip(skip).Take(take).OrderByDescending(c => c.CreateDate).ToList(),
                 pageCount);
+        }
+
+        public List<CourseGroup> GetGroupsForManage()
+        {
+            return _context.CourseGroups.Include(g => g.CourseGroups).ToList();
+        }
+
+        public void AddGroup(CourseGroup group)
+        {
+            _context.CourseGroups.Add(group);
+            _context.SaveChanges();
+        }
+
+        public void UpdateGroup(CourseGroup group)
+        {
+            _context.CourseGroups.Update(group);
+            _context.SaveChanges();
+        }
+
+        public CourseGroup GetGroupById(int id)
+        {
+            return _context.CourseGroups.Find(id);
+        }
+
+        public void DeleteGroup(CourseGroup group)
+        {
+            _context.CourseGroups.Remove(group);
+            _context.SaveChanges();
         }
     }
 }

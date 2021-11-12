@@ -16,6 +16,8 @@ namespace HamechiTamoom.Core.Services.Interfaces
 
         List<CourseGroup> GetAllCourseGroups();
 
+        List<CourseGroup> GetGroupsForManage();
+
         List<SelectListItem> GetGroupForManageCourse();
 
         List<SelectListItem> GetSubGroupForManageCourse(int groupId);
@@ -25,6 +27,15 @@ namespace HamechiTamoom.Core.Services.Interfaces
         List<SelectListItem> GetLevels();
 
         List<SelectListItem> GetStatuses();
+
+        void AddGroup(CourseGroup group);
+
+        void UpdateGroup(CourseGroup group);
+
+        void DeleteGroup(CourseGroup group);
+
+        CourseGroup GetGroupById(int id);
+
 
         #endregion
 

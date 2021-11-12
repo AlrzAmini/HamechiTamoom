@@ -17,13 +17,12 @@
         </div>
     </div>
 </div>
-<div class="shop_area shop_reverse mt-60 mb-60">
+<div class="shop_reverse mt-60 mb-60">
     <div class="container">
         <form action="/Course" method="get" id="formfilter">
             <input type="hidden" name="pageId" value="@ViewBag.pageId.ToString()" />
             <div class="row">
                 <div class="col-lg-3 col-md-12">
-                    <!--sidebar widget start-->
                     <aside class="sidebar_widget">
                         <div class="widget_inner">
                             <div class="widget_list widget_categories">
@@ -56,15 +55,12 @@
                             </div>
                         </div>
                     </aside>
-                    <!--sidebar widget end-->
                 </div>
                 <div class="col-lg-9 col-md-12">
-                    <!--shop wrapper start-->
-                    <!--shop toolbar start-->
-                    <div class="shop_toolbar_wrapper shadow border-radius-5">
+                    <div class="shop_toolbar_wrapper rounded">
                         <div class="niceselect_container">
                             <label>مرتب سازی بر اساس:</label>
-                            <select class="select_option" name="orderByType" id="short" style="display: none;">
+                            <select class="select_option disnone" name="orderByType" id="short">
                                 <option value="date"> تاریخ انتشار </option>
                                 <option value="updatedate"> تاریخ بروزرسانی </option>
                                 <option value="price"> قیمت </option>
@@ -94,8 +90,6 @@
                             <a href="/Course" class="btn btn-warning">لغو  </a>
                         </div>
                     </div>
-                    <!--shop toolbar end-->
-
                     <div class="row shop_wrapper">
                         @foreach (var item in Model)
                         {
@@ -104,9 +98,6 @@
                             </div>
                         }
                     </div>
-
-                    <!--shop toolbar end-->
-                    <!--shop wrapper end-->
                 </div>
             </div>
         </form>

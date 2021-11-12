@@ -5,12 +5,10 @@
 @{
     SideBarUserPanelViewModel user = _userService.GetSideBarUserPanelData(User.Identity.Name);
 }
-
 <div class="col-md-3">
     <aside>
         <div class="avatar-layer">
             <div class="img-layer">
-                <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
                 <img class="picture-maxwh" src="/img/UserAvatar/@user.ImageName">
             </div>
             <div class="detail text-center text-black-50">
@@ -18,7 +16,7 @@
             </div>
         </div>
         <div class="dashboard_tab_button">
-            <ul role="tablist" class="nav flex-column dashboard-list">
+            <ul role="tablist" class="nav flex-column">
                 <li><a href="/UserPanel" class="nav-link bg-info">مشاهده اطلاعات حساب کاربری</a></li>
                 <li><a href="/UserPanel/EditProfile" class="nav-link bg-info">ویرایش اطلاعات کاربری</a></li>
                 <li><a href="/UserPanel/ChangePassword" class="nav-link bg-info">تغییر کلمه عبور</a></li>

@@ -1,0 +1,41 @@
+﻿@page "{Id}"
+@model HamechiTamoom.Web.Pages.Admin.ManageGroups.EditGroupModel
+@{
+    ViewData["Title"] = "ویرایش گروه";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="page-header">ویرایش گروه</h1>
+    </div>
+    <div class="col-md-3">
+        <a asp-page="Index" class="btn btn-outline btn-primary">لیست گروه ها</a>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <form method="post">
+        <input type="hidden" asp-for="CourseGroup.ParrentId" />
+        <input type="hidden" asp-for="CourseGroup.GroupId" />
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    اطلاعات گروه
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>عنوان گروه</label>
+                        <input type="text" asp-for="CourseGroup.GroupTitle" class="form-control" placeholder="عنوان گروه را وارد کنید ">
+                        <span asp-validation-for="CourseGroup.GroupTitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <div class="col-md-7">
+            <button type="submit" class="btn btn-primary btn-block">ویرایش گروه</button>
+        </div>
+    </form>
+</div>
+
