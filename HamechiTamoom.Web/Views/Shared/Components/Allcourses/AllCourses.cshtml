@@ -1,0 +1,5 @@
+﻿@model IEnumerable<HamechiTamoom.Core.DTOs.ShowCourseListViewModel>
+@foreach (var item in Model)
+{
+    <partial name="_BoxCourse" model="@item" />
+}

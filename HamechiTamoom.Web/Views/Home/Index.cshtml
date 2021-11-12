@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "خانه";
 }
-<partial name="_Slider" />
+<cache expires-after="@TimeSpan.FromMinutes(180)">
+    <partial name="_Slider" />
+</cache>
 <section class="product_area mb-46">
     <div class="container">
         <div class="row">
@@ -34,10 +36,9 @@
                         </div>
                     </div>
                     <div class="row shop_wrapper">
-                        @foreach (var item in Model)
-                        {
-                            <partial name="_BoxCourse" model="@item" />
-                        }
+                        <cache expires-after="@TimeSpan.FromMinutes(30)">
+                            @await Component.InvokeAsync("AllCourses")
+                        </cache>
                     </div>
                 </div>
             </div>

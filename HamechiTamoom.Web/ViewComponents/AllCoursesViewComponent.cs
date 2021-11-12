@@ -7,18 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HamechiTamoom.Web.ViewComponents
 {
-    public class LatesCourseViewComponent : ViewComponent
+    public class AllCoursesViewComponent : ViewComponent
     {
         private readonly ICourseService _courseService;
 
-        public LatesCourseViewComponent(ICourseService courseService)
+        public AllCoursesViewComponent(ICourseService courseService)
         {
             _courseService = courseService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return await Task.FromResult((IViewComponentResult)View("LatesCourse", _courseService.GetCourse()));
+            return await Task.FromResult((IViewComponentResult)View("AllCourses", _courseService.GetCourse()));
         }
     }
 }
