@@ -15,6 +15,7 @@ using HamechiTamoom.DataLayer.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace HamechiTamoom.Web
 {
@@ -119,7 +120,52 @@ namespace HamechiTamoom.Web
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+            #region Cach Static Files
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse =
+                    r =>
+                    {
+                        string path = r.File.PhysicalPath;
+                        if (path.EndsWith(".css") || path.EndsWith(".js") || path.EndsWith(".gif") || path.EndsWith(".jpg") || path.EndsWith(".png") || path.EndsWith(".svg"))
+                        {
+                            TimeSpan maxAge = new TimeSpan(1, 0, 0, 0);
+                            r.Context.Response.Headers.Append("Cache-Control", "max-age=" + maxAge.TotalSeconds.ToString("0"));
+                        }
+                    }
+            });
+            app.Use(async (context, next) =>
+            {
+                string path = context.Request.Path;
+
+                if (path.EndsWith(".css") || path.EndsWith(".js"))
+                {
+
+                    //Set css and js files to be cached for 1 days
+                    TimeSpan maxAge = new TimeSpan(1, 0, 0, 0);     //1 days
+                    context.Response.Headers.Append("Cache-Control", "max-age=" + maxAge.TotalSeconds.ToString("0"));
+
+                }
+                else if (path.EndsWith(".gif") || path.EndsWith(".jpg") || path.EndsWith(".png"))
+                {
+                    //custom headers for images goes here if needed
+
+                }
+                else
+                {
+                    //Request for views fall here.
+                    context.Response.Headers.Append("Cache-Control", "no-cache");
+                    context.Response.Headers.Append("Cache-Control", "private, no-store");
+
+                }
+                await next();
+            });
+
+            #endregion
+
+
 
             app.UseRouting();
 
