@@ -131,7 +131,7 @@ namespace HamechiTamoom.Web
                         string path = r.File.PhysicalPath;
                         if (path.EndsWith(".css") || path.EndsWith(".js") || path.EndsWith(".gif") || path.EndsWith(".jpg") || path.EndsWith(".png") || path.EndsWith(".svg"))
                         {
-                            TimeSpan maxAge = new TimeSpan(1, 0, 0, 0);
+                            TimeSpan maxAge = new TimeSpan(7, 0, 0, 0);
                             r.Context.Response.Headers.Append("Cache-Control", "max-age=" + maxAge.TotalSeconds.ToString("0"));
                         }
                     }
@@ -143,8 +143,8 @@ namespace HamechiTamoom.Web
                 if (path.EndsWith(".css") || path.EndsWith(".js"))
                 {
 
-                    //Set css and js files to be cached for 1 days
-                    TimeSpan maxAge = new TimeSpan(1, 0, 0, 0);     //1 days
+                    //Set css and js files to be cached for 7 days
+                    TimeSpan maxAge = new TimeSpan(7, 0, 0, 0);     //7 days
                     context.Response.Headers.Append("Cache-Control", "max-age=" + maxAge.TotalSeconds.ToString("0"));
 
                 }
