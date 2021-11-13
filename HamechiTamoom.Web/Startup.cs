@@ -69,7 +69,7 @@ namespace HamechiTamoom.Web
 
             #endregion
 
-            #region DB Context
+            #region Context
 
             services.AddDbContext<HamechiTamoomContext>(options =>
             {
@@ -97,6 +97,15 @@ namespace HamechiTamoom.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             #region App use ...
+
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Response.Redirect("/Error404");
+                }
+            });
 
             if (env.IsDevelopment())
             {
