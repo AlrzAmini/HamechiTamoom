@@ -130,7 +130,7 @@ namespace HamechiTamoom.Web
                     {
                         string path = r.File.PhysicalPath;
                         if (path.EndsWith(".css") || path.EndsWith(".js") || path.EndsWith(".gif") || path.EndsWith(".jpg")
-                            || path.EndsWith(".png") || path.EndsWith(".svg") || path.EndsWith(".woff2") || path.EndsWith(".ico") || path.EndsWith(".ttf"))
+                            || path.EndsWith(".png") || path.EndsWith(".svg") || path.EndsWith(".woff2") || path.EndsWith(".ico") || path.EndsWith(".ttf") || path.EndsWith(".webp"))
                         {
                             TimeSpan maxAge = new TimeSpan(7, 0, 0, 0);
                             r.Context.Response.Headers.Append("Cache-Control", "max-age=" + maxAge.TotalSeconds.ToString("0"));
