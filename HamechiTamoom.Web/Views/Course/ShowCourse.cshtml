@@ -70,7 +70,10 @@
                                     </a>
                                 </li>
                                 <li><a class="text-black-50" href="#" title="تعداد ویدیو"><i class="fa fa-video-camera"></i> تعداد ویدیو : @Model.CourseEpisodes.Count</a></li>
-                                @{
+                                
+                                @*null refrence bug*@
+                                @*TODO:Fixing*@
+                                @*@{
                                     string level = "متوسط";
                                     string status = "در حال برگزاری";
                                     if (Model.CourseLevel != null)
@@ -85,7 +88,7 @@
 
                                 }
                                 <li><a class="text-black-50" href="#" title="سطح دوره"><i class="fa fa-level-up"></i> سطح دوره : @level</a></li>
-                                <li><a class="text-black-50" href="#" title="وضعیت دوره"><i class="fa fa-warning"></i> وضعیت دوره : @status</a></li>
+                                <li><a class="text-black-50" href="#" title="وضعیت دوره"><i class="fa fa-warning"></i> وضعیت دوره : @status</a></li>*@
                                 <li><a class="text-black-50" href="#" title="آخرین بروزرسانی دوره"><i class="fa fa-calendar"></i> تاریخ شروع : @Model.CreateDate.ToShamsi() </a></li>
                                 <li><a class="text-black-50" href="#" title="آخرین بروزرسانی دوره"><i class="fa fa-upload"></i> آخرین بروزرسانی : @Model.UpdateDate?.ToShamsi() </a></li>
                             </ul>
