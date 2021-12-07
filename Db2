@@ -1,0 +1,1261 @@
+
+USE [ShooraDahakDB]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Answers]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Answers](
+	[AnswerId] [int] IDENTITY(1,1) NOT NULL,
+	[DiscussionId] [int] NOT NULL,
+	[UserId] [int] NULL,
+	[AnswerBody] [nvarchar](max) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_Answers] PRIMARY KEY CLUSTERED 
+(
+	[AnswerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BlogCategories]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BlogCategories](
+	[BlogCategoryId] [int] IDENTITY(1,1) NOT NULL,
+	[BlogCategoryTitle] [nvarchar](250) NOT NULL,
+	[IsDelete] [bit] NOT NULL,
+	[ParrentId] [int] NULL,
+ CONSTRAINT [PK_BlogCategories] PRIMARY KEY CLUSTERED 
+(
+	[BlogCategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Blogs]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Blogs](
+	[BlogId] [int] IDENTITY(1,1) NOT NULL,
+	[GenderId] [int] NOT NULL,
+	[BlogBody] [nvarchar](max) NOT NULL,
+	[BlogImageName] [nvarchar](50) NULL,
+	[BlogTitle] [nvarchar](250) NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[LittleDescription] [nvarchar](300) NOT NULL,
+	[SubCatId] [int] NULL,
+	[WriterId] [int] NOT NULL,
+ CONSTRAINT [PK_Blogs] PRIMARY KEY CLUSTERED 
+(
+	[BlogId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CommentAnswers]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CommentAnswers](
+	[CAnswerId] [int] IDENTITY(1,1) NOT NULL,
+	[CommentId] [int] NOT NULL,
+	[UserId] [int] NULL,
+	[AnswerBody] [nvarchar](800) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[IsDelete] [bit] NOT NULL,
+ CONSTRAINT [PK_CommentAnswers] PRIMARY KEY CLUSTERED 
+(
+	[CAnswerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Comments]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comments](
+	[CommentId] [int] IDENTITY(1,1) NOT NULL,
+	[BlogId] [int] NOT NULL,
+	[UserId] [int] NULL,
+	[CommentBody] [nvarchar](800) NOT NULL,
+	[CommentCreateDate] [datetime2](7) NOT NULL,
+	[IsDelete] [bit] NOT NULL,
+ CONSTRAINT [PK_Comments] PRIMARY KEY CLUSTERED 
+(
+	[CommentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DiscussionImpLevels]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DiscussionImpLevels](
+	[ImpLevelId] [int] IDENTITY(1,1) NOT NULL,
+	[ImpLevelTitle] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_DiscussionImpLevels] PRIMARY KEY CLUSTERED 
+(
+	[ImpLevelId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Discussions]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Discussions](
+	[DiscussionId] [int] IDENTITY(1,1) NOT NULL,
+	[ServiceId] [int] NOT NULL,
+	[ImpLevelId] [int] NOT NULL,
+	[UserId] [int] NULL,
+	[DiscussionTitle] [nvarchar](300) NOT NULL,
+	[DiscussionBody] [nvarchar](max) NOT NULL,
+	[DiscussionCreateDate] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_Discussions] PRIMARY KEY CLUSTERED 
+(
+	[DiscussionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Genders]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Genders](
+	[GenderId] [int] IDENTITY(1,1) NOT NULL,
+	[GenderTitle] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Genders] PRIMARY KEY CLUSTERED 
+(
+	[GenderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LetterAnswers]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LetterAnswers](
+	[LetterAnswerId] [int] IDENTITY(1,1) NOT NULL,
+	[LetterId] [int] NOT NULL,
+	[LetterAnswerBody] [nvarchar](max) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[SenderId] [int] NULL,
+ CONSTRAINT [PK_LetterAnswers] PRIMARY KEY CLUSTERED 
+(
+	[LetterAnswerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Letters]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Letters](
+	[LetterId] [int] IDENTITY(1,1) NOT NULL,
+	[LetterToId] [int] NOT NULL,
+	[SenderId] [int] NOT NULL,
+	[LetterTitle] [nvarchar](400) NOT NULL,
+	[LetterBody] [nvarchar](max) NOT NULL,
+	[LetterSendDate] [datetime2](7) NOT NULL,
+	[LetterFileName] [nvarchar](50) NULL,
+	[IsRead] [bit] NOT NULL,
+ CONSTRAINT [PK_Letters] PRIMARY KEY CLUSTERED 
+(
+	[LetterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LetterTos]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LetterTos](
+	[LetterToId] [int] IDENTITY(1,1) NOT NULL,
+	[LetterToTitle] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_LetterTos] PRIMARY KEY CLUSTERED 
+(
+	[LetterToId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Permission]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Permission](
+	[PermissionId] [int] IDENTITY(1,1) NOT NULL,
+	[PermissionTitle] [nvarchar](150) NOT NULL,
+	[ParrentId] [int] NULL,
+ CONSTRAINT [PK_Permission] PRIMARY KEY CLUSTERED 
+(
+	[PermissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Quotes]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Quotes](
+	[QuoteId] [int] IDENTITY(1,1) NOT NULL,
+	[QuoteBody] [nvarchar](600) NOT NULL,
+	[QuoteBy] [nvarchar](200) NOT NULL,
+	[QuoterJob] [nvarchar](200) NOT NULL,
+	[QuoteImageName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Quotes] PRIMARY KEY CLUSTERED 
+(
+	[QuoteId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ReportAbuses]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ReportAbuses](
+	[ReportId] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[ReportSubject] [nvarchar](400) NOT NULL,
+	[ReportDescription] [nvarchar](850) NOT NULL,
+	[ReportAddress] [nvarchar](500) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[IsRead] [bit] NOT NULL,
+ CONSTRAINT [PK_ReportAbuses] PRIMARY KEY CLUSTERED 
+(
+	[ReportId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RolePermission]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RolePermission](
+	[RolePrmId] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[PermissionId] [int] NOT NULL,
+ CONSTRAINT [PK_RolePermission] PRIMARY KEY CLUSTERED 
+(
+	[RolePrmId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[RoleId] [int] IDENTITY(1,1) NOT NULL,
+	[RoleTitle] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Service]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Service](
+	[ServiceId] [int] IDENTITY(1,1) NOT NULL,
+	[GroupId] [int] NOT NULL,
+	[SubGroup] [int] NULL,
+	[WriterId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL,
+	[ServiceTitle] [nvarchar](250) NOT NULL,
+	[ServiceDescription] [nvarchar](max) NOT NULL,
+	[ServiceStartDate] [datetime2](7) NOT NULL,
+	[ServiceEndDate] [datetime2](7) NULL,
+	[ServiceUpdateDate] [datetime2](7) NULL,
+	[ServiceBudget] [int] NOT NULL,
+	[RelatedInstitutions] [nvarchar](500) NULL,
+	[ServiceVideoName] [nvarchar](100) NULL,
+	[ServiceImageName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Service] PRIMARY KEY CLUSTERED 
+(
+	[ServiceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ServiceGroups]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ServiceGroups](
+	[GroupId] [int] IDENTITY(1,1) NOT NULL,
+	[GroupTitle] [nvarchar](200) NOT NULL,
+	[ParrentId] [int] NULL,
+ CONSTRAINT [PK_ServiceGroups] PRIMARY KEY CLUSTERED 
+(
+	[GroupId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ServiceStatus]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ServiceStatus](
+	[StatusId] [int] IDENTITY(1,1) NOT NULL,
+	[StatusTitle] [nvarchar](150) NOT NULL,
+ CONSTRAINT [PK_ServiceStatus] PRIMARY KEY CLUSTERED 
+(
+	[StatusId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserRoles](
+	[UserRoleId] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+ CONSTRAINT [PK_UserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserRoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 12/7/2021 9:05:47 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](300) NOT NULL,
+	[NCode] [nvarchar](50) NOT NULL,
+	[PhoneNumber] [nvarchar](50) NOT NULL,
+	[BirthDate] [datetime2](7) NOT NULL,
+	[Email] [nvarchar](400) NOT NULL,
+	[Password] [nvarchar](200) NOT NULL,
+	[ActivationCode] [nvarchar](50) NULL,
+	[IsActive] [bit] NOT NULL,
+	[RegisterDate] [datetime2](7) NOT NULL,
+	[IsConfirmedByAdmin] [bit] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211118080644_initDb', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211120114813_ChangeNCodeType', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211120115137_maxlnToNcode', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211123093909_addtblpermis', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211123100705_per2', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211123130645_addtblservicgroup', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211124125803_ADdtbalServices', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211125102939_editserv', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211125110600_changserv', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211128205952_addtblDiscus', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211129202557_addfieldisconftouser', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211130133040_AddtblsForLetter', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211130155825_changesendname', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211130161101_migtblletter', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211201144742_adtblanswerletter', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211201145044_changeanslett', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211201162621_changeanswer', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211202082140_tblQuetes', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211203122101_addtblcategoriesforBlog', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211203122526_changetblcat', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211203160640_addgender', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211203161032_changgender', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211203162628_addblogTbl', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211203174724_changgg', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211205131611_addtblsforcomment', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211205185527_addlistanswertocomment', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211207090839_addreportabuse', N'5.0.12')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20211207113432_changetblrep', N'5.0.12')
+GO
+SET IDENTITY_INSERT [dbo].[Answers] ON 
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (2, 11, 14, N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+', CAST(N'2020-11-01T00:00:00.0000000' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (3, 11, 18, N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+', CAST(N'2021-01-01T00:00:00.0000000' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (4, 11, 17, N'<p>افزودن پاسخ برای بحث 10</p>
+', CAST(N'2021-11-30T12:54:08.9071825' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (5, 5, 17, N'<p>پاسخ به بحث 4</p>
+', CAST(N'2021-11-30T14:22:33.1298315' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (6, 1, 14, N'<p>2000000</p>
+', CAST(N'2021-11-30T14:25:04.2072246' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (7, 3, 14, N'<p>P1</p>
+', CAST(N'2021-11-30T14:53:37.6632027' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (8, 4, 14, N'<p>پاسخ بحث</p>
+', CAST(N'2021-12-01T12:48:19.2828236' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (9, 4, 14, N'<p>پاسخ 2</p>
+', CAST(N'2021-12-01T12:48:43.4225478' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (10, 14, 17, N'<p>P15</p>
+
+<p><strong>P12.5</strong></p>
+', CAST(N'2021-12-01T21:59:30.5500075' AS DateTime2))
+GO
+INSERT [dbo].[Answers] ([AnswerId], [DiscussionId], [UserId], [AnswerBody], [CreateDate]) VALUES (11, 3, 17, N'<p><em><strong>P600</strong></em></p>
+', CAST(N'2021-12-01T22:00:01.5017199' AS DateTime2))
+GO
+SET IDENTITY_INSERT [dbo].[Answers] OFF
+GO
+SET IDENTITY_INSERT [dbo].[BlogCategories] ON 
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (1, N'ورزش', 0, NULL)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (2, N'سلامتی', 0, NULL)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (3, N'تکنولوژی', 0, NULL)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (4, N'بدنسازی', 0, 1)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (5, N'فوتبال', 0, 1)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (6, N'تغذیه', 0, 2)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (7, N'Test', 1, NULL)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (8, N'Test T1', 0, 7)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (9, N'Test T2', 1, 7)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (10, N'Test T3', 1, 7)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (11, N'No Test', 1, NULL)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (12, N'Test', 0, NULL)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (13, N'Test 1', 0, 12)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (14, N'Test 2', 0, 12)
+GO
+INSERT [dbo].[BlogCategories] ([BlogCategoryId], [BlogCategoryTitle], [IsDelete], [ParrentId]) VALUES (15, N'Test 3', 0, 12)
+GO
+SET IDENTITY_INSERT [dbo].[BlogCategories] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Blogs] ON 
+GO
+INSERT [dbo].[Blogs] ([BlogId], [GenderId], [BlogBody], [BlogImageName], [BlogTitle], [CategoryId], [CreateDate], [LittleDescription], [SubCatId], [WriterId]) VALUES (2, 2, N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+&nbsp;</p>
+', N'5d25bfecbf2c4e3aab2c8676282d5f67.jpg', N'بلاگ 1', 2, CAST(N'2020-06-01T00:00:00.0000000' AS DateTime2), N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.', 6, 14)
+GO
+INSERT [dbo].[Blogs] ([BlogId], [GenderId], [BlogBody], [BlogImageName], [BlogTitle], [CategoryId], [CreateDate], [LittleDescription], [SubCatId], [WriterId]) VALUES (3, 1, N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+<img alt="" src="/MyImages/5171be0f-decf-47bc-a007-c6d7876128d5.jpg" style="height:417px; width:626px" /></p>
+
+<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+&nbsp;</p>
+', N'b4aadc449e904e998cea3e96f1dff32e.jpg', N'بلاگ 2', 1, CAST(N'2021-12-04T17:27:19.3773313' AS DateTime2), N'چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر آنچنان که لازم است و برای شرایط فعلی', 4, 17)
+GO
+INSERT [dbo].[Blogs] ([BlogId], [GenderId], [BlogBody], [BlogImageName], [BlogTitle], [CategoryId], [CreateDate], [LittleDescription], [SubCatId], [WriterId]) VALUES (4, 2, N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+&nbsp;</p>
+', N'1bebf0e4c6144595aab7074d3ce5ba4c.jpg', N'بلاگ 3', 3, CAST(N'2021-12-04T15:39:50.7996961' AS DateTime2), N'چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است', NULL, 14)
+GO
+INSERT [dbo].[Blogs] ([BlogId], [GenderId], [BlogBody], [BlogImageName], [BlogTitle], [CategoryId], [CreateDate], [LittleDescription], [SubCatId], [WriterId]) VALUES (5, 1, N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+
+<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات&nbsp;</p>
+', N'2087e7864d934e1199114fa281705897.jpg', N'بلاگ 4', 1, CAST(N'2021-12-04T23:49:05.0305289' AS DateTime2), N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ', 5, 17)
+GO
+SET IDENTITY_INSERT [dbo].[Blogs] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CommentAnswers] ON 
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (1, 2, 18, N'Hello To Hello', CAST(N'2021-12-12T00:00:00.0000000' AS DateTime2), 0)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (2, 2, 17, N'Hello To HelloHello', CAST(N'2021-12-12T00:00:00.0000000' AS DateTime2), 0)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (3, 9, 14, N'Why Nope ?', CAST(N'2021-12-06T17:23:21.4422492' AS DateTime2), 1)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (4, 9, 14, N'why nope 2 ?', CAST(N'2021-12-06T18:40:10.6693255' AS DateTime2), 1)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (5, 9, 14, N'why nope 3 ?', CAST(N'2021-12-06T18:53:02.7336575' AS DateTime2), 1)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (6, 9, 14, N'why nope 3 ?', CAST(N'2021-12-06T18:53:14.8247921' AS DateTime2), 0)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (7, 8, 14, N'Why No Bye ?', CAST(N'2021-12-06T18:56:43.3973700' AS DateTime2), 1)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (8, 7, 14, N'Bye To who ?', CAST(N'2021-12-06T19:01:29.9662401' AS DateTime2), 0)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (9, 6, 14, N'Why bye ?', CAST(N'2021-12-06T19:06:13.4802052' AS DateTime2), 0)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (10, 8, 14, N'Why No Bye ???', CAST(N'2021-12-06T21:16:06.2903281' AS DateTime2), 0)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (11, 11, 17, N'سلام علیکم', CAST(N'2021-12-06T21:22:46.6694071' AS DateTime2), 1)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (12, 11, 17, N'‌‌Begoo Hello', CAST(N'2021-12-06T21:26:52.2563128' AS DateTime2), 0)
+GO
+INSERT [dbo].[CommentAnswers] ([CAnswerId], [CommentId], [UserId], [AnswerBody], [CreateDate], [IsDelete]) VALUES (13, 8, 14, N'Sorry Bye.', CAST(N'2021-12-06T23:48:12.9773131' AS DateTime2), 0)
+GO
+SET IDENTITY_INSERT [dbo].[CommentAnswers] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Comments] ON 
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (2, 3, 14, N'Hello', CAST(N'2021-12-05T20:12:39.3722880' AS DateTime2), 0)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (3, 3, 14, N'Hello2', CAST(N'2021-12-05T20:17:29.2366370' AS DateTime2), 0)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (4, 3, 14, N'Hello
+Its Me', CAST(N'2021-12-05T23:37:42.1188249' AS DateTime2), 0)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (5, 3, 14, N'Hello 
+Its Not me', CAST(N'2021-12-05T23:38:16.2222139' AS DateTime2), 0)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (6, 3, 14, N'Bye', CAST(N'2021-12-05T23:43:57.1579931' AS DateTime2), 0)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (7, 3, 14, N'Bye to', CAST(N'2021-12-05T23:44:11.5653603' AS DateTime2), 0)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (8, 3, 14, N'No Bye ', CAST(N'2021-12-05T23:44:20.4491716' AS DateTime2), 0)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (9, 3, 14, N'Nope', CAST(N'2021-12-06T16:45:59.5143937' AS DateTime2), 1)
+GO
+INSERT [dbo].[Comments] ([CommentId], [BlogId], [UserId], [CommentBody], [CommentCreateDate], [IsDelete]) VALUES (11, 2, 14, N'سلام', CAST(N'2021-12-06T21:17:05.0251485' AS DateTime2), 0)
+GO
+SET IDENTITY_INSERT [dbo].[Comments] OFF
+GO
+SET IDENTITY_INSERT [dbo].[DiscussionImpLevels] ON 
+GO
+INSERT [dbo].[DiscussionImpLevels] ([ImpLevelId], [ImpLevelTitle]) VALUES (1, N'معمولی')
+GO
+INSERT [dbo].[DiscussionImpLevels] ([ImpLevelId], [ImpLevelTitle]) VALUES (2, N'مهم')
+GO
+INSERT [dbo].[DiscussionImpLevels] ([ImpLevelId], [ImpLevelTitle]) VALUES (3, N'خیلی مهم')
+GO
+SET IDENTITY_INSERT [dbo].[DiscussionImpLevels] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Discussions] ON 
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (1, 8, 1, 14, N'هزینه ', N'<p>هزینه انجام چقدر بوده ؟</p>
+', CAST(N'2021-11-29T14:03:56.5645197' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (2, 12, 2, 14, N'بحث 1', N'<p>شرح بحث 1</p>
+', CAST(N'2021-11-29T15:49:29.7092307' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (3, 9, 3, 17, N'بحث 2', N'<p>شرح بحث 3</p>
+', CAST(N'2021-11-29T15:58:01.0339133' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (4, 8, 3, 17, N'بحث 3', N'<p>شرح بحث 3</p>
+', CAST(N'2021-11-29T20:51:11.0163024' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (5, 8, 2, 14, N'بحث 4', N'<p>شرح بحث 4</p>
+', CAST(N'2021-11-30T00:19:31.4598719' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (6, 12, 3, 14, N'بحث 5', N'<p>شرح بحث 5</p>
+', CAST(N'2021-11-30T00:20:24.1595415' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (7, 7, 1, 17, N'بحث 6', N'<p>شرح بحث 6</p>
+', CAST(N'2021-11-30T00:21:00.4011880' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (8, 7, 1, 17, N'بحث 6', N'<p>شرح بحث 6</p>
+', CAST(N'2021-11-30T00:26:32.1936840' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (9, 8, 3, 17, N'بحث 8', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد</p>
+', CAST(N'2021-11-30T00:41:06.1363082' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (10, 7, 3, 14, N'بحث 9', N'<p>متن بحث 9</p>
+', CAST(N'2021-11-30T10:57:47.9111041' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (11, 12, 2, 17, N'بحث 10', N'<p>شرح بحث 10</p>
+', CAST(N'2021-11-30T11:09:34.8133148' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (12, 10, 3, 17, N'بحث 11', N'<p>شرح بحث 11</p>
+', CAST(N'2021-11-30T12:58:26.6951106' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (13, 8, 3, 14, N'بحث 12', N'<p>متن بحث 12</p>
+', CAST(N'2021-12-01T16:13:41.8072051' AS DateTime2))
+GO
+INSERT [dbo].[Discussions] ([DiscussionId], [ServiceId], [ImpLevelId], [UserId], [DiscussionTitle], [DiscussionBody], [DiscussionCreateDate]) VALUES (14, 9, 3, 17, N'بحث 20', N'<p>P20</p>
+
+<p>P10</p>
+
+<p><strong>P50</strong></p>
+', CAST(N'2021-12-01T21:59:12.6768654' AS DateTime2))
+GO
+SET IDENTITY_INSERT [dbo].[Discussions] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Genders] ON 
+GO
+INSERT [dbo].[Genders] ([GenderId], [GenderTitle]) VALUES (1, N'خانم')
+GO
+INSERT [dbo].[Genders] ([GenderId], [GenderTitle]) VALUES (2, N'آقا')
+GO
+SET IDENTITY_INSERT [dbo].[Genders] OFF
+GO
+SET IDENTITY_INSERT [dbo].[LetterAnswers] ON 
+GO
+INSERT [dbo].[LetterAnswers] ([LetterAnswerId], [LetterId], [LetterAnswerBody], [CreateDate], [SenderId]) VALUES (3, 19, N'<p>پاسه نامه 5</p>
+', CAST(N'2021-12-01T19:58:26.3999008' AS DateTime2), 14)
+GO
+INSERT [dbo].[LetterAnswers] ([LetterAnswerId], [LetterId], [LetterAnswerBody], [CreateDate], [SenderId]) VALUES (4, 20, N'<p>مورد تایید است</p>
+', CAST(N'2021-12-01T21:29:06.8178893' AS DateTime2), 14)
+GO
+INSERT [dbo].[LetterAnswers] ([LetterAnswerId], [LetterId], [LetterAnswerBody], [CreateDate], [SenderId]) VALUES (5, 19, N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+&nbsp;</p>
+', CAST(N'2021-12-01T22:22:18.5937903' AS DateTime2), 14)
+GO
+SET IDENTITY_INSERT [dbo].[LetterAnswers] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Letters] ON 
+GO
+INSERT [dbo].[Letters] ([LetterId], [LetterToId], [SenderId], [LetterTitle], [LetterBody], [LetterSendDate], [LetterFileName], [IsRead]) VALUES (1, 2, 14, N'نامه 1', N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+', CAST(N'2021-11-30T20:30:35.0000000' AS DateTime2), NULL, 1)
+GO
+INSERT [dbo].[Letters] ([LetterId], [LetterToId], [SenderId], [LetterTitle], [LetterBody], [LetterSendDate], [LetterFileName], [IsRead]) VALUES (2, 2, 14, N'نامه 2', N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+', CAST(N'2021-11-30T21:22:01.0000000' AS DateTime2), NULL, 1)
+GO
+INSERT [dbo].[Letters] ([LetterId], [LetterToId], [SenderId], [LetterTitle], [LetterBody], [LetterSendDate], [LetterFileName], [IsRead]) VALUES (3, 3, 14, N'نامه 3', N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+', CAST(N'2021-11-30T21:29:38.6919090' AS DateTime2), NULL, 0)
+GO
+INSERT [dbo].[Letters] ([LetterId], [LetterToId], [SenderId], [LetterTitle], [LetterBody], [LetterSendDate], [LetterFileName], [IsRead]) VALUES (18, 1, 14, N'نامه 4', N'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+', CAST(N'2021-11-30T22:19:57.0000000' AS DateTime2), N'37846c65d2254130a3692a8b53440664.jpg', 1)
+GO
+INSERT [dbo].[Letters] ([LetterId], [LetterToId], [SenderId], [LetterTitle], [LetterBody], [LetterSendDate], [LetterFileName], [IsRead]) VALUES (19, 1, 14, N'نامه 5', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+&nbsp;</p>
+', CAST(N'2021-12-01T12:46:19.0000000' AS DateTime2), N'ddcc899e3a744c50b6b0eebfb5818df1.jpg', 1)
+GO
+INSERT [dbo].[Letters] ([LetterId], [LetterToId], [SenderId], [LetterTitle], [LetterBody], [LetterSendDate], [LetterFileName], [IsRead]) VALUES (20, 3, 17, N'نامه 1', N'<p>متن نامه 1</p>
+', CAST(N'2021-12-01T17:42:00.0000000' AS DateTime2), N'188cdb03acef45cf9f4507a5494d9fb0.jpg', 1)
+GO
+INSERT [dbo].[Letters] ([LetterId], [LetterToId], [SenderId], [LetterTitle], [LetterBody], [LetterSendDate], [LetterFileName], [IsRead]) VALUES (21, 2, 17, N'نامه 25', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br>
+&nbsp;</p>
+', CAST(N'2021-12-01T22:03:31.5490095' AS DateTime2), N'5a23ad93852143d684fbc4b8c2e9eab8.jpg', 0)
+GO
+SET IDENTITY_INSERT [dbo].[Letters] OFF
+GO
+SET IDENTITY_INSERT [dbo].[LetterTos] ON 
+GO
+INSERT [dbo].[LetterTos] ([LetterToId], [LetterToTitle]) VALUES (1, N'شورا')
+GO
+INSERT [dbo].[LetterTos] ([LetterToId], [LetterToTitle]) VALUES (2, N'بخشداری')
+GO
+INSERT [dbo].[LetterTos] ([LetterToId], [LetterToTitle]) VALUES (3, N'بسیج')
+GO
+INSERT [dbo].[LetterTos] ([LetterToId], [LetterToTitle]) VALUES (4, N'Test')
+GO
+SET IDENTITY_INSERT [dbo].[LetterTos] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Permission] ON 
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (1, N'پنل مدیریت', NULL)
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (2, N'ادمین کاربران', 1)
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (3, N'ادمین نقش ها', 1)
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (4, N'ادمین خدمات', 1)
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (5, N'ادمین نقل قول ها', 1)
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (6, N'ادمین نامه ها', 1)
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (7, N'ادمین بلاگ ها', 1)
+GO
+INSERT [dbo].[Permission] ([PermissionId], [PermissionTitle], [ParrentId]) VALUES (8, N'ادمین تخلف ها', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Permission] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Quotes] ON 
+GO
+INSERT [dbo].[Quotes] ([QuoteId], [QuoteBody], [QuoteBy], [QuoterJob], [QuoteImageName]) VALUES (3, N'<p>به بازخوردهای منفی (انتقادات) توجه کنید و آن را به خصوص از دوستان خود بخواهید &hellip; این کار سخت اما فوق العاده مفید است.</p>
+', N'ایلان ماسک', N'موسس تسلا و اسپیس ایکس', N'70c53ad22d594834adcb1b50c0b39792.png')
+GO
+INSERT [dbo].[Quotes] ([QuoteId], [QuoteBody], [QuoteBy], [QuoterJob], [QuoteImageName]) VALUES (4, N'<p><strong>انتخاب دوست:</strong>&nbsp;&quot;زندگی کوتاه&zwnj;تر از آن است که صرف کسانی شود که هیچ تدبیر و درایتی ندارند.&quot;</p>
+', N'جف بزوس', N'موسس آمازون', N'dd131c1e7dbc4c639bc5764e50a218ab.png')
+GO
+INSERT [dbo].[Quotes] ([QuoteId], [QuoteBody], [QuoteBy], [QuoterJob], [QuoteImageName]) VALUES (5, N'<p>به نظرم مردم معمولی هم می توانند فوق العاده بودن را انتخاب کنند.</p>
+', N'ایلان ماسک', N'موسس تسلا و اسپیس ایکس', N'2f405b099dd947e181234d6fce197774.png')
+GO
+SET IDENTITY_INSERT [dbo].[Quotes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ReportAbuses] ON 
+GO
+INSERT [dbo].[ReportAbuses] ([ReportId], [UserId], [ReportSubject], [ReportDescription], [ReportAddress], [CreateDate], [IsRead]) VALUES (1, 14, N'تخلف 1', N'<p>توضیحات گزارش 1</p>
+', N'خیابان 1 کوچه 1', CAST(N'2021-12-07T14:35:57.8196819' AS DateTime2), 1)
+GO
+INSERT [dbo].[ReportAbuses] ([ReportId], [UserId], [ReportSubject], [ReportDescription], [ReportAddress], [CreateDate], [IsRead]) VALUES (2, 14, N'تخلف 2', N'<p>توضیحات تخلف 2</p>
+', N'خیابان 2 کوچه 2', CAST(N'2021-12-07T14:45:00.7779844' AS DateTime2), 0)
+GO
+SET IDENTITY_INSERT [dbo].[ReportAbuses] OFF
+GO
+SET IDENTITY_INSERT [dbo].[RolePermission] ON 
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (18, 7, 1)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (19, 7, 2)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (20, 8, 1)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (21, 8, 3)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (22, 9, 1)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (23, 9, 4)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (24, 10, 1)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (25, 10, 5)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (45, 12, 1)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (46, 12, 7)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (47, 11, 1)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (48, 11, 6)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (63, 2, 1)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (64, 2, 2)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (65, 2, 3)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (66, 2, 4)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (67, 2, 5)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (68, 2, 6)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (69, 2, 7)
+GO
+INSERT [dbo].[RolePermission] ([RolePrmId], [RoleId], [PermissionId]) VALUES (70, 2, 8)
+GO
+SET IDENTITY_INSERT [dbo].[RolePermission] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Roles] ON 
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle]) VALUES (2, N'مدیر ')
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle]) VALUES (7, N'ادمین کاربران')
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle]) VALUES (8, N'ادمین نقش ها')
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle]) VALUES (9, N'ادمین خدمات')
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle]) VALUES (10, N'ادمین اخبار')
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle]) VALUES (11, N'ادمین نامه ها')
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle]) VALUES (12, N'ادمین بلاگ ها')
+GO
+SET IDENTITY_INSERT [dbo].[Roles] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Service] ON 
+GO
+INSERT [dbo].[Service] ([ServiceId], [GroupId], [SubGroup], [WriterId], [StatusId], [ServiceTitle], [ServiceDescription], [ServiceStartDate], [ServiceEndDate], [ServiceUpdateDate], [ServiceBudget], [RelatedInstitutions], [ServiceVideoName], [ServiceImageName]) VALUES (7, 1, 4, 14, 2, N'خدمات 1', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+', CAST(N'2021-11-02T00:00:00.0000000' AS DateTime2), CAST(N'2021-11-30T00:00:00.0000000' AS DateTime2), CAST(N'2021-11-28T12:12:14.8752738' AS DateTime2), 10000000, N'شورا', N'13c884845ee1401483e469f5e052419b.txt', N'456c643f8b6b447dab152d04a7c1e884.jpg')
+GO
+INSERT [dbo].[Service] ([ServiceId], [GroupId], [SubGroup], [WriterId], [StatusId], [ServiceTitle], [ServiceDescription], [ServiceStartDate], [ServiceEndDate], [ServiceUpdateDate], [ServiceBudget], [RelatedInstitutions], [ServiceVideoName], [ServiceImageName]) VALUES (8, 1, 4, 14, 2, N'خدمات 2', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+', CAST(N'2020-02-27T00:00:00.0000000' AS DateTime2), CAST(N'2021-11-08T00:00:00.0000000' AS DateTime2), CAST(N'2021-11-28T12:26:00.3667028' AS DateTime2), 13000000, N'شورا-بخشداری', N'e5988c4f47774cd4ae41a0714feb5fc4.PNG', N'1be6f1910daf42f78a273fc8342c77d3.jpg')
+GO
+INSERT [dbo].[Service] ([ServiceId], [GroupId], [SubGroup], [WriterId], [StatusId], [ServiceTitle], [ServiceDescription], [ServiceStartDate], [ServiceEndDate], [ServiceUpdateDate], [ServiceBudget], [RelatedInstitutions], [ServiceVideoName], [ServiceImageName]) VALUES (9, 2, 6, 18, 1, N'خدمات 3', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+', CAST(N'2021-11-01T00:00:00.0000000' AS DateTime2), NULL, CAST(N'2021-11-28T12:12:24.6881415' AS DateTime2), 40000000, N'بسیج', N'b6f96dd3861f415ca0d5e6883986e8ae.PNG', N'4ff185330417444a8ffc53f8e02f3e97.jpg')
+GO
+INSERT [dbo].[Service] ([ServiceId], [GroupId], [SubGroup], [WriterId], [StatusId], [ServiceTitle], [ServiceDescription], [ServiceStartDate], [ServiceEndDate], [ServiceUpdateDate], [ServiceBudget], [RelatedInstitutions], [ServiceVideoName], [ServiceImageName]) VALUES (10, 1, 5, 18, 1, N'خدمات 4', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+', CAST(N'2018-02-27T00:00:00.0000000' AS DateTime2), NULL, CAST(N'2021-11-28T12:12:29.2092015' AS DateTime2), 960000, N'شورا', NULL, N'874ba6c0e6dc4eab9a1f3aa572fdc3d9.jpg')
+GO
+INSERT [dbo].[Service] ([ServiceId], [GroupId], [SubGroup], [WriterId], [StatusId], [ServiceTitle], [ServiceDescription], [ServiceStartDate], [ServiceEndDate], [ServiceUpdateDate], [ServiceBudget], [RelatedInstitutions], [ServiceVideoName], [ServiceImageName]) VALUES (11, 1, 4, 14, 2, N'خدمات 5', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+', CAST(N'2021-11-04T00:00:00.0000000' AS DateTime2), CAST(N'2021-11-30T00:00:00.0000000' AS DateTime2), CAST(N'2021-11-28T12:12:33.2077697' AS DateTime2), 150000, N'شورا', NULL, N'1ebf921863db427ba0f7006d74a8164f.jpg')
+GO
+INSERT [dbo].[Service] ([ServiceId], [GroupId], [SubGroup], [WriterId], [StatusId], [ServiceTitle], [ServiceDescription], [ServiceStartDate], [ServiceEndDate], [ServiceUpdateDate], [ServiceBudget], [RelatedInstitutions], [ServiceVideoName], [ServiceImageName]) VALUES (12, 3, 10, 14, 2, N'خدمات 6', N'<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br />
+<img alt="" src="/MyImages/08753d05-3d87-4b4d-af38-eb75d5509f90.png" style="height:66px; width:324px" /></p>
+', CAST(N'2021-11-15T00:00:00.0000000' AS DateTime2), CAST(N'2021-11-15T00:00:00.0000000' AS DateTime2), NULL, 90000, N'بسیج', NULL, N'422e8d4f0be246309b10ada9dda3519a.jpg')
+GO
+SET IDENTITY_INSERT [dbo].[Service] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ServiceGroups] ON 
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (1, N'بهینه سازی', NULL)
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (2, N'مذهبی', NULL)
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (3, N'بسیج', NULL)
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (4, N'آسفالت', 1)
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (5, N'درختکاری', 1)
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (6, N'مسجد', 2)
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (7, N'حسینیه', 2)
+GO
+INSERT [dbo].[ServiceGroups] ([GroupId], [GroupTitle], [ParrentId]) VALUES (10, N'میدان تیر', 3)
+GO
+SET IDENTITY_INSERT [dbo].[ServiceGroups] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ServiceStatus] ON 
+GO
+INSERT [dbo].[ServiceStatus] ([StatusId], [StatusTitle]) VALUES (1, N'در حال انجام')
+GO
+INSERT [dbo].[ServiceStatus] ([StatusId], [StatusTitle]) VALUES (2, N'تمام شده')
+GO
+SET IDENTITY_INSERT [dbo].[ServiceStatus] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserRoles] ON 
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (10, 18, 10)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (11, 18, 9)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (33, 14, 2)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (34, 14, 7)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (35, 14, 8)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (36, 14, 9)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (37, 14, 10)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (38, 14, 11)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (39, 14, 12)
+GO
+INSERT [dbo].[UserRoles] ([UserRoleId], [UserId], [RoleId]) VALUES (40, 17, 12)
+GO
+SET IDENTITY_INSERT [dbo].[UserRoles] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+GO
+INSERT [dbo].[Users] ([UserId], [Name], [NCode], [PhoneNumber], [BirthDate], [Email], [Password], [ActivationCode], [IsActive], [RegisterDate], [IsConfirmedByAdmin]) VALUES (14, N'علیرضا ', N'2283455911', N'09300804882', CAST(N'2002-08-01T00:00:00.0000000' AS DateTime2), N'mranotmillion@gmail.com', N'20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70', N'7bd58256ffb84d63abfce5f7f34685ac', 1, CAST(N'2021-11-21T12:56:17.0757473' AS DateTime2), 1)
+GO
+INSERT [dbo].[Users] ([UserId], [Name], [NCode], [PhoneNumber], [BirthDate], [Email], [Password], [ActivationCode], [IsActive], [RegisterDate], [IsConfirmedByAdmin]) VALUES (16, N'Ahmad', N'12345', N'09012051542', CAST(N'2021-11-05T00:00:00.0000000' AS DateTime2), N'rew@12.com', N'20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70', N'888e633178474631abb43b339ff5ccf1', 1, CAST(N'2021-11-22T19:05:59.8629184' AS DateTime2), 0)
+GO
+INSERT [dbo].[Users] ([UserId], [Name], [NCode], [PhoneNumber], [BirthDate], [Email], [Password], [ActivationCode], [IsActive], [RegisterDate], [IsConfirmedByAdmin]) VALUES (17, N'زهرا', N'9999', N'658745', CAST(N'2021-11-18T00:00:00.0000000' AS DateTime2), N'ad4@b.co', N'20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70', N'1e963721aade4ab7942f9d790abb8f62', 1, CAST(N'2021-11-22T19:13:25.1694232' AS DateTime2), 0)
+GO
+INSERT [dbo].[Users] ([UserId], [Name], [NCode], [PhoneNumber], [BirthDate], [Email], [Password], [ActivationCode], [IsActive], [RegisterDate], [IsConfirmedByAdmin]) VALUES (18, N'امیر', N'245917', N'09125487603', CAST(N'2015-02-09T00:00:00.0000000' AS DateTime2), N'a8e@g.co', N'20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70', N'370460b6456c48758839f32cc15d1c2c', 1, CAST(N'2021-11-23T11:11:52.3895254' AS DateTime2), 0)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
+/****** Object:  Index [IX_Answers_DiscussionId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Answers_DiscussionId] ON [dbo].[Answers]
+(
+	[DiscussionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Answers_UserId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Answers_UserId] ON [dbo].[Answers]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_BlogCategories_ParrentId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_BlogCategories_ParrentId] ON [dbo].[BlogCategories]
+(
+	[ParrentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Blogs_CategoryId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Blogs_CategoryId] ON [dbo].[Blogs]
+(
+	[CategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Blogs_GenderId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Blogs_GenderId] ON [dbo].[Blogs]
+(
+	[GenderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Blogs_SubCatId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Blogs_SubCatId] ON [dbo].[Blogs]
+(
+	[SubCatId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Blogs_WriterId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Blogs_WriterId] ON [dbo].[Blogs]
+(
+	[WriterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_CommentAnswers_CommentId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_CommentAnswers_CommentId] ON [dbo].[CommentAnswers]
+(
+	[CommentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_CommentAnswers_UserId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_CommentAnswers_UserId] ON [dbo].[CommentAnswers]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Comments_BlogId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Comments_BlogId] ON [dbo].[Comments]
+(
+	[BlogId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Comments_UserId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Comments_UserId] ON [dbo].[Comments]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Discussions_ImpLevelId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Discussions_ImpLevelId] ON [dbo].[Discussions]
+(
+	[ImpLevelId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Discussions_ServiceId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Discussions_ServiceId] ON [dbo].[Discussions]
+(
+	[ServiceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Discussions_UserId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Discussions_UserId] ON [dbo].[Discussions]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_LetterAnswers_LetterId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_LetterAnswers_LetterId] ON [dbo].[LetterAnswers]
+(
+	[LetterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_LetterAnswers_SenderId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_LetterAnswers_SenderId] ON [dbo].[LetterAnswers]
+(
+	[SenderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Letters_LetterToId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Letters_LetterToId] ON [dbo].[Letters]
+(
+	[LetterToId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Letters_SenderId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Letters_SenderId] ON [dbo].[Letters]
+(
+	[SenderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Permission_ParrentId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Permission_ParrentId] ON [dbo].[Permission]
+(
+	[ParrentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ReportAbuses_UserId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_ReportAbuses_UserId] ON [dbo].[ReportAbuses]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_RolePermission_PermissionId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_RolePermission_PermissionId] ON [dbo].[RolePermission]
+(
+	[PermissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_RolePermission_RoleId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_RolePermission_RoleId] ON [dbo].[RolePermission]
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Service_GroupId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Service_GroupId] ON [dbo].[Service]
+(
+	[GroupId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Service_StatusId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Service_StatusId] ON [dbo].[Service]
+(
+	[StatusId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Service_SubGroup]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Service_SubGroup] ON [dbo].[Service]
+(
+	[SubGroup] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Service_WriterId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Service_WriterId] ON [dbo].[Service]
+(
+	[WriterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ServiceGroups_ParrentId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_ServiceGroups_ParrentId] ON [dbo].[ServiceGroups]
+(
+	[ParrentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserRoles_RoleId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_UserRoles_RoleId] ON [dbo].[UserRoles]
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserRoles_UserId]    Script Date: 12/7/2021 9:05:47 PM ******/
+CREATE NONCLUSTERED INDEX [IX_UserRoles_UserId] ON [dbo].[UserRoles]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT (N'') FOR [BlogBody]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT (N'') FOR [BlogTitle]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT ((0)) FOR [CategoryId]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT ('0001-01-01T00:00:00.0000000') FOR [CreateDate]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT (N'') FOR [LittleDescription]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT ((0)) FOR [WriterId]
+GO
+ALTER TABLE [dbo].[Letters] ADD  DEFAULT ((0)) FOR [SenderId]
+GO
+ALTER TABLE [dbo].[ReportAbuses] ADD  DEFAULT (CONVERT([bit],(0))) FOR [IsRead]
+GO
+ALTER TABLE [dbo].[Users] ADD  DEFAULT (CONVERT([bit],(0))) FOR [IsConfirmedByAdmin]
+GO
+ALTER TABLE [dbo].[Answers]  WITH CHECK ADD  CONSTRAINT [FK_Answers_Discussions_DiscussionId] FOREIGN KEY([DiscussionId])
+REFERENCES [dbo].[Discussions] ([DiscussionId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Answers] CHECK CONSTRAINT [FK_Answers_Discussions_DiscussionId]
+GO
+ALTER TABLE [dbo].[Answers]  WITH CHECK ADD  CONSTRAINT [FK_Answers_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[Answers] CHECK CONSTRAINT [FK_Answers_Users_UserId]
+GO
+ALTER TABLE [dbo].[BlogCategories]  WITH CHECK ADD  CONSTRAINT [FK_BlogCategories_BlogCategories_ParrentId] FOREIGN KEY([ParrentId])
+REFERENCES [dbo].[BlogCategories] ([BlogCategoryId])
+GO
+ALTER TABLE [dbo].[BlogCategories] CHECK CONSTRAINT [FK_BlogCategories_BlogCategories_ParrentId]
+GO
+ALTER TABLE [dbo].[Blogs]  WITH CHECK ADD  CONSTRAINT [FK_Blogs_BlogCategories_CategoryId] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[BlogCategories] ([BlogCategoryId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Blogs] CHECK CONSTRAINT [FK_Blogs_BlogCategories_CategoryId]
+GO
+ALTER TABLE [dbo].[Blogs]  WITH CHECK ADD  CONSTRAINT [FK_Blogs_BlogCategories_SubCatId] FOREIGN KEY([SubCatId])
+REFERENCES [dbo].[BlogCategories] ([BlogCategoryId])
+GO
+ALTER TABLE [dbo].[Blogs] CHECK CONSTRAINT [FK_Blogs_BlogCategories_SubCatId]
+GO
+ALTER TABLE [dbo].[Blogs]  WITH CHECK ADD  CONSTRAINT [FK_Blogs_Genders_GenderId] FOREIGN KEY([GenderId])
+REFERENCES [dbo].[Genders] ([GenderId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Blogs] CHECK CONSTRAINT [FK_Blogs_Genders_GenderId]
+GO
+ALTER TABLE [dbo].[Blogs]  WITH CHECK ADD  CONSTRAINT [FK_Blogs_Users_WriterId] FOREIGN KEY([WriterId])
+REFERENCES [dbo].[Users] ([UserId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Blogs] CHECK CONSTRAINT [FK_Blogs_Users_WriterId]
+GO
+ALTER TABLE [dbo].[CommentAnswers]  WITH CHECK ADD  CONSTRAINT [FK_CommentAnswers_Comments_CommentId] FOREIGN KEY([CommentId])
+REFERENCES [dbo].[Comments] ([CommentId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[CommentAnswers] CHECK CONSTRAINT [FK_CommentAnswers_Comments_CommentId]
+GO
+ALTER TABLE [dbo].[CommentAnswers]  WITH CHECK ADD  CONSTRAINT [FK_CommentAnswers_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[CommentAnswers] CHECK CONSTRAINT [FK_CommentAnswers_Users_UserId]
+GO
+ALTER TABLE [dbo].[Comments]  WITH CHECK ADD  CONSTRAINT [FK_Comments_Blogs_BlogId] FOREIGN KEY([BlogId])
+REFERENCES [dbo].[Blogs] ([BlogId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_Blogs_BlogId]
+GO
+ALTER TABLE [dbo].[Comments]  WITH CHECK ADD  CONSTRAINT [FK_Comments_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_Users_UserId]
+GO
+ALTER TABLE [dbo].[Discussions]  WITH CHECK ADD  CONSTRAINT [FK_Discussions_DiscussionImpLevels_ImpLevelId] FOREIGN KEY([ImpLevelId])
+REFERENCES [dbo].[DiscussionImpLevels] ([ImpLevelId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Discussions] CHECK CONSTRAINT [FK_Discussions_DiscussionImpLevels_ImpLevelId]
+GO
+ALTER TABLE [dbo].[Discussions]  WITH CHECK ADD  CONSTRAINT [FK_Discussions_Service_ServiceId] FOREIGN KEY([ServiceId])
+REFERENCES [dbo].[Service] ([ServiceId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Discussions] CHECK CONSTRAINT [FK_Discussions_Service_ServiceId]
+GO
+ALTER TABLE [dbo].[Discussions]  WITH CHECK ADD  CONSTRAINT [FK_Discussions_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[Discussions] CHECK CONSTRAINT [FK_Discussions_Users_UserId]
+GO
+ALTER TABLE [dbo].[LetterAnswers]  WITH CHECK ADD  CONSTRAINT [FK_LetterAnswers_Letters_LetterId] FOREIGN KEY([LetterId])
+REFERENCES [dbo].[Letters] ([LetterId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[LetterAnswers] CHECK CONSTRAINT [FK_LetterAnswers_Letters_LetterId]
+GO
+ALTER TABLE [dbo].[LetterAnswers]  WITH CHECK ADD  CONSTRAINT [FK_LetterAnswers_Users_SenderId] FOREIGN KEY([SenderId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[LetterAnswers] CHECK CONSTRAINT [FK_LetterAnswers_Users_SenderId]
+GO
+ALTER TABLE [dbo].[Letters]  WITH CHECK ADD  CONSTRAINT [FK_Letters_LetterTos_LetterToId] FOREIGN KEY([LetterToId])
+REFERENCES [dbo].[LetterTos] ([LetterToId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Letters] CHECK CONSTRAINT [FK_Letters_LetterTos_LetterToId]
+GO
+ALTER TABLE [dbo].[Letters]  WITH CHECK ADD  CONSTRAINT [FK_Letters_Users_SenderId] FOREIGN KEY([SenderId])
+REFERENCES [dbo].[Users] ([UserId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Letters] CHECK CONSTRAINT [FK_Letters_Users_SenderId]
+GO
+ALTER TABLE [dbo].[Permission]  WITH CHECK ADD  CONSTRAINT [FK_Permission_Permission_ParrentId] FOREIGN KEY([ParrentId])
+REFERENCES [dbo].[Permission] ([PermissionId])
+GO
+ALTER TABLE [dbo].[Permission] CHECK CONSTRAINT [FK_Permission_Permission_ParrentId]
+GO
+ALTER TABLE [dbo].[ReportAbuses]  WITH CHECK ADD  CONSTRAINT [FK_ReportAbuses_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ReportAbuses] CHECK CONSTRAINT [FK_ReportAbuses_Users_UserId]
+GO
+ALTER TABLE [dbo].[RolePermission]  WITH CHECK ADD  CONSTRAINT [FK_RolePermission_Permission_PermissionId] FOREIGN KEY([PermissionId])
+REFERENCES [dbo].[Permission] ([PermissionId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RolePermission] CHECK CONSTRAINT [FK_RolePermission_Permission_PermissionId]
+GO
+ALTER TABLE [dbo].[RolePermission]  WITH CHECK ADD  CONSTRAINT [FK_RolePermission_Roles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([RoleId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[RolePermission] CHECK CONSTRAINT [FK_RolePermission_Roles_RoleId]
+GO
+ALTER TABLE [dbo].[Service]  WITH CHECK ADD  CONSTRAINT [FK_Service_ServiceGroups_GroupId] FOREIGN KEY([GroupId])
+REFERENCES [dbo].[ServiceGroups] ([GroupId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Service] CHECK CONSTRAINT [FK_Service_ServiceGroups_GroupId]
+GO
+ALTER TABLE [dbo].[Service]  WITH CHECK ADD  CONSTRAINT [FK_Service_ServiceGroups_SubGroup] FOREIGN KEY([SubGroup])
+REFERENCES [dbo].[ServiceGroups] ([GroupId])
+GO
+ALTER TABLE [dbo].[Service] CHECK CONSTRAINT [FK_Service_ServiceGroups_SubGroup]
+GO
+ALTER TABLE [dbo].[Service]  WITH CHECK ADD  CONSTRAINT [FK_Service_ServiceStatus_StatusId] FOREIGN KEY([StatusId])
+REFERENCES [dbo].[ServiceStatus] ([StatusId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Service] CHECK CONSTRAINT [FK_Service_ServiceStatus_StatusId]
+GO
+ALTER TABLE [dbo].[Service]  WITH CHECK ADD  CONSTRAINT [FK_Service_Users_WriterId] FOREIGN KEY([WriterId])
+REFERENCES [dbo].[Users] ([UserId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Service] CHECK CONSTRAINT [FK_Service_Users_WriterId]
+GO
+ALTER TABLE [dbo].[ServiceGroups]  WITH CHECK ADD  CONSTRAINT [FK_ServiceGroups_ServiceGroups_ParrentId] FOREIGN KEY([ParrentId])
+REFERENCES [dbo].[ServiceGroups] ([GroupId])
+GO
+ALTER TABLE [dbo].[ServiceGroups] CHECK CONSTRAINT [FK_ServiceGroups_ServiceGroups_ParrentId]
+GO
+ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_UserRoles_Roles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([RoleId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Roles_RoleId]
+GO
+ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_UserRoles_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Users_UserId]
+GO
+USE [master]
+GO
+ALTER DATABASE [ShooraDahakDB] SET  READ_WRITE 
+GO
