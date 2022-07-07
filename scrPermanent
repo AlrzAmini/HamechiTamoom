@@ -1,0 +1,440 @@
+USE [master]
+GO
+/****** Object:  Database [ArtShopDB]    Script Date: 7/7/2022 4:17:06 PM ******/
+CREATE DATABASE [ArtShopDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'ArtShopDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\ArtShopDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'ArtShopDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\ArtShopDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [ArtShopDB] SET COMPATIBILITY_LEVEL = 100
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [ArtShopDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [ArtShopDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [ArtShopDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [ArtShopDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [ArtShopDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [ArtShopDB] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [ArtShopDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [ArtShopDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [ArtShopDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [ArtShopDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [ArtShopDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [ArtShopDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [ArtShopDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [ArtShopDB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'ArtShopDB', N'ON'
+GO
+ALTER DATABASE [ArtShopDB] SET QUERY_STORE = OFF
+GO
+USE [ArtShopDB]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 7/7/2022 4:17:06 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Blogs]    Script Date: 7/7/2022 4:17:06 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Blogs](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[WriterId] [int] NULL,
+	[Title] [nvarchar](500) NOT NULL,
+	[Body] [nvarchar](max) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[ImageName] [nvarchar](50) NOT NULL,
+	[Introduce] [nvarchar](300) NOT NULL,
+ CONSTRAINT [PK_Blogs] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CustomerFeedBacks]    Script Date: 7/7/2022 4:17:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CustomerFeedBacks](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](400) NOT NULL,
+	[FeedBack] [nvarchar](800) NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_CustomerFeedBacks] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MyServices]    Script Date: 7/7/2022 4:17:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MyServices](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](400) NOT NULL,
+	[Description] [nvarchar](700) NOT NULL,
+	[IconSource] [nvarchar](250) NOT NULL,
+	[ColWidth] [int] NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_MyServices] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OwnerLogs]    Script Date: 7/7/2022 4:17:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OwnerLogs](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Password] [nvarchar](max) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+ CONSTRAINT [PK_OwnerLogs] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Owners]    Script Date: 7/7/2022 4:17:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Owners](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](300) NOT NULL,
+	[JobTitle] [nvarchar](500) NOT NULL,
+	[Address] [nvarchar](300) NOT NULL,
+	[Email] [nvarchar](256) NOT NULL,
+	[PhoneNumber] [nvarchar](max) NOT NULL,
+	[Birthday] [datetime2](7) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[AboutMe] [nvarchar](max) NOT NULL,
+	[AvatarName] [nvarchar](50) NULL,
+	[TwitterUrl] [nvarchar](100) NULL,
+	[InstagramUrl] [nvarchar](100) NULL,
+	[LinkedInUrl] [nvarchar](100) NULL,
+	[ResumeName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Owners] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 7/7/2022 4:17:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](400) NOT NULL,
+	[Price] [int] NOT NULL,
+	[Weight] [int] NOT NULL,
+	[Width] [int] NOT NULL,
+	[Height] [int] NOT NULL,
+	[Shape] [int] NOT NULL,
+	[Material] [int] NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[ImageName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 7/7/2022 4:17:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](400) NOT NULL,
+	[Password] [nvarchar](max) NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[UserRole] [int] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220620081222_InitDb', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220620090355_AddIsDeletePropToUser', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220620132024_AddInfoTables', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220621111155_remove-unusedtables', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220621115946_AddMyServices', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220621162043_RemoveColor', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220621164835_AddCustomerFeedBacks', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220621180725_AddOwners', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220621183547_ChangeOwner', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220621193000_AddAboutMe', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220622185039_AddAvatarToOwner', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220628090039_Rem-ImageName-FeedBack', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220629100250_AddBlogs', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220629105959_AddImgToBlog', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220629164848_ChangeBlog', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220630160058_AddPasswordToOwner', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220630164602_AddOwnerLog', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220630165107_AddUserRole', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220703095328_AddProducts', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220703100551_ChangeProduct', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220705115507_AddOwnerSocialMediaLinksAndRemovePassword', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220705120139_ChangeOwnerNullables', N'6.0.6')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220705142304_AddResumeToOwner', N'6.0.6')
+GO
+SET IDENTITY_INSERT [dbo].[Blogs] ON 
+GO
+INSERT [dbo].[Blogs] ([Id], [WriterId], [Title], [Body], [CreateDate], [IsDeleted], [ImageName], [Introduce]) VALUES (3, 1, N'وبلاگ چیست و چگونه کار میکند؟', N'<p>&nbsp;</p>
+
+<p>بلاگ یا همان وبلاگ (weblog) یک ژورنال آنلاین یا وبسایت اطلاع رسانی است که نویسنده در آن درباره علاقمندی هایش، عقایدش یا هر چیز دیگری می نویسد و آنها را با دیگران به اشتراک میگذارد.</p>
+
+<p>در واقع بلاگ پلتفرمی برای اشتراک گذاری نوشته ها یا ویدیوها با دیگران است.</p>
+
+<h4><strong>وبسایت با بلاگ چه فرقی می کند؟</strong></h4>
+
+<p>این روزها وبسایت و وبلاگ لزوما فرق زیادی با هم ندارند، اما قبلا وبسایت ها فقط خدمات خاصی را ارائه میکردند یا محصولات خاصی را میفروختند و خیلی دیر به دیر آپدیت میشدند و درباره مسئله دیگری هم نمی نوشتند.<br />
+برعکس، وبلاگ ها که معمولا چیزی برای فروش نداشتند و فقط برای نوشتن و اطلاع رسانی بودند و مدام هم آپدیت میشدند.<br />
+اما این روزها تقریبا همه وبسایت بخشی به نام وبلاگ دارند که در آن درباره موضوعات مختلفی که به آنها مرتبط است می نویسند و از آن برای جذب مخاطبین بیشتر و ایجاد ترافیک استفاده می کنند.</p>
+
+<h4><strong>بلاگینگ چیست؟</strong></h4>
+
+<p>بلاگینگ مجموعه ای از چند مهارت است که یک نفر باید داشته باشد تا بتواند یک بلاگ را مدیریت کند و موضوع مورد نظرش را با دیگران به اشتراک بگذارد.<br />
+بلاگینگ می تواند بصورت نوشتاری باشد، یا به صورت صوتی و یا ویدیویی (که در اینصورت به آن ویلاگ Vlogge گفته می شود.)</p>
+
+<h4><strong>بلاگر کیست؟</strong></h4>
+
+<p>بلاگر به کسی گفته می شود که یک بلاگ را راه اندازی و کنترل میکند و در آن درباره موضوعات مورد نظرش می نویسد.<br />
+بلاگرها کسانی هستند که از به اشتراک گذاشتن علاقمندی ها یا تجربه هایشان با دیگران لذت میبرند و معمولا این کار را به عنوان تفریح انجام میدهند اگرچه بیشتر آنها با رعایت اصول بلاگینگ و تبدیل بلاگ خود به یک بلاگ حرفه ای، کسب درآمد می کنند.</p>
+
+<p>برای بلاگینگ نیاز به مکان و زمان خاصی وجود ندارد، فقط کافیست به اینترنت و یک لپ تاپ یا موبایل دسترسی داشته باشید.</p>
+', CAST(N'2022-06-29T21:26:05.7011615' AS DateTime2), 0, N'46ae1ab978c44afb84a5e10e5d49cde8.jpg', N'این روزها وبسایت و وبلاگ لزوما فرق زیادی با هم ندارند، اما قبلا وبسایت ها فقط خدمات خاصی را ارائه میکردند یا محصولات خاصی را میفروختند و خیلی دیر به دیر آپدیت میشدند و درباره مسئله دیگری هم نمی نوشتند.')
+GO
+INSERT [dbo].[Blogs] ([Id], [WriterId], [Title], [Body], [CreateDate], [IsDeleted], [ImageName], [Introduce]) VALUES (4, 1, N'ergggggggggggggg', N'<p>sdvvvvvvvvvgerrrrrrrrrrrrrrr</p>
+', CAST(N'2022-06-29T21:35:05.4729275' AS DateTime2), 1, N'fe29b4644297458da9943fe1ebdd4783.jpg', N'sdvvvvvvvvvv')
+GO
+INSERT [dbo].[Blogs] ([Id], [WriterId], [Title], [Body], [CreateDate], [IsDeleted], [ImageName], [Introduce]) VALUES (5, 1, N'sdgsdv', N'<p>dfgbdfgbdfvgb</p>
+', CAST(N'2022-07-04T17:53:10.2472905' AS DateTime2), 1, N'a0cb1dc89e934979b1ca2957f4473172.jpg', N'sdvgsdgvs')
+GO
+INSERT [dbo].[Blogs] ([Id], [WriterId], [Title], [Body], [CreateDate], [IsDeleted], [ImageName], [Introduce]) VALUES (6, 1, N'xcvxcbxcb', N'<p>xcvvvvvvvvvvv</p>
+', CAST(N'2022-07-04T17:56:16.8033522' AS DateTime2), 1, N'b8867cf80a11414cbfe4f438b277e657.png', N'xcvvvvvvvvvvvvvvvvvv')
+GO
+INSERT [dbo].[Blogs] ([Id], [WriterId], [Title], [Body], [CreateDate], [IsDeleted], [ImageName], [Introduce]) VALUES (7, 1, N'sdfsdf', N'<p>sdfsdfs</p>
+', CAST(N'2022-07-05T18:13:45.2380693' AS DateTime2), 1, N'Blog-Default.jpg', N'sdfsdfsdf')
+GO
+INSERT [dbo].[Blogs] ([Id], [WriterId], [Title], [Body], [CreateDate], [IsDeleted], [ImageName], [Introduce]) VALUES (8, 1, N'sdfsdf', N'<p>sdfsdfsdfsdfsdfsdf</p>
+', CAST(N'2022-07-05T18:29:43.2414936' AS DateTime2), 1, N'Blog-Default.jpg', N'sdfsdf')
+GO
+SET IDENTITY_INSERT [dbo].[Blogs] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CustomerFeedBacks] ON 
+GO
+INSERT [dbo].[CustomerFeedBacks] ([Id], [Name], [FeedBack], [IsDeleted], [CreateDate]) VALUES (1, N'محمد رضا', N'بسیارحرفه ای و منظم رفتار میکنند.', 0, CAST(N'2022-12-12T00:00:00.0000000' AS DateTime2))
+GO
+INSERT [dbo].[CustomerFeedBacks] ([Id], [Name], [FeedBack], [IsDeleted], [CreateDate]) VALUES (2, N'سارا حمیدی', N'از کار کردن با آقای امینی بسیار خرسندم.', 0, CAST(N'2022-03-03T00:00:00.0000000' AS DateTime2))
+GO
+INSERT [dbo].[CustomerFeedBacks] ([Id], [Name], [FeedBack], [IsDeleted], [CreateDate]) VALUES (3, N'محمدحسین صالحی ', N'بسیار تجربه خوبی با ایشون داشتم. کاملا حرفه ای و منظم.', 0, CAST(N'2022-06-28T13:37:19.0666234' AS DateTime2))
+GO
+INSERT [dbo].[CustomerFeedBacks] ([Id], [Name], [FeedBack], [IsDeleted], [CreateDate]) VALUES (4, N'sdfsdf', N'sdfsdfsdfsdfsdf', 1, CAST(N'2022-07-05T18:29:18.4239456' AS DateTime2))
+GO
+SET IDENTITY_INSERT [dbo].[CustomerFeedBacks] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MyServices] ON 
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (1, N'عکاسی صنعتی', N'تصویر برداری و تنظیم تصاویر صنعتی', N'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/100/000000/external-photo-media-agency-flaticons-lineal-color-flat-icons.png', 6, 0, CAST(N'2022-12-12T00:00:00.0000000' AS DateTime2))
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (2, N'ادیت عکس', N'ادیت و اصلاح تصاویر', N'https://img.icons8.com/fluency/48/000000/photo-editor.png', 6, 0, CAST(N'2022-05-05T00:00:00.0000000' AS DateTime2))
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (3, N'test', N'in test ast', N'-', 4, 1, CAST(N'2022-06-27T17:47:08.8003468' AS DateTime2))
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (4, N'برنامه نویسی 2', N'برنامه نویسی و طراحی و وبسایت 2 ', N'https://img.icons8.com/fluency/100/000000/laptop-coding.png', 12, 0, CAST(N'2022-06-27T18:06:12.4854419' AS DateTime2))
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (5, N'test', N'tes', N'set', 6, 1, CAST(N'2022-06-29T20:35:04.9643162' AS DateTime2))
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (6, N'sdfsd', N'sdfsdf', N'sdfsdf', 3, 1, CAST(N'2022-07-05T18:28:50.4237827' AS DateTime2))
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (7, N'cxvxcv', N'xcvxcv', N'-', 6, 1, CAST(N'2022-07-06T14:02:41.2783988' AS DateTime2))
+GO
+INSERT [dbo].[MyServices] ([Id], [Title], [Description], [IconSource], [ColWidth], [IsDeleted], [CreateDate]) VALUES (8, N'sdf', N'sdfsdf', N'0', 12, 1, CAST(N'2022-07-06T15:22:15.0540180' AS DateTime2))
+GO
+SET IDENTITY_INSERT [dbo].[MyServices] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Owners] ON 
+GO
+INSERT [dbo].[Owners] ([Id], [Name], [JobTitle], [Address], [Email], [PhoneNumber], [Birthday], [CreateDate], [IsDeleted], [AboutMe], [AvatarName], [TwitterUrl], [InstagramUrl], [LinkedInUrl], [ResumeName]) VALUES (1, N'علیرضا امینی', N'عکاس و طراح گرافیک', N'فارس شیراز ', N'Alireza@Goole.com', N'09301235888', CAST(N'2002-08-01T00:00:00.0000000' AS DateTime2), CAST(N'2022-05-05T00:00:00.0000000' AS DateTime2), 0, N'<p>من مدیر خلاق و طراح UI / UX از سیدنی ، استرالیا هستم که در زمینه توسعه وب و رسانه های چاپی کار می کنم. من از تبدیل مشکلات پیچیده به طرح های ساده ، زیبا و بصری لذت می برم.</p>
+
+<p>کار من ساخت وب سایت شما به گونه ای است که کاربردی و کاربر پسند باشد اما در عین حال جذاب باشد. علاوه بر این ، من لمس شخصی به محصول شما اضافه می کنم و مطمئن هستم که چشم نواز است و کاربرد آن آسان است. هدف من این است که پیام و هویت شما را با خلاقانه ترین راه بیان کنم. من طراحی وب را برای بسیاری از شرکتهای معروف مارک ایجاد کردم.</p>
+', N'23064b54afc14d34a29df664d0edfc17.jpg', N'https://www.twitter.com/', N'https://www.instagram.com/', N'https://www.linkedin.com/', N'345749a311814a28afff8f36c357261f.pdf')
+GO
+SET IDENTITY_INSERT [dbo].[Owners] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Products] ON 
+GO
+INSERT [dbo].[Products] ([Id], [Title], [Price], [Weight], [Width], [Height], [Shape], [Material], [CreateDate], [IsDeleted], [ImageName]) VALUES (1, N'طرح موزیکال', 50000, 350, 15, 25, 0, 0, CAST(N'2022-07-03T00:00:00.0000000' AS DateTime2), 1, N'')
+GO
+INSERT [dbo].[Products] ([Id], [Title], [Price], [Weight], [Width], [Height], [Shape], [Material], [CreateDate], [IsDeleted], [ImageName]) VALUES (2, N'قاب مونالیزا', 250000, 525, 30, 45, 0, 0, CAST(N'2022-07-04T21:09:31.1573021' AS DateTime2), 0, N'4ed67e1396ab4243a4a104921cde8811.jpeg')
+GO
+INSERT [dbo].[Products] ([Id], [Title], [Price], [Weight], [Width], [Height], [Shape], [Material], [CreateDate], [IsDeleted], [ImageName]) VALUES (3, N'قاب شکسپیر', 260000, 600, 40, 60, 0, 1, CAST(N'2022-07-05T13:35:46.0747056' AS DateTime2), 0, N'039cedbb55274e8aad9dba04211214de.jpg')
+GO
+SET IDENTITY_INSERT [dbo].[Products] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (1, N'alireza', N'$2a$11$illhlIoY5yNNtK0SNPYQduU0mkM2mf2.f8bvwj0gBED2pQYDzrI/y', CAST(N'2020-02-02T00:00:00.0000000' AS DateTime2), 0, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (9, N'mohammadreza', N'$2a$11$6h0Gpy8VJ.WMOI9y9YamQetM5rGg1X1qAMR9V1Yo4zclF6FmOe.72', CAST(N'2022-06-28T20:23:16.6260591' AS DateTime2), 0, 1)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (10, N'sara', N'$2a$11$illhlIoY5yNNtK0SNPYQduU0mkM2mf2.f8bvwj0gBED2pQYDzrI/y', CAST(N'2022-06-29T10:54:12.4322951' AS DateTime2), 0, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (13, N'sdfsdf', N'$2a$11$tJLd8MFd9azokgfqpHeFa.wFNxFG16NK4C675Jn1lx4UsslWKNOFi', CAST(N'2022-07-05T17:30:31.5601153' AS DateTime2), 1, 1)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (14, N'dfgdfbg', N'$2a$11$k1xQpkTIq8IxZLO2DDD1nuIheV8cdCMyD4.AFuYsZ09IlsLcg5jCS', CAST(N'2022-07-05T17:33:56.1292996' AS DateTime2), 1, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (15, N'sdfsdf', N'$2a$11$QDJeJ7X1gzg51tvdrkTk4OWlS3O4rLgR/FuRmKUp/qaOMuXj3ghbK', CAST(N'2022-07-05T17:36:43.9028929' AS DateTime2), 1, 1)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (16, N'etetet', N'$2a$11$wb7B.sIVpDf7jOtRXmSbge2NKFPuSqMVLFFsKlNobnS7ppV5yz8kW', CAST(N'2022-07-05T17:47:36.5816606' AS DateTime2), 1, 1)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (17, N'xdfv', N'$2a$11$7qwIxqrBKIFVdx.DYnIq3utL671mOtQSliffmSUkzM6r7hBgN/EuK', CAST(N'2022-07-05T17:51:12.9305233' AS DateTime2), 1, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (18, N'sdfsdf', N'$2a$11$OOxXHbxNsHOx/t14CjoiieIocNyFT2AGOWH4TcqYwkzg8rrU/MQO.', CAST(N'2022-07-05T17:52:07.8000812' AS DateTime2), 1, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (19, N'sdfsdf', N'$2a$11$PfkDpDuedjJaqicCJxW0aOxYZOAno1E7m.ozbgDiYUm20e4Bozey6', CAST(N'2022-07-05T17:54:00.4900329' AS DateTime2), 1, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (20, N'sdfsdf', N'$2a$11$BM83ljh4UnL0rg4Esby5nOzPvFILdcqzBVlUuWo3wztQeNlmpAs6a', CAST(N'2022-07-05T17:56:21.4601589' AS DateTime2), 1, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (21, N'asdasdas', N'$2a$11$5dpm8V4MkbKAADeAkycyd.ECj7GMBJD6siWmn6vSjDQsJ3PrbP5US', CAST(N'2022-07-05T17:58:34.8484102' AS DateTime2), 1, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (22, N'سیبسیبسیب', N'$2a$11$Ib4LYod9FxjOCQUksYrhuekPDw8AaT34IHI9JG606nxELbVOV8nzG', CAST(N'2022-07-05T18:04:31.9621135' AS DateTime2), 1, 0)
+GO
+INSERT [dbo].[Users] ([Id], [UserName], [Password], [CreateDate], [IsDeleted], [UserRole]) VALUES (23, N'sdfsdf', N'$2a$11$gDLKNGs9Fp2T.S7904Bo2ub.bdCO5ViWlnVjnPFn8RbYr1peCilcm', CAST(N'2022-07-05T18:28:34.3044253' AS DateTime2), 1, 0)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
+/****** Object:  Index [IX_Blogs_WriterId]    Script Date: 7/7/2022 4:17:07 PM ******/
+CREATE NONCLUSTERED INDEX [IX_Blogs_WriterId] ON [dbo].[Blogs]
+(
+	[WriterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT (N'') FOR [ImageName]
+GO
+ALTER TABLE [dbo].[Blogs] ADD  DEFAULT (N'') FOR [Introduce]
+GO
+ALTER TABLE [dbo].[Owners] ADD  DEFAULT (CONVERT([bit],(0),0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Owners] ADD  DEFAULT (N'') FOR [AboutMe]
+GO
+ALTER TABLE [dbo].[Products] ADD  DEFAULT (N'') FOR [ImageName]
+GO
+ALTER TABLE [dbo].[Users] ADD  DEFAULT (CONVERT([bit],(0),0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Users] ADD  DEFAULT ((0)) FOR [UserRole]
+GO
+ALTER TABLE [dbo].[Blogs]  WITH CHECK ADD  CONSTRAINT [FK_Blogs_Owners_WriterId] FOREIGN KEY([WriterId])
+REFERENCES [dbo].[Owners] ([Id])
+GO
+ALTER TABLE [dbo].[Blogs] CHECK CONSTRAINT [FK_Blogs_Owners_WriterId]
+GO
+USE [master]
+GO
+ALTER DATABASE [ArtShopDB] SET  READ_WRITE 
+GO
